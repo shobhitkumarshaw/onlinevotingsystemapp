@@ -61,7 +61,7 @@ public class DBInitElectionResult implements CommandLineRunner {
 		CooperativeSociety cs1 = new CooperativeSociety("Name", "Head", "Village", "mandal", "dis", "12345678", regList, candidateList);
 		ElectionResult es = new ElectionResult(1l, LocalDate.now(), cs1, 7, 8, 7, 8, 8, "loosed");
 		
-		repo.save(es);
+		//repo.save(es);
 		
 	}
 
