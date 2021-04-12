@@ -34,7 +34,7 @@ public class VotedList implements Serializable {
 	private long id;
 
 	@Basic
-	private LocalDate pollingDateTime;
+	private LocalDate pollingDateTime; 
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)
