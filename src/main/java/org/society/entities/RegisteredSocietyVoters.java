@@ -26,6 +26,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Registered_Society_Voters")
@@ -87,6 +88,7 @@ public class RegisteredSocietyVoters implements Serializable {
 	private boolean castedVote;
 	
 	// OneToOne relationship one Voter can have only one Society
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL) //added cascade
 	@JoinColumn(name = "cooperative_society_fk")
 	private CooperativeSociety cooperativeSociety;

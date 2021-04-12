@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Nominated_Candidates")
 public class NominatedCandidates implements Serializable {
@@ -49,12 +51,13 @@ public class NominatedCandidates implements Serializable {
 
 	@AssertTrue
 	private boolean approvedByElectionOfficer;
-
+	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "registered_society_voter_fk")
 	private RegisteredSocietyVoters registeredSocietyVoter;
 	
-	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)// added cascade
 	@JoinColumn(name="cooperativeSociety_fk")
 	private CooperativeSociety cooperativeSociety;

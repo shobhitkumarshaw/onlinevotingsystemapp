@@ -23,6 +23,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ElectionResult implements Serializable {
 
@@ -40,6 +42,7 @@ public class ElectionResult implements Serializable {
 //	@Transient
 //	private String cooperativeSocietyName;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cooperativeSociety_fk")
 	private CooperativeSociety cooperativeSociety;

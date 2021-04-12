@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @RestController
 @RequestMapping("api/NominatedCandidates")
 public class NominatedCandidatesController {
 	@Autowired
 	NominatedCandidatesService nominatedCandidatesService;
-	
+
 	@GetMapping(value = "{candidateId}")
 	public ResponseEntity<?> getCandidateById(@PathVariable("candidateId") long id) {
 		NominatedCandidates n = nominatedCandidatesService.searchByCandidateId(id);
