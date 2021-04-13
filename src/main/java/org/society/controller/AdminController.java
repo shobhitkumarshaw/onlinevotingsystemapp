@@ -5,12 +5,14 @@ import javax.validation.Valid;
 import org.society.entities.Admin;
 import org.society.entities.ElectionOfficer;
 import org.society.entities.ElectionResult;
+import org.society.entities.User;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
 import org.society.service.AdminService;
 import org.society.service.ElectionOfficerService;
 import org.society.service.ElectionResultService;
+import org.society.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,8 @@ public class AdminController {
 	//private ElectionOfficerService eoService;
 	//@Autowired
 	//private ElectionResultService erService;
+	//@Autowired
+	//private UserService service;
 
 	@PostMapping
 	public String saveAdmin(@Valid @RequestBody Admin admin) {
@@ -67,52 +71,51 @@ public class AdminController {
 		return new ResponseEntity<Admin>(ad, HttpStatus.OK);
 	}
 /*
-	//ElectionOfficer
-	
+	// ElectionOfficer
+
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getElectionOfficerById(@PathVariable("id") long id) {
-		
+
 		ElectionOfficer officer = eoService.viewElectionOfficerById(id);
 		return new ResponseEntity<ElectionOfficer>(officer, HttpStatus.OK);
 	}
-	
+
 	@GetMapping
 	public List<ElectionOfficer> getListOfElectionOfficer() {
-		
+
 		List<ElectionOfficer> officerList = eoService.viewElectionOfficerList();
 		if (officerList.size() == 0) {
 			throw new EmptyDataException("No Election officer in database!");
 		}
 		return officerList;
 	}
-	
+
 	@PostMapping
 	public String addElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
-		
-		
+
 		eoService.addElectionOfficerDetails(officer);
 		return "Election Officer Details added successfully!";
-		
+
 	}
-	
+
 	@PutMapping
 	public String updateElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
-		
+
 		eoService.updateElectionOfficerDetails(officer);
-		
+
 		return "Election Officer details updated successfully!";
-		
+
 	}
-	
+
 	@DeleteMapping(value = "{id}")
 	public String deleteElectionOfficerDetailsById(@PathVariable("id") long id) {
 		eoService.deleteElectionOfficer(id);
-		
+
 		return "Election Officer details removed!";
 	}
-	
-	//ElectionResult
-	
+
+	// ElectionResult
+
 	@JsonIgnore
 	@GetMapping
 	public List<ElectionResult> getAllResult() {
@@ -153,22 +156,51 @@ public class AdminController {
 		return "Election Result data successfully deleted";
 
 	}
+
+	//User
 	
-*/
+	
+	@GetMapping(value = "{id}")
+	public ResponseEntity<?> getUserById(@PathVariable("id") long id) {
+		
+		User user = service.findByUserId(id);
+
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
 	
 	
+	@GetMapping
+	public List<User> getUserList(){
+		
+		List<User> userList = service.viewUserList();
+		if(userList.size() == 0) {
+			throw new EmptyDataException("No user found in database!");
+		}
+		return userList;
+		
+	}
 	
+	@PostMapping
+	public String registerUser(@Valid @RequestBody User user) {
+		service.save(user);
+		
+		return "User registation successful!";
+	}
+	
+	@PutMapping
+	public String updateUser(@Valid @RequestBody User user) {
+		
+		service.update(user);
+		
+		return "User details updated!";
+	}
+	
+	@DeleteMapping(value = "{userId}")
+	public String deleteUser(@PathVariable("userId") long userId) {
+		
+		service.delete(userId);
+		
+		return "User with Id: "+ userId +" deleted!";
+	}
+	*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

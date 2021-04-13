@@ -2,6 +2,7 @@ package org.society;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.society.entities.CooperativeSociety;
@@ -23,15 +24,27 @@ public class DBInitElectionResult implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//		CooperativeSociety cs = new CooperativeSociety(100l, "Taj", "Mahal", "Sathpur", "Mondal", "Saran", "123456");
-//		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc",
-//				"9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
-//		NominatedCandidates nc = new NominatedCandidates(33l, 2222l, "Shor", "Tiger", 25000f, true, true, true, rs);
-//		ElectionResult er1 = new ElectionResult(10l, LocalDate.of(2021, 1, 26), nc, "Indra Nagar", 10000, 5000, 50,
-//				2500, 50, "Win");
-//		repo.save(er1);
-//		
-//		
+/*	
+		NominatedCandidates nc = new NominatedCandidates(33l, 2222l, "Shor", "Tiger", 25000f, true, true, true, rs,cs);
+		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345RK", "Mihir", "shaw", "Bcrec", "Male", "obc","9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
+
+		CooperativeSociety cs= new CooperativeSociety("Taj", "Mahal", "Sathpur", "Mondal", "Saran", "123456",Arrays.asList(rs),Arrays.asList(nc));
+
+		ElectionResult er1 = new ElectionResult(10l, LocalDate.of(2021, 1, 26), cs, 10000, 5000, 50f,2500, 50, "Win");
+		
+		repo.save(er1);
+*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		RegisteredSocietyVoters rs2 = new RegisteredSocietyVoters(2l, "22345", "Shobit", "Kumar", "Bcrec1", "Male",
 //				"gen", "1876543210", "shobit@email.com", "add1", "add23", "mondal", "Dis", 178543, false, cs);
 //
