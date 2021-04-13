@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -125,8 +126,8 @@ public class ElectionResultTest {
 				cs2));
 		ElectionResult er2 = new ElectionResult(301l, LocalDate.now(), cs2, 10000, 5000, 50, 2500, 50, "Win");
 
-		when(erRepo.save(er2)).thenReturn(er2);
-		assertEquals(er2, erDao.update(er2));
+		when(erRepo.findById(301l)).thenReturn(Optional.of(er2));
+		assertEquals(er2, erDao.getCandidatewiseResult(301l));
 	}
 
 	@Test

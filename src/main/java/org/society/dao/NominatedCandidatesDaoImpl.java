@@ -27,10 +27,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 
 	@Override
 	public NominatedCandidates update(NominatedCandidates candidate) throws NominatedCandidateNotFoundException {
-		if (nominatedCandidatesRepository.existsById(candidate.getCandidateId())) {
-			nominatedCandidatesRepository.save(candidate);
-
-		}
+		nominatedCandidatesRepository.existsById(candidate.getCandidateId());
 		return nominatedCandidatesRepository.save(candidate);
 
 	}
@@ -42,7 +39,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 			nominatedCandidatesRepository.deleteById((long) candidateId);
 			return true;
 		}
-		throw new NominatedCandidateNotFoundException("Nominated candidate was not found to delete!");		
+		return false;
 	}
 
 	@Override
@@ -56,9 +53,8 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 		Optional<NominatedCandidates> candidate = nominatedCandidatesRepository.findById(candidateId);
 		if (candidate.isPresent()) {
 			return candidate.get();
-		} else
-			throw new NominatedCandidateNotFoundException("Nominated Candidate not found!");
-
+		}
+		return null;
 	}
 
 }

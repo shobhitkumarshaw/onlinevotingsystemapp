@@ -68,20 +68,20 @@ public class DBInitElectionResult implements CommandLineRunner {
 		//Third input
 
 		
-		List<RegisteredSocietyVoters> regList3 = new ArrayList<>();
+		//List<RegisteredSocietyVoters> regList3 = new ArrayList<>();
 
 		CooperativeSociety cs3 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",
 				"454321", null, null);
-		regList3.add(new RegisteredSocietyVoters(201l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
-				"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3));
-		List<NominatedCandidates> candidateList3 = new ArrayList<>();
-		candidateList3
-				.add(new NominatedCandidates(102L, 333, "Shor", "Tiger", 30000, true, true, true,
-						new RegisteredSocietyVoters(202l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
-								"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3),
-						cs3));
+		//regList3.add(new RegisteredSocietyVoters(201l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
+		//		"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3));
+		//List<NominatedCandidates> candidateList3 = new ArrayList<>();
+		//candidateList3
+			//	.add(new NominatedCandidates(102L, 333, "Shor", "Tiger", 30000, true, true, true,
+				//		new RegisteredSocietyVoters(202l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
+					//			"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3),
+				//		cs3));
 
-		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 30000, 15000, 50, 7500, 50, "loss");
+		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 70000, 15000, 50, 7500, 50, "loss");
 		repo.save(er3);
 
 

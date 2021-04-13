@@ -1,5 +1,8 @@
 package org.society;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.society.entities.CooperativeSociety;
 import org.society.entities.NominatedCandidates;
 import org.society.entities.RegisteredSocietyVoters;
@@ -15,22 +18,22 @@ public class DbInitNominatedCandidates implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//CooperativeSociety cs = new CooperativeSociety(100l, "Taj", "Mahal", "Sathpur", "Mondal", "Saran", "123456");
+
 		
-//		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
-//		NominatedCandidates nc = new NominatedCandidates(33l, 2222l, "Shor", "Tiger", 25000f, true, true, true,rs );
-//		repo.save(nc);
-//		RegisteredSocietyVoters rs2 = new RegisteredSocietyVoters(2l, "22345", "Shobit", "Kumar", "Bcrec1", "Male", "gen", "1876543210", "shobit@email.com", "add1", "add23", "mondal", "Dis", 178543, false, cs);
-//		NominatedCandidates nc2 = new NominatedCandidates(22l, 3333l, "Life", "Water", 35000f, true, true, true,rs2 );
-//	repo.save(nc2);
-//		RegisteredSocietyVoters rs3 = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543, true, cs);
-//		NominatedCandidates nc3 = new NominatedCandidates(33l, 4444l, "Death", "Fire", 45000f, true, true, true,rs3 );
-//	repo.save(nc3);
+		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1", "Dis1", "12345678", null, null);
+		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Bcrec1", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add2", "mondal1", "Dis1", 678543, true, cs1);
+		NominatedCandidates nc1 = new NominatedCandidates(100l, 111, "Life", "Water",10000, true, true, true, rs1, cs1);
+		repo.save(nc1);
 		
-		CooperativeSociety cs = new CooperativeSociety("Name", "HeadNominatedCandidate", "Village", "mandal", "dis", "12345678", null, null);
-		RegisteredSocietyVoters rgv = new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
-		NominatedCandidates cand = new NominatedCandidates(1L, 788, "PartyName", "Symbol", 788, true, true, true, rgv, cs);
-		repo.save(cand);
+		
+		
+		CooperativeSociety cs2 = new CooperativeSociety("B Society", "HeadNominatedCandidate12", "Village2", "mondal2",
+				"Dis2", "554321", null, null);
+		RegisteredSocietyVoters rs2 = new RegisteredSocietyVoters(300l, "v22345", "Shobbit", "kumar", "Bcrec2", "Male",
+				"gen", "8876543210", "shobbit@email.com", "add2", "add3", "mondal2", "Dis2", 578543, true, cs2);
+		NominatedCandidates nc2 = new NominatedCandidates(200l, 222, "Death", "Fire", 20000, true, true, true, rs2,
+				cs2);
+		repo.save(nc2);
 	}
 
 }
