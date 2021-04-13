@@ -28,7 +28,7 @@ public class ElectionResultController {
 	@Autowired
 	private ElectionResultService service;
 
-	@JsonIgnore
+	
 	@GetMapping
 	public List<ElectionResult> getAllResult() {
 		List<ElectionResult> list = service.viewElectionResultList();
@@ -38,7 +38,7 @@ public class ElectionResultController {
 		return list;
 	}
 
-	@JsonIgnore
+	
 	@GetMapping(value = "{CandidateId}")
 	public ResponseEntity<?> getResult(@PathVariable("CandidateId") long candidateId) {
 		ElectionResult er = service.viewCandidatewiseResult(candidateId);
