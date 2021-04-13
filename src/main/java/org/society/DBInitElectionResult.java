@@ -73,7 +73,7 @@ public class DBInitElectionResult implements CommandLineRunner {
 		ElectionResult es = new ElectionResult(1l, LocalDate.now(), cs, 7, 8, 7, 8, 8, "loosed");
 		
 		repo.save(es);
-		
+		System.out.print(es);
 	}
 
 }

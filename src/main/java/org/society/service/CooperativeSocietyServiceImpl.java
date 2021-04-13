@@ -24,19 +24,19 @@ public class CooperativeSocietyServiceImpl implements CooperativeSocietyService 
 	@Override
 	public CooperativeSociety updateSocietyDetails(CooperativeSociety society) {
 		
-		return null;
+		return repository.update(society);
 	}
 
 	@Override
 	public boolean deleteSociety(long societyId) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return repository.delete(societyId);
 	}
 
 	@Override
 	public List<CooperativeSociety> viewSocietiesList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return repository.getAll();
 	}
 
 	@Override

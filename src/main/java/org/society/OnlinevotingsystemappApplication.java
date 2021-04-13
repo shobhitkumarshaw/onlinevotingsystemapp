@@ -32,6 +32,7 @@ public class OnlinevotingsystemappApplication {
 
 	private ApiInfo metaInfo() {
 
+		@SuppressWarnings("deprecation")
 		ApiInfo apiInfo = new ApiInfo("Online Voting Application", "Sprint:1", "1.0", "", "Group:2",
 				"Licence 2.1.0", "https://www.cg.com");
 

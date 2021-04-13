@@ -10,9 +10,9 @@ import org.society.entities.VotedList;
 
 public interface VotedListService {
 	
-	public int castVotedList(VotedList votedList);
+	public VotedList castVotedList(VotedList votedList);
 
-	public boolean updateVotedListDetails(VotedList votedList);
+	public VotedList updateVotedListDetails(VotedList votedList);
 
 	public boolean deletedVotedListDetails(long id);
 

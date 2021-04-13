@@ -5,36 +5,45 @@
 package org.society.dao;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.society.entities.ElectionOfficer;
 import org.society.entities.VotedList;
 import org.society.exceptions.CastedVoteNotFoundException;
+import org.society.exceptions.DuplicateEntityFoundException;
+import org.society.exceptions.ElectionOfficerNotFoundException;
+import org.society.exceptions.NominatedCandidateNotFoundException;
 import org.society.exceptions.VoterNotFoundException;
 import org.society.repository.VotedListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 @Component
-public class VotedListDaoImpl implements VotedListDao{
+public class VotedListDaoImpl implements VotedListDao {
 
 	@Autowired
 	private VotedListRepository votedListRepository;
-	
+
 	@Override
-	public int cast(VotedList votedList) {
-		return 0;
+	public VotedList cast(VotedList votedList) {
+		if (votedListRepository.existsById(votedList.getId())) {
+			throw new DuplicateEntityFoundException("Casting vote", "Can not cast vote more than once");
+		}
+		return votedListRepository.save(votedList);
 	}
 
 	@Override
-	public boolean update(VotedList votedList) throws CastedVoteNotFoundException {
-		if(votedListRepository.existsById(votedList.getId())) {
-			votedListRepository.save(votedList);
-			return true;
+	public VotedList update(VotedList votedList) throws CastedVoteNotFoundException {
+		if (votedListRepository.existsById(votedList.getId())) {
+
+			return votedListRepository.save(votedList);
 		}
-		return false;
+		throw new CastedVoteNotFoundException("Voted List not found to update");
 	}
 
 	@Override
 	public boolean delete(long id) throws CastedVoteNotFoundException {
-		if(votedListRepository.existsById(id)){
+		if (votedListRepository.existsById(id)) {
 			votedListRepository.deleteById(id);
 			return true;
 		}
@@ -49,13 +58,22 @@ public class VotedListDaoImpl implements VotedListDao{
 
 	@Override
 	public VotedList getByVoterId(long voterId) throws VoterNotFoundException {
-		return votedListRepository.findById(voterId);
+//		VotedList list = votedListRepository.findVoterListByVoterId(voterId);
+//		if(list == null)
+//			throw new VoterNotFoundException("Voter Id + "+voterId+ " does not exits in votered list!");
+//		return list;
+		return null;
 	}
 
-	/*@Override
-	*public List<VotedList> searchByNominatedCandidateId(long candidateId) throws NominatedCandidateNotFoundException {
-	*	// TODO Auto-generated method stub
-	*	return null;
-	*}
-	*/
+	@Override
+	public List<VotedList> searchByNominatedCandidateId(long candidateId) throws NominatedCandidateNotFoundException {
+		
+//		Optional<VotedList> candidate = votedListRepository.findById(candidateId);
+//		if (candidate.isPresent()) {
+//			return candidate.get();
+//		} else
+//			throw new CastedVoteNotFoundException("");
+		return null;
+	}
+
 }

@@ -15,23 +15,24 @@ import org.springframework.stereotype.Service;
 public class VotedListServiceImpl implements VotedListService{
 
 	@Autowired
-	VotedListDaoImpl dao;
+	private VotedListDaoImpl dao;
 	
 	@Override
-	public int castVotedList(VotedList votedList) {
-		return 0;
+	public VotedList castVotedList(VotedList votedList) {
+		
+		return dao.cast(votedList);
 	}
 
 	@Override
-	public boolean updateVotedListDetails(VotedList votedList) {
-		dao.update(votedList);
-		return true;
+	public VotedList updateVotedListDetails(VotedList votedList) {
+		
+		return dao.update(votedList);
 	}
 
 	@Override
 	public boolean deletedVotedListDetails(long id) {
-		dao.delete(id);
-		return true;
+		
+		return dao.delete(id);
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class VotedListServiceImpl implements VotedListService{
 
 	@Override
 	public List<VotedList> searchByNominatedCandidateId(int candidateId) {
-		return null;
+		return dao.searchByNominatedCandidateId(candidateId);
 	}
 
 }
