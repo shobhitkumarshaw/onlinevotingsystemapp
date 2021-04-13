@@ -1,8 +1,6 @@
 package org.society.exceptions;
 
-public class NoAdminFoundException extends RuntimeException{
-	
-	private static final long serialVersionUID = 1L;
+public class NoAdminFoundException extends RuntimeException {
 	private String operation;
 
 	public NoAdminFoundException(String operation,String message) {
@@ -14,5 +12,4 @@ public class NoAdminFoundException extends RuntimeException{
 	public String getMessage() {
 		return operation;
 	}
-
 }
