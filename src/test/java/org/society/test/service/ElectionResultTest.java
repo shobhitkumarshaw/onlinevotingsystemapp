@@ -1,49 +1,71 @@
 package org.society.test.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.society.dao.ElectionResultDao;
 import org.society.entities.CooperativeSociety;
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.repository.ElectionResultRepository;
+import org.society.service.ElectionResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-@SpringBootTest
+//@SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class ElectionResultTest {
 	@Autowired
 	private ElectionResultDao erDao;
+	private ElectionResultService erService;
+	
+	@Mock
+	private ElectionResultRepository erRepo;
 
-	@MockBean
-	private ElectionResultRepository repo;
-
+	/*
 	@Test
 	@DisplayName("Test for adding Election Result")
 	public void addElectionResultDetailsTest() {
-//		CooperativeSociety cs = new CooperativeSociety(100l, "Taj", "Mahal", "Sathpur", "Mondal", "Saran", "123456");
-//		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc",
-//				"9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
-//		NominatedCandidates nc = new NominatedCandidates(33l, 2222l, "Shor", "Tiger", 25000f, true, true, true, rs);
-//		ElectionResult er1 = new ElectionResult(10l, LocalDate.of(2021, 1, 26), nc, "Indra Nagar", 1000, 500, 50, 250,
-//				50, "Win");
-//
-//		when(repo.save(er1)).thenReturn(er1);
-//		assertEquals(er1, erDao.save(er1));
+		
+		List<RegisteredSocietyVoters> regList = new ArrayList<>();
+
+		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadofResult1", "Village1", "mandal1", "dis1",
+				"654321", null, null);
+		regList.add(new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Bcrec1", "Male", "obc", "9876543210",
+				"mihir@email.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1));
+		List<NominatedCandidates> candidateList = new ArrayList<>();
+		candidateList
+				.add(new NominatedCandidates(100L, 111, "Life", "Water", 10000, true, true, true,
+						new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Bcrec1", "Male", "obc",
+								"9876543210", "mihir@email.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1),
+						cs1));
+
+		ElectionResult es1 = new ElectionResult(300l, LocalDate.now(), cs1, 20000, 10000, 50, 5000, 50, "loosed");
+		
+		erDao.save(es1);
+		verify(repo, times(1)).save(es1);
 
 	}
+	*/
+	
 //UPDATE
 	/*
 	 * @Test
@@ -76,23 +98,52 @@ public class ElectionResultTest {
 		erDao.delete(10l);
 		verify(repo, times(1)).deleteById(10l);
 	}*/
-	
+	/*
 	@Test
 	@DisplayName("Test for displaying Election Result by Id")
 	public void getCandidatewiseResultDetailsTest() {
-//		CooperativeSociety cs = new CooperativeSociety(100l, "Taj", "Mahal", "Sathpur", "Mondal", "Saran", "123456");
-//		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc",
-//				"9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
-//		NominatedCandidates nc = new NominatedCandidates(33l, 2222l, "Shor", "Tiger", 25000f, true, true, true, rs);
-//		ElectionResult er1 = new ElectionResult(10l, LocalDate.of(2021, 1, 26), nc, "Indra Nagar", 1000, 500, 50, 250,
-//				50, "Win");
-//		when(repo.findById(10l)).thenReturn(Optional.of(er1));
-//		assertEquals(er1, erDao.getCandidatewiseResult(10l));
+		List<RegisteredSocietyVoters> regList2 = new ArrayList<>();
+
+		CooperativeSociety cs2 = new CooperativeSociety("B Society", "HeadofResult2", "village2", "mandal2", "dis2",
+				"554321", null, null);
+		regList2.add(new RegisteredSocietyVoters(201l, "v22345", "Shobbit", "Kumar", "Bcrec2", "Male", "gen",
+				"8876543210", "shobbit@email.com", "add2", "add3", "mondal2", "Dis2", 554321, true, cs2));
+		List<NominatedCandidates> candidateList2 = new ArrayList<>();
+		candidateList2.add(new NominatedCandidates(101L, 222, "Death", "Fire", 20000, true, true, true,
+				new RegisteredSocietyVoters(201l, "v22345", "Shobbit", "Kumar", "Bcrec2", "Male", "gen", "8876543210",
+						"shobbit@email.com", "add2", "add3", "mondal2", "Dis2", 554321, true, cs2),
+				cs2));
+
+		
+		//when(erRepo.findById(301l)).thenReturn(new ElectionResult(301l, LocalDate.now(), new CooperativeSociety("B Society", "HeadofResult2", "village2", "mandal2", "dis2",
+			//	"554321", null, null), 10000, 5000, 50, 2500, 50, "Win"));
+
+		ElectionResult er = erService.viewCandidatewiseResult(301l);
+
+		assertThat(er.getId()).isEqualTo(301l);
+		assertThat(er.getPollingDate()).isEqualTo(LocalDate.now());
+	}	
+		
+		
+		
 	}
 	
-	@Test
-	@DisplayName("Test for displaying list of Election Result")
-	public void getElectionResultList() {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//@Test
+	//@DisplayName("Test for displaying list of Election Result")
+	//public void getElectionResultList() {
 //		CooperativeSociety cs = new CooperativeSociety(100l, "Taj", "Mahal", "Sathpur", "Mondal", "Saran", "123456");
 //		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc",
 //				"9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
@@ -103,7 +154,9 @@ public class ElectionResultTest {
 //				2500, 50, "Win"))
 //				.collect(Collectors.toList()));
 //		assertEquals(2, erDao.getElectionResultList().size());
-	}
+	//}
+	 
+	 */
 }
 
 

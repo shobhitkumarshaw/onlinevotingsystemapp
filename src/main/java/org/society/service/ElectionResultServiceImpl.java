@@ -14,15 +14,15 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 	ElectionResultDaoImpl dao;
 
 	@Override
-	public void addElectionResult(ElectionResult result) {
-		dao.save(result);
+	public ElectionResult addElectionResult(ElectionResult result) {
+		return dao.save(result);
 
 	}
 
 	@Override
-	public boolean updateElectionResult(ElectionResult result) {
-		dao.update(result);
-		return true;
+	public ElectionResult updateElectionResult(ElectionResult result) {
+		return dao.update(result);
+		
 	}
 
 	@Override

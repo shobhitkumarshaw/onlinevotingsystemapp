@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public Boolean delete(long userId){
+	public boolean delete(long userId){
 		if(repository.existsById(userId)) {
 			repository.deleteById(userId);
 			return true;

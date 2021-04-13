@@ -1,6 +1,4 @@
-/*
- * @author: Aditya Moohapatra
- */
+
 
 package org.society.service;
 
@@ -18,14 +16,14 @@ public class RegisteredSocietyVotersServiceImpl implements RegisteredSocietyVote
 	RegisteredSocietyVotersDaoImpl dao;
 
 	@Override
-	public void voterRegistration(RegisteredSocietyVoters voter) {
-		dao.save(voter);
+	public RegisteredSocietyVoters voterRegistration(RegisteredSocietyVoters voter) {
+		return dao.save(voter);
 	}
 
 	@Override
-	public boolean updateRegisteredVoterDetails(RegisteredSocietyVoters voter) {
-		dao.update(voter);
-		return true;
+	public RegisteredSocietyVoters updateRegisteredVoterDetails(RegisteredSocietyVoters voter) {
+		return dao.update(voter);
+		
 	}
 	
 	@Override
