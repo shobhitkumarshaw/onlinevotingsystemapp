@@ -56,10 +56,10 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 	@Override
 	public RegisteredSocietyVoters getByVoterID(String voterId) throws VoterNotFoundException {
 		RegisteredSocietyVoters voter =  registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
-		if(voter != null)
-			return voter;
+		if(voter == null)
+			throw new VoterNotFoundException("Voter not found!");
 		
-		throw new VoterNotFoundException("Voter not found!");
+		return voter;
 		
 		
 	}
