@@ -19,46 +19,5 @@ public interface AdminService {
 
 	public Admin viewAdminById(long adminId);
 
-	public boolean addElectionOfficerDetails(ElectionOfficer officer);
-
-	public boolean updateElectionOfficerDetails(ElectionOfficer officer);
-
-	public boolean deleteElectionOfficer(long officerId);
-
-	public void addElectionResult(ElectionResult result);
-
-	public boolean updateElectionResult(ElectionResult result);
-
-	public boolean deleteElectionResult(long candidadeId);
-
-	public boolean addNominatedCandidate(NominatedCandidates candidate);
-
-	public void updateNominatedCandidateDetails(NominatedCandidates candidate);
-
-	public void deleteNominatedCandididate(long candidateId);
-
-	public void addSocietyDetails(CooperativeSociety society);
-
-	public boolean updateSocietyDetails(CooperativeSociety society);
-
-	public boolean deleteSociety(long societyId);
-
-	public void voterRegistration(RegisteredSocietyVoters voter);
-
-	public boolean updateRegisteredVoterDetails(RegisteredSocietyVoters voter);
-
-	public boolean deleteRegisteredVoter(long voterId);
-
-	public void registerUser(User user);
-
-	public boolean updateUser(User user);
-
-	public boolean deleteUser(long userId);
-
-	public void castVotedList(VotedList votedList);
-
-	public boolean updateVotedListDetails(VotedList votedList);
-
-	public boolean deletedVotedListDetails(long id);
-
+	
 }
