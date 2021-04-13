@@ -25,7 +25,7 @@ public class VotedListDaoImpl implements VotedListDao {
 	private VotedListRepository votedListRepository;
 
 	@Override
-	public VotedList cast(VotedList votedList) {
+	public VotedList save(VotedList votedList) {
 		if (votedListRepository.existsById(votedList.getId())) {
 			throw new DuplicateEntityFoundException("Casting vote", "Can not cast vote more than once");
 		}

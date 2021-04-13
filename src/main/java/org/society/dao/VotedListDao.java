@@ -13,7 +13,7 @@ import org.society.exceptions.VoterNotFoundException;
 
 public interface VotedListDao {
 	
-	public VotedList cast(VotedList votedList);
+	public VotedList save(VotedList votedList);
 
 	public VotedList update(VotedList votedList) throws CastedVoteNotFoundException;
 

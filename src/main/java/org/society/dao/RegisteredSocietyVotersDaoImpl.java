@@ -5,6 +5,7 @@
 package org.society.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.exceptions.DuplicateEntityFoundException;
@@ -38,9 +39,6 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 
 	@Override
 	public boolean delete(long voterId) throws VoterNotFoundException {
-		if (registeredSocietyVotersRepository.existsById(voterId)) {
-			registeredSocietyVotersRepository.deleteById(voterId);
-		}
 		if (registeredSocietyVotersRepository.existsById( voterId)) {
 			registeredSocietyVotersRepository.deleteById( voterId);
 			return true;
@@ -56,8 +54,14 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 	}
 
 	@Override
-	public RegisteredSocietyVoters getByVoterID(long voterId) throws VoterNotFoundException {
-		return registeredSocietyVotersRepository.findById(voterId);
+	public RegisteredSocietyVoters getByVoterID(String voterId) throws VoterNotFoundException {
+		RegisteredSocietyVoters voter =  registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
+		if(voter == null)
+			return voter;
+		
+		throw new VoterNotFoundException("Voter not found!");
+		
+		
 	}
 	
 	/*

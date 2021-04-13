@@ -40,7 +40,7 @@ public class RegisteredSocietyVotersServiceImpl implements RegisteredSocietyVote
 	}
 
 	@Override
-	public RegisteredSocietyVoters searchByVoterID(long voterId) {
+	public RegisteredSocietyVoters searchByVoterID(String voterId) {
 		return  dao.getByVoterID(voterId);
 	}
 

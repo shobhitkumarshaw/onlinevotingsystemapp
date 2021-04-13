@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("RegisteredSocietyVoter")
+@RequestMapping("api/RegisteredSocietyVoter")
 public class RegisteredSocietyVotersController {
 
 	@Autowired
 	RegisteredSocietyVotersService registeredSocietyVotersService;
 	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<?> getRegisteredSocietyVoterById(@PathVariable("id") long id) {
+	public ResponseEntity<?> getRegisteredSocietyVoterById(@PathVariable("id") String id) {
 		RegisteredSocietyVoters r = registeredSocietyVotersService.searchByVoterID(id);
 
 		return new ResponseEntity<RegisteredSocietyVoters>(r, HttpStatus.OK);

@@ -38,7 +38,7 @@ public class RegisteredSocietyVoters implements Serializable {
 	private long id;
 	
 	// Voter Id card number must be unique
-	@NotBlank(message = "Voter Id number can not be null")
+	@NotNull(message = "Voter Id number can not be null")
 	@Column(unique = true)
 	private String voterIdCardNo;
 	

@@ -10,7 +10,7 @@ import org.society.entities.VotedList;
 
 public interface VotedListService {
 	
-	public VotedList castVotedList(VotedList votedList);
+	public VotedList addVotedList(VotedList votedList);
 
 	public VotedList updateVotedListDetails(VotedList votedList);
 
@@ -21,4 +21,6 @@ public interface VotedListService {
 	public VotedList searchByVoterId(long voterId);
 
 	public List<VotedList> searchByNominatedCandidateId(int candidateId);
+
+	public VotedList castVote(long scoietyId, long nominatedCandidateId, String voterIdNumber);
 }

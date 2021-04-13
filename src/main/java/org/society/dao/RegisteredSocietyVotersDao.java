@@ -14,7 +14,7 @@ public interface RegisteredSocietyVotersDao {
 
 	public List<RegisteredSocietyVoters> getRegisteredVoterList();
 
-	public RegisteredSocietyVoters getByVoterID(long voterId) throws VoterNotFoundException;
+	public RegisteredSocietyVoters getByVoterID(String voterId) throws VoterNotFoundException;
 
 	//public RegisteredSocietyVoters loginValidate(String userid, String password) throws VoterNotFoundException;
 }

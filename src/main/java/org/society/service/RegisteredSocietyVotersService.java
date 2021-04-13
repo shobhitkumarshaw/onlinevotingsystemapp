@@ -17,7 +17,9 @@ public interface RegisteredSocietyVotersService {
 
 	public List<RegisteredSocietyVoters> viewRegisteredVoterList();
 
-	public RegisteredSocietyVoters searchByVoterID(long voterId);
+	public RegisteredSocietyVoters searchByVoterID(String voterId);
 
 	public RegisteredSocietyVoters loginValidate(String userid, String password);
+
+
 }
