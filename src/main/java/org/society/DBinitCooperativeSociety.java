@@ -17,7 +17,7 @@ public class DBinitCooperativeSociety implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		CooperativeSociety cs = new CooperativeSociety("Name", "Head", "Village", "mandal", "dis", "12345678", null, null);
+		CooperativeSociety cs = new CooperativeSociety("Name", "HeadCooperativeSociety", "Village", "mandal", "dis", "12345678", null, null);
 		repo.save(cs);
 		
 	}

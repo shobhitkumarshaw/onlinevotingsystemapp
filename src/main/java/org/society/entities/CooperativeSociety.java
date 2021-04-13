@@ -17,6 +17,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Cooperative_Society")
 public class CooperativeSociety implements Serializable {
@@ -43,12 +47,14 @@ public class CooperativeSociety implements Serializable {
 	private String district;
 
 	@NotNull(message = "Pincode is required")
-	@Min(6)
+	@Length(min = 6)//@Min(6)
 	private String pincode;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = RegisteredSocietyVoters.class)
 	private List<RegisteredSocietyVoters> registeredSocietyVoters = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = NominatedCandidates.class)
 	private List<NominatedCandidates> nominatedCandidates = new ArrayList<>();
 

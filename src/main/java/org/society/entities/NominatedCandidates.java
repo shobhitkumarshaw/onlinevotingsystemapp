@@ -43,13 +43,13 @@ public class NominatedCandidates implements Serializable {
 	private float securityDeposit;
 
 	// It must be true only than a candidate can complete his or her can registration process
-	@AssertTrue
+	//@AssertTrue
 	private boolean oathOrAffirmationSummited;
 
-	@AssertTrue
+	//@AssertTrue
 	private boolean policeVerificationDone;
 
-	@AssertTrue
+	//@AssertTrue
 	private boolean approvedByElectionOfficer;
 	
 	@JsonIgnore

@@ -27,8 +27,9 @@ public class DbInitNominatedCandidates implements CommandLineRunner {
 //		NominatedCandidates nc3 = new NominatedCandidates(33l, 4444l, "Death", "Fire", 45000f, true, true, true,rs3 );
 //	repo.save(nc3);
 		
-		CooperativeSociety cs = new CooperativeSociety("Name", "Head", "Village", "mandal", "dis", "12345678", null, null);
-		NominatedCandidates cand = new NominatedCandidates(1L, 788, "PartyName", "Symbol", 788, true, true, true, null, cs);
+		CooperativeSociety cs = new CooperativeSociety("Name", "HeadNominatedCandidate", "Village", "mandal", "dis", "12345678", null, null);
+		RegisteredSocietyVoters rgv = new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
+		NominatedCandidates cand = new NominatedCandidates(1L, 788, "PartyName", "Symbol", 788, true, true, true, rgv, cs);
 		repo.save(cand);
 	}
 

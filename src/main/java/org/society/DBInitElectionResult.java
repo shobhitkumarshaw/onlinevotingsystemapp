@@ -64,17 +64,15 @@ public class DBInitElectionResult implements CommandLineRunner {
 		
 		List<RegisteredSocietyVoters> regList = new ArrayList<>();
 		
-		CooperativeSociety cs = new CooperativeSociety("Name", "Head", "Village", "mandal", "dis", "12345678", null, null);
+		CooperativeSociety cs = new CooperativeSociety("Name", "HeadElectionResult", "Village", "mandal", "dis", "12345678", null, null);
 		regList.add(new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs));
 		List<NominatedCandidates> candidateList = new ArrayList<>();
 		candidateList.add(new NominatedCandidates(2L, 788, "PartyName", "Symbol", 788, true, true, true, new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs), cs));
 		
+	
+		ElectionResult es = new ElectionResult(1l, LocalDate.now(), cs, 7, 8, 7, 8, 8, "loosed");
 		
-
-		CooperativeSociety cs1 = new CooperativeSociety("Name", "Head", "Village", "mandal", "dis", "12345678", regList, candidateList);
-		ElectionResult es = new ElectionResult(1l, LocalDate.now(), cs1, 7, 8, 7, 8, 8, "loosed");
-		
-		//repo.save(es);
+		repo.save(es);
 		
 	}
 

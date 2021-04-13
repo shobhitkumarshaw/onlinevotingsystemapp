@@ -6,6 +6,7 @@ import org.society.dao.CooperativeSocietyDao;
 import org.society.entities.CooperativeSociety;
 import org.society.repository.CooporativeSocietyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,8 +41,8 @@ public class CooperativeSocietyServiceImpl implements CooperativeSocietyService 
 
 	@Override
 	public CooperativeSociety viewSocietyById(long societyId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return repository.getById(societyId);
 	}
 
 }
