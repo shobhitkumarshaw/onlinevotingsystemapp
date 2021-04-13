@@ -28,9 +28,8 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	@Override
 	public ElectionResult update(ElectionResult result) {
-		if (!repository.existsById(result.getId())) {
-			throw new ElectionResultNotFoundException("Update Operation","Election Result not found!");
-		}
+		repository.existsById(result.getId());
+		
 		return repository.save(result);
 	}
 
@@ -52,11 +51,10 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	@Override
 	public ElectionResult getCandidatewiseResult(long candidateId) {
 		Optional<ElectionResult> er = repository.findById(candidateId);
-		if (er.isPresent()) {
+		if(er.isPresent()) {
+		
 			return er.get(); // how to get result
-		} else {
-			throw new NominatedCandidateNotFoundException(
-					"For this Id " + candidateId + " There is no Nominated Candidate ");
 		}
+		return null;
 	}
 }

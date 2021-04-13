@@ -40,8 +40,8 @@ public class DBInitElectionResult implements CommandLineRunner {
 								"9876543210", "mihir@email.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1),
 						cs1));
 
-		ElectionResult es1 = new ElectionResult(300l, LocalDate.now(), cs1, 20000, 10000, 50, 5000, 50, "loosed");
-		repo.save(es1);
+		ElectionResult er1 = new ElectionResult(300l, LocalDate.now(), cs1, 20000, 10000, 50, 5000, 50, "loosed");
+		repo.save(er1);
 
 		
 		
@@ -60,8 +60,8 @@ public class DBInitElectionResult implements CommandLineRunner {
 						"shobbit@email.com", "add2", "add3", "mondal2", "Dis2", 554321, true, cs2),
 				cs2));
 
-		ElectionResult es2 = new ElectionResult(301l, LocalDate.now(), cs2, 10000, 5000, 50, 2500, 50, "Win");
-		repo.save(es2);
+		ElectionResult er2 = new ElectionResult(301l, LocalDate.now(), cs2, 10000, 5000, 50, 2500, 50, "Win");
+		repo.save(er2);
 
 		
 		
@@ -81,8 +81,8 @@ public class DBInitElectionResult implements CommandLineRunner {
 								"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3),
 						cs3));
 
-		ElectionResult es3 = new ElectionResult(302l, LocalDate.now(), cs3, 30000, 15000, 50, 7500, 50, "loss");
-		repo.save(es3);
+		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 30000, 15000, 50, 7500, 50, "loss");
+		repo.save(er3);
 
 
 	}
