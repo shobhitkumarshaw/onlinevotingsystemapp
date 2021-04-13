@@ -30,11 +30,9 @@ public class VotedListServiceImpl implements VotedListService{
 	@Autowired
 	private CooperativeSocietyService cooperativeSocietyService;
 	
-	//@Autowired
-	//private RegisteredSocietyVotersService registeredSocietyVotersService;
-	
 	@Autowired
-	private RegisteredSocietyVotersRepository repo;
+	private RegisteredSocietyVotersService registeredSocietyVotersService;
+	
 	
 	@Autowired
 	private NominatedCandidatesService nominatedCandidatesService;
@@ -71,15 +69,15 @@ public class VotedListServiceImpl implements VotedListService{
 	public List<VotedList> searchByNominatedCandidateId(int candidateId) {
 		return dao.searchByNominatedCandidateId(candidateId);
 	}
+	
 	@Transactional
 	@Override
 	public VotedList castVote(long scoietyId, long nominatedCandidateId, String voterIdNumber) {
 		
 		CooperativeSociety scoiety = cooperativeSocietyService.viewSocietyById(scoietyId);
 		
-		RegisteredSocietyVoters voter = repo.findByVoterIdCardNo("22345");
-		//= registeredSocietyVotersService.searchByVoterID(voterIdNumber);
-		System.out.println("voter test "+voter.toString());
+		RegisteredSocietyVoters voter = registeredSocietyVotersService.searchByVoterID(voterIdNumber);
+	
 		if(!(voter.isCastedVote())) {
 			voter.setCastedVote(true);
 		}
@@ -89,7 +87,7 @@ public class VotedListServiceImpl implements VotedListService{
 		
 		NominatedCandidates candidate = nominatedCandidatesService.searchByCandidateId(nominatedCandidateId);
 		
-		VotedList vote = new VotedList(2L, LocalDate.now(), scoiety, voter, candidate, LocalTime.now(), LocalTime.now());
+		VotedList vote = new VotedList(0L, LocalDate.now(), scoiety, voter, candidate, LocalTime.now(), LocalTime.now());
 		dao.save(vote);
 		
 		return vote;
