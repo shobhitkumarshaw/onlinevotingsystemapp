@@ -24,7 +24,7 @@ public class DBInitElectionResult implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-/*	
+/*
 		NominatedCandidates nc = new NominatedCandidates(33l, 2222l, "Shor", "Tiger", 25000f, true, true, true, rs,cs);
 		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345RK", "Mihir", "shaw", "Bcrec", "Male", "obc","9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
 
