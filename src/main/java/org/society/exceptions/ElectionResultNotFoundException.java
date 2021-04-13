@@ -12,7 +12,7 @@ public class ElectionResultNotFoundException extends RuntimeException{
 		
 	}
 	
-	public String getMessage() {
+	public String getOperation() {
 		return operation;
 	}
 }

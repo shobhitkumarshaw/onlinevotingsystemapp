@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.society.exceptions.DuplicateEntityFoundException;
+import org.society.exceptions.ElectionOfficerNotFoundException;
+import org.society.exceptions.ElectionResultNotFoundException;
+import org.society.exceptions.NoAdminFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,28 +19,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
 @ControllerAdvice
-public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
+public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		List<String> errorList = 
-				ex.getBindingResult()
-				.getFieldErrors()
-				.stream()
-				.map(fe -> fe.getDefaultMessage())
+		List<String> errorList = ex.getBindingResult().getFieldErrors().stream().map(fe -> fe.getDefaultMessage())
 				.collect(Collectors.toList());
-		
+
 		Map<String, Object> errorBody = new LinkedHashMap<>();
 		errorBody.put("data error", "Problem in data received");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("errors", errorList);
-		return new ResponseEntity<>(errorBody,HttpStatus.BAD_REQUEST);
-	
+		return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
+
 	}
-	
+
 //	@ExceptionHandler(DuplicateEmployeeException.class)
 //	public ResponseEntity<?> handleDumplicateEntity(DuplicateEmployeeException ex) {
 //		log.info("Exception Not able to create Employee object");
@@ -50,15 +48,44 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 //		
 //
 //	}
-	
+
 	@ExceptionHandler(DuplicateEntityFoundException.class)
-	public ResponseEntity<?> handleDuplicateEntityFoundException(DuplicateEntityFoundException ex){
-		
+	public ResponseEntity<?> handleDuplicateEntityFoundException(DuplicateEntityFoundException ex) {
+
 		Map<String, Object> errorBody = new LinkedHashMap<>();
 		errorBody.put("error", "creation failed");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
-		return new ResponseEntity<>(errorBody,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(ElectionResultNotFoundException.class)
+	public ResponseEntity<?> handleElectionResultNotFound(ElectionResultNotFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+
+	}
+
+	@ExceptionHandler(ElectionOfficerNotFoundException.class)
+	public ResponseEntity<?> handleElectionOfficerNotFound(ElectionOfficerNotFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+
+	}
+
+	@ExceptionHandler(ElectionOfficerNotFoundException.class)
+	public ResponseEntity<?> handleNoAdminFound(NoAdminFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+
+	}
 }

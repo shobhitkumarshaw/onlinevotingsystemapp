@@ -9,7 +9,7 @@ public class NoAdminFoundException extends RuntimeException {
 		
 	}
 	
-	public String getMessage() {
+	public String getOperation() {
 		return operation;
 	}
 }
