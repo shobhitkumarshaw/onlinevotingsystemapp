@@ -24,56 +24,66 @@ public class DBInitElectionResult implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-/*
-		NominatedCandidates nc = new NominatedCandidates(33l, 2222l, "Shor", "Tiger", 25000f, true, true, true, rs,cs);
-		RegisteredSocietyVoters rs = new RegisteredSocietyVoters(1l, "12345RK", "Mihir", "shaw", "Bcrec", "Male", "obc","9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs);
-
-		CooperativeSociety cs= new CooperativeSociety("Taj", "Mahal", "Sathpur", "Mondal", "Saran", "123456",Arrays.asList(rs),Arrays.asList(nc));
-
-		ElectionResult er1 = new ElectionResult(10l, LocalDate.of(2021, 1, 26), cs, 10000, 5000, 50f,2500, 50, "Win");
+		//First input
 		
-		repo.save(er1);
-*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		RegisteredSocietyVoters rs2 = new RegisteredSocietyVoters(2l, "22345", "Shobit", "Kumar", "Bcrec1", "Male",
-//				"gen", "1876543210", "shobit@email.com", "add1", "add23", "mondal", "Dis", 178543, false, cs);
-//
-//		NominatedCandidates nc2 = new NominatedCandidates(22l, 3333l, "Life", "Water", 35000f, true, true, true, rs2);
-//		ElectionResult er2 = new ElectionResult(10l, LocalDate.of(2021, 1, 26), nc2, "Mohit Nagar", 20000, 10000, 50,
-//				5000, 50, "Loss");
-//		repo.save(er2);
-//		
-//		
-//		RegisteredSocietyVoters rs3 = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar", "Bcrec3", "Male",
-//				"obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543, true, cs);
-//
-//		NominatedCandidates nc3 = new NominatedCandidates(33l, 4444l, "Death", "Fire", 45000f, true, true, true, rs3);
-//		ElectionResult er3 = new ElectionResult(10l, LocalDate.of(2021, 1, 26), nc3, "Ganga Nagar", 30000, 15000, 50,
-//				7500, 50, "Win");
-//		repo.save(er3);
 		
 		List<RegisteredSocietyVoters> regList = new ArrayList<>();
-		
-		CooperativeSociety cs = new CooperativeSociety("Name", "HeadElectionResult", "Village", "mandal", "dis", "12345678", null, null);
-		regList.add(new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs));
+
+		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadofResult1", "Village1", "mandal1", "dis1",
+				"654321", null, null);
+		regList.add(new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Bcrec1", "Male", "obc", "9876543210",
+				"mihir@email.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1));
 		List<NominatedCandidates> candidateList = new ArrayList<>();
-		candidateList.add(new NominatedCandidates(2L, 788, "PartyName", "Symbol", 788, true, true, true, new RegisteredSocietyVoters(1l, "12345", "Mihir", "shaw", "Bcrec", "Male", "obc", "9876543210", "mihir@email.com", "add1", "add23", "mondal", "Dis", 678543, true, cs), cs));
+		candidateList
+				.add(new NominatedCandidates(100L, 111, "Life", "Water", 10000, true, true, true,
+						new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Bcrec1", "Male", "obc",
+								"9876543210", "mihir@email.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1),
+						cs1));
+
+		ElectionResult es1 = new ElectionResult(300l, LocalDate.now(), cs1, 20000, 10000, 50, 5000, 50, "loosed");
+		repo.save(es1);
+
 		
-	
-		ElectionResult es = new ElectionResult(1l, LocalDate.now(), cs, 7, 8, 7, 8, 8, "loosed");
 		
-		repo.save(es);
+		//Second input
 		
+		
+		List<RegisteredSocietyVoters> regList2 = new ArrayList<>();
+
+		CooperativeSociety cs2 = new CooperativeSociety("B Society", "HeadofResult2", "village2", "mandal2", "dis2",
+				"554321", null, null);
+		regList2.add(new RegisteredSocietyVoters(201l, "v22345", "Shobbit", "Kumar", "Bcrec2", "Male", "gen",
+				"8876543210", "shobbit@email.com", "add2", "add3", "mondal2", "Dis2", 554321, true, cs2));
+		List<NominatedCandidates> candidateList2 = new ArrayList<>();
+		candidateList2.add(new NominatedCandidates(101L, 222, "Death", "Fire", 20000, true, true, true,
+				new RegisteredSocietyVoters(201l, "v22345", "Shobbit", "Kumar", "Bcrec2", "Male", "gen", "8876543210",
+						"shobbit@email.com", "add2", "add3", "mondal2", "Dis2", 554321, true, cs2),
+				cs2));
+
+		ElectionResult es2 = new ElectionResult(301l, LocalDate.now(), cs2, 10000, 5000, 50, 2500, 50, "Win");
+		repo.save(es2);
+
+		
+		
+		//Third input
+		
+		
+		List<RegisteredSocietyVoters> regList3 = new ArrayList<>();
+
+		CooperativeSociety cs3 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",
+				"454321", null, null);
+		regList3.add(new RegisteredSocietyVoters(201l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
+				"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3));
+		List<NominatedCandidates> candidateList3 = new ArrayList<>();
+		candidateList3
+				.add(new NominatedCandidates(102L, 333, "Shor", "Tiger", 30000, true, true, true,
+						new RegisteredSocietyVoters(202l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
+								"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3),
+						cs3));
+
+		ElectionResult es3 = new ElectionResult(302l, LocalDate.now(), cs3, 30000, 15000, 50, 7500, 50, "loss");
+		repo.save(es3);
+
 	}
 
 }
