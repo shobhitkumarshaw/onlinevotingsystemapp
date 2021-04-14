@@ -81,7 +81,7 @@ public class ElectionResultTest {
 	}
 */
 //DELETE
-
+/*
 	@Test
 
 	@DisplayName("Test for deleting Election Result")
@@ -105,7 +105,7 @@ public class ElectionResultTest {
 		assertEquals(null, erDao.getCandidatewiseResult(300l));
 
 	}
-
+*/
 	// DetailsById
 	@Test
 

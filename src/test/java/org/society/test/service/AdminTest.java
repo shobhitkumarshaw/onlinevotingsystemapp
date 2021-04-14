@@ -43,14 +43,14 @@ public class AdminTest {
 	}
 	*/
 	//Delete
-	@Test
+	/*@Test
 	@DisplayName("Test for deleting Admin")
 	public void deleteAdminDetailsTest() {
 		Admin ad = new Admin(111l, "Life", "Water");
 		adRepo.deleteById(111l);
 		assertEquals(null, adDao.getAdmin(111l));
 	}
-	
+	*/
 	//getById
 	@Test
 	@DisplayName("Test for displaying Admin by Id")
