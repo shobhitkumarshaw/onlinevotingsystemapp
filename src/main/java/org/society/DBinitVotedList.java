@@ -6,6 +6,7 @@ package org.society;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.society.entities.CooperativeSociety;
 import org.society.entities.ElectionResult;
@@ -50,9 +51,11 @@ public class DBinitVotedList implements CommandLineRunner {
 		
 		votedListRepository.save(new VotedList(1, LocalDate.now(), cs, regv, cand, LocalTime.now(), LocalTime.now()));
 		
-		System.out.println(votedListRepository.findByNominatedCandidateId(1l).toString());
+		//System.out.println(votedListRepository.findByNominatedCandidateId(1l).toString());
 		
-		System.out.println(votedListRepository.findByVoterIdCard("12345"));
+		//System.out.println(votedListRepository.findByVoterIdCard("12345"));
+		
+		
 
 	}
 

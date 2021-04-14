@@ -1,14 +1,13 @@
 package org.society.repository;
 
-import javax.transaction.Transactional;
+
+import java.util.List;
 
 import org.society.entities.VotedList;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.repository.CrudRepository;
 
 @Repository
 public interface VotedListRepository extends JpaRepository<VotedList, Long>{
@@ -25,5 +24,7 @@ public interface VotedListRepository extends JpaRepository<VotedList, Long>{
 			nativeQuery = true)
 	
 	VotedList findByVoterIdCard(@Param("voterId") String voterId);
+	
+	
 	
 }

@@ -8,7 +8,9 @@ import java.util.List;
 import org.society.entities.CooperativeSociety;
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
+import org.society.entities.PollingResult;
 import org.society.entities.RegisteredSocietyVoters;
+import org.society.entities.VotedList;
 import org.society.repository.ElectionResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -84,7 +86,8 @@ public class DBInitElectionResult implements CommandLineRunner {
 		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 70000, 15000, 50, 7500, 50, "loss");
 		repo.save(er3);
 
-
+		List<PollingResult> list = repo.votedlistResult();
+		System.out.println(list);
 	}
 
 }

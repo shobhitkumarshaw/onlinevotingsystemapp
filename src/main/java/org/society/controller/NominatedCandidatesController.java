@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @RequestMapping("api/NominatedCandidates")
 public class NominatedCandidatesController {
 	@Autowired
-	NominatedCandidatesService nominatedCandidatesService;
+	private NominatedCandidatesService nominatedCandidatesService;
 
 	@GetMapping(value = "{candidateId}")
 	public ResponseEntity<?> getCandidateById(@PathVariable("candidateId") long id) {
