@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.society.entities.NominatedCandidates;
 import org.society.exceptions.DuplicateEntityFoundException;
+import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.NominatedCandidateNotFoundException;
 import org.society.repository.NominatedCandidatesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,10 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 
 	@Override
 	public NominatedCandidates update(NominatedCandidates candidate) throws NominatedCandidateNotFoundException {
-		nominatedCandidatesRepository.existsById(candidate.getCandidateId());
+		if(nominatedCandidatesRepository.existsById(candidate.getCandidateId())) {
 		return nominatedCandidatesRepository.save(candidate);
+		}
+		throw new NominatedCandidateNotFoundException("Candidate not found to update!");
 
 	}
 
@@ -39,7 +42,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 			nominatedCandidatesRepository.deleteById((long) candidateId);
 			return true;
 		}
-		return false;
+		throw new NominatedCandidateNotFoundException("Candidate not found to delete!");
 	}
 
 	@Override
@@ -49,12 +52,12 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 	}
 
 	@Override
-	public NominatedCandidates getByCandidateId(long candidateId) {
+	public NominatedCandidates getByCandidateId(long candidateId) throws NominatedCandidateNotFoundException{
 		Optional<NominatedCandidates> candidate = nominatedCandidatesRepository.findById(candidateId);
 		if (candidate.isPresent()) {
 			return candidate.get();
 		}
-		return null;
+		throw new NominatedCandidateNotFoundException("Candidate not found!");
 	}
 
 }

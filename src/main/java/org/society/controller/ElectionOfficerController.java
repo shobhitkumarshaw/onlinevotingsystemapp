@@ -35,7 +35,7 @@ public class ElectionOfficerController {
 		//Duplicate validation is done in DAO part. If Exception is thrown than it will be propagated to ApplicationExecptionHandler class
 		ElectionOfficer officer = service.viewElectionOfficerById(id);
 		if (officer == null)
-			throw new ElectionOfficerNotFoundException("Request", "Election Officer not found!");
+			throw new ElectionOfficerNotFoundException("Election Officer not found!");
 		return new ResponseEntity<ElectionOfficer>(officer, HttpStatus.OK);
 	}
 

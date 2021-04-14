@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.society.entities.Admin;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.NoAdminFoundException;
+import org.society.exceptions.UserNotFoundException;
 import org.society.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,16 +33,16 @@ public class AdminDaoImp implements AdminDao {
 
 			return repository.save(ad);
 		}
-		return null;
+		throw new NoAdminFoundException("Admin not found to update!");
 	}
 
 	@Override
-	public boolean delete(long adminId) {
+	public boolean delete(long adminId) throws NoAdminFoundException{
 		if (repository.existsById(adminId)) {
 			repository.deleteById(adminId);
 			return true;
 		}
-		return false;
+		throw new NoAdminFoundException("Admin not found to delete!");
 	}
 
 	@Override
@@ -50,7 +51,8 @@ public class AdminDaoImp implements AdminDao {
 		if (an.isPresent()) {
 			return an.get();
 		}
-		return null;
+		else
+			throw new NoAdminFoundException("Admin not found!");
 	}
 
 	@Override

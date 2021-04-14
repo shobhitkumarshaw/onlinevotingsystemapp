@@ -64,7 +64,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	@ExceptionHandler(ElectionResultNotFoundException.class)
 	public ResponseEntity<?> handleElectionResultNotFound(ElectionResultNotFoundException ex) {
 		Map<String, Object> errorBody = new LinkedHashMap<>();
-		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("error"," Failed");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
@@ -73,7 +73,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	@ExceptionHandler(ElectionOfficerNotFoundException.class)
 	public ResponseEntity<?> handleElectionOfficerNotFound(ElectionOfficerNotFoundException ex) {
 		Map<String, Object> errorBody = new LinkedHashMap<>();
-		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("error"," Failed");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
@@ -82,7 +82,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	@ExceptionHandler(NoAdminFoundException.class)
 	public ResponseEntity<?> handleNoAdminFound(NoAdminFoundException ex) {
 		Map<String, Object> errorBody = new LinkedHashMap<>();
-		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("error"," Failed");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
@@ -91,7 +91,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	@ExceptionHandler(CastedVoteNotFoundException.class)
 	public ResponseEntity<?> handleCastedVoteNot(CastedVoteNotFoundException ex) {
 		Map<String, Object> errorBody = new LinkedHashMap<>();
-		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("error", " Failed");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);

@@ -43,7 +43,7 @@ public class ElectionResultController {
 	public ResponseEntity<?> getResult(@PathVariable("CandidateId") long candidateId) {
 		ElectionResult er = service.viewCandidatewiseResult(candidateId);
 		if (er == null)
-			throw new ElectionResultNotFoundException("Request", "Election Result not found!");
+			throw new ElectionResultNotFoundException("Election Result not found!");
 
 		return new ResponseEntity<ElectionResult>(er, HttpStatus.OK);
 	}

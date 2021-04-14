@@ -4,16 +4,10 @@ public class CastedVoteNotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 
 
-	private String operation;
-
-	public CastedVoteNotFoundException(String operation,String message) {
+	public CastedVoteNotFoundException(String message) {
 		super(message);
-		this.operation = operation;
 		
 	}
 	
-	public String getOperation() {
-		return operation;
-	}
 
 }

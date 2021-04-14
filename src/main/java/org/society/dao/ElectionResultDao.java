@@ -11,7 +11,7 @@ public interface ElectionResultDao {
 	
 	public ElectionResult update(ElectionResult result) throws ElectionResultNotFoundException;
 	
-	public boolean delete(long candidateId);
+	public boolean delete(long candidateId)throws ElectionResultNotFoundException;
 	
 	public List<ElectionResult> getElectionResultList();
 

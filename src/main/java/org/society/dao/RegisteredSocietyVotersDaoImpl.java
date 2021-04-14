@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.exceptions.DuplicateEntityFoundException;
+import org.society.exceptions.NominatedCandidateNotFoundException;
 import org.society.exceptions.VoterNotFoundException;
 import org.society.repository.RegisteredSocietyVotersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,12 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 
 	@Override
 	public RegisteredSocietyVoters update(RegisteredSocietyVoters voter) throws VoterNotFoundException {
-		if (registeredSocietyVotersRepository.existsById(voter.getId())) 
+		if (registeredSocietyVotersRepository.existsById(voter.getId())) {
 			registeredSocietyVotersRepository.save(voter);
-			
-		return registeredSocietyVotersRepository.save(voter);
-	}
+		}
+		throw new VoterNotFoundException("voter not found to update!");
+
+		}
 
 	@Override
 	public boolean delete(long voterId) throws VoterNotFoundException {
@@ -43,7 +45,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 			registeredSocietyVotersRepository.deleteById( voterId);
 			return true;
 		}
-		return false;
+		throw new VoterNotFoundException("voter not found to delete!");
 	}
 
 	@Override
