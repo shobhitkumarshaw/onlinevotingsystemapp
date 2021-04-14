@@ -1,7 +1,9 @@
 package org.society.test.service;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,24 +36,28 @@ public class AdminTest {
 	
 	
 	//update 
-	/*@Test
-	@DisplayName("Test for update Admin")
+	
+	@Test
+	@DisplayName("Test for updating Admin")
 	public void updateAdminDetailsTest() {
 		Admin ad = new Admin(111l, "Life", "Water");
-		when(adRepo.save(ad)).thenReturn(ad);
-		assertEquals(ad, adDao.update(ad));
+		ad.setAdminName("FullLife");
+		assertThat(adRepo.findById(ad.getId())).isNotEqualTo(ad);
 	}
-	*/
+	
 	//Delete
-	/*@Test
+	
+	@Test
 	@DisplayName("Test for deleting Admin")
 	public void deleteAdminDetailsTest() {
 		Admin ad = new Admin(111l, "Life", "Water");
-		adRepo.deleteById(111l);
-		assertEquals(null, adDao.getAdmin(111l));
+		when(adRepo.existsById(ad.getId())).thenReturn(true);
+		adDao.delete(ad.getId());
+		verify(adRepo).deleteById(111l);
 	}
-	*/
+	
 	//getById
+	
 	@Test
 	@DisplayName("Test for displaying Admin by Id")
 	public void getAdminDetailsTest() {

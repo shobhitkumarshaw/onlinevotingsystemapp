@@ -1,5 +1,6 @@
 package org.society.test.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -59,7 +60,7 @@ public class ElectionResultTest {
 	}
 
 //UPDATE
-	@Disabled
+	
 	@Test
 
 	@DisplayName("Test for updating Election Result")
@@ -78,12 +79,12 @@ public class ElectionResultTest {
 						cs3));
 
 		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 30000, 15000, 50, 7500, 50, "loss");
-		when(erRepo.save(er3)).thenReturn(er3);
-		assertEquals(er3, erDao.update(er3));
+		er3.setResult("Win");
+		assertThat(erRepo.findById(er3.getId())).isNotEqualTo(er3);
 	}
 
 //DELETE
-	@Disabled
+
 	@Test
 
 	@DisplayName("Test for deleting Election Result")
@@ -103,8 +104,9 @@ public class ElectionResultTest {
 
 		ElectionResult er1 = new ElectionResult(300l, LocalDate.now(), cs1, 20000, 10000, 50, 5000, 50, "loosed");
 
-		erRepo.deleteById(300l);
-		assertEquals(null, erDao.getCandidatewiseResult(300l));
+		when(erRepo.existsById(er1.getId())).thenReturn(true);
+		erDao.delete(er1.getId());
+		verify(erRepo).deleteById(300l);
 
 	}
 

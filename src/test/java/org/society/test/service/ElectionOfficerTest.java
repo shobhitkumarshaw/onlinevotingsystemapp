@@ -47,20 +47,20 @@ public class ElectionOfficerTest {
 	}
 
 	// Update
-	/*
-	 * @Test
-	 * 
-	 * @DisplayName("Test for updating Election officer in database") 
-	 * public void updateElectionOfficerDetailsTest() {
-	 * 
-	 * ElectionOfficer officer = new ElectionOfficer(788L, "shobhit", "shaw",
-	 * "Bcrec1", "Male", "9876543210", "shobhit@gmail.com", "add1", "add2", "dis1",
-	 * 654321); 
-	 * when(repo.save(officer)).thenReturn(officer); 
-	 * assertEquals(officer,eoservice.update(officer));
-	 * 
-	 * }
-*/
+	
+	  @Test
+	  
+	  @DisplayName("Test for updating Election officer in database") 
+	  public void updateElectionOfficerDetailsTest() {
+	 
+	  ElectionOfficer officer = new ElectionOfficer(788L, "shobhit", "shaw",
+	  "Bcrec1", "Male", "9876543210", "shobhit@gmail.com", "add1", "add2", "dis1",
+	  654321); 
+	  officer.setFirstName("Tej");
+		assertThat(repository.findById(officer.getId())).isNotEqualTo(officer);
+	  
+	  }
+
 
 	//Delete
 	
@@ -70,11 +70,9 @@ public class ElectionOfficerTest {
 		
 		ElectionOfficer officer = new ElectionOfficer(3L, "shobhit", "shaw", "Bcrec1", "Male", "9876543210",
 				"shobhit@gmail.com", "add1", "add2", "dis1", 654321);
-		when(repository.save(officer)).thenReturn(officer);
-		//when(repository.findById(3l)).thenReturn(Optional.of(officer));
-		//assertThat(service.deleteElectionOfficer(3l)).isEqualTo(true);
-		service.deleteElectionOfficer(3l);
-		verify(repository,times(1)).deleteById(1l);
+		when(repository.existsById(officer.getId())).thenReturn(true);
+		service.deleteElectionOfficer(officer.getId());
+		verify(repository).deleteById(3l);
 	}
 
 	//DetailsById
