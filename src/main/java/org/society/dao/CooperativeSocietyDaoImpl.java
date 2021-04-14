@@ -19,7 +19,7 @@ public class CooperativeSocietyDaoImpl implements CooperativeSocietyDao {
 	@Override
 	public CooperativeSociety save(CooperativeSociety society) {
 		if (repository.existsById(society.getId())) {
-			throw new DuplicateEntityFoundException("User save operation", "Duplicated User can be saved!");
+			throw new DuplicateEntityFoundException("Society save operation", "Duplicated Society can be saved!");
 		}
 		return repository.save(society);
 	}
@@ -30,7 +30,7 @@ public class CooperativeSocietyDaoImpl implements CooperativeSocietyDao {
 			return repository.save(society);
 		}
 
-		throw new SocietyNotFoundException("User not found to update!");
+		throw new SocietyNotFoundException("Society not found to update!");
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class CooperativeSocietyDaoImpl implements CooperativeSocietyDao {
 			repository.deleteById(societyId);
 			return true;
 		}
-		throw new SocietyNotFoundException("User not found to delete!");
+		throw new SocietyNotFoundException("Society not found to delete!");
 	}
 
 	@Override

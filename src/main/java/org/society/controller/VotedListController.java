@@ -38,5 +38,8 @@ public class VotedListController {
 		}
 		return votedList;
 	}
-
+	
+	//@GetMapping("{id}")
+	
+	
 }

@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.society.dao.ElectionResultDao;
@@ -58,7 +59,7 @@ public class ElectionResultTest {
 	}
 
 //UPDATE
-/*	@Test
+	@Test
 
 	@DisplayName("Test for updating Election Result")
 	public void updateElectionResultDetailsTest() {
@@ -79,9 +80,9 @@ public class ElectionResultTest {
 		when(erRepo.save(er3)).thenReturn(er3);
 		assertEquals(er3, erDao.update(er3));
 	}
-*/
+
 //DELETE
-/*
+	//@Disabled
 	@Test
 
 	@DisplayName("Test for deleting Election Result")
@@ -105,8 +106,9 @@ public class ElectionResultTest {
 		assertEquals(null, erDao.getCandidatewiseResult(300l));
 
 	}
-*/
+
 	// DetailsById
+	
 	@Test
 
 	@DisplayName("Test for displaying Election Result by Id")

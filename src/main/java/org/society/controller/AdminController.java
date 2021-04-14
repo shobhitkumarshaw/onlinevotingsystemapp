@@ -56,7 +56,6 @@ public class AdminController {
 
 	}
 
-	@JsonIgnore
 	@GetMapping(value = "{adminId}")
 	public ResponseEntity<?> getAdmin(@PathVariable("adminId") long adminId) {
 		Admin ad = adService.viewAdminById(adminId);

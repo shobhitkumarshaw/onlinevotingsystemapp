@@ -57,6 +57,7 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 
 	@Override
 	public List<ElectionOfficer> getElectionOfficerList() {
+		
 		List<ElectionOfficer> list = (List<ElectionOfficer>) repository.findAll();
 
 		return list;

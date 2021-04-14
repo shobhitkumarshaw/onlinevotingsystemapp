@@ -20,7 +20,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 	public NominatedCandidates save(NominatedCandidates candidate) {
 
 		if (nominatedCandidatesRepository.existsById(candidate.getCandidateId())) {
-			throw new DuplicateEntityFoundException("Duplicate Candidate can not be saved");
+			throw new DuplicateEntityFoundException("Duplicate Nominated Candidate can not be saved!");
 		}
 
 		return nominatedCandidatesRepository.save(candidate);
@@ -31,7 +31,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 		if(nominatedCandidatesRepository.existsById(candidate.getCandidateId())) {
 		return nominatedCandidatesRepository.save(candidate);
 		}
-		throw new NominatedCandidateNotFoundException("Candidate not found to update!");
+		throw new NominatedCandidateNotFoundException(" Nominated Candidate not found to update!");
 
 	}
 
@@ -42,7 +42,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 			nominatedCandidatesRepository.deleteById((long) candidateId);
 			return true;
 		}
-		throw new NominatedCandidateNotFoundException("Candidate not found to delete!");
+		throw new NominatedCandidateNotFoundException("Nominated Candidate not found to delete!");
 	}
 
 	@Override
