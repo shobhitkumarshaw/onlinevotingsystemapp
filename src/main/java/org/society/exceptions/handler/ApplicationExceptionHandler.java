@@ -66,7 +66,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
-
 	}
 
 	@ExceptionHandler(ElectionOfficerNotFoundException.class)
@@ -76,7 +75,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
-
 	}
 
 	@ExceptionHandler(ElectionOfficerNotFoundException.class)
@@ -86,6 +84,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
-
 	}
+	
 }
