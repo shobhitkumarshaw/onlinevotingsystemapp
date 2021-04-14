@@ -18,9 +18,9 @@ public interface VotedListService {
 
 	public List<VotedList> viewVotedList();
 
-	public VotedList searchByVoterId(long voterId);
+	public VotedList searchByVoterId(String voterId);
 
-	public List<VotedList> searchByNominatedCandidateId(int candidateId);
+	public VotedList searchByNominatedCandidateId(int candidateId);
 
 	public VotedList castVote(long scoietyId, long nominatedCandidateId, String voterIdNumber);
 }

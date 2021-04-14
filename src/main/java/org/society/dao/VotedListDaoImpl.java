@@ -38,8 +38,8 @@ public class VotedListDaoImpl implements VotedListDao {
 
 			return votedListRepository.save(votedList);
 		}
-		return null;
-
+		
+		throw new CastedVoteNotFoundException("Voted list not found to update!");
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class VotedListDaoImpl implements VotedListDao {
 			votedListRepository.deleteById(id);
 			return true;
 		}
-		return false;
+		throw new CastedVoteNotFoundException("Voted list not found!");
 	}
 
 	@Override
@@ -58,23 +58,23 @@ public class VotedListDaoImpl implements VotedListDao {
 	}
 
 	@Override
-	public VotedList getByVoterId(long voterId) throws VoterNotFoundException {
-//		VotedList list = votedListRepository.findVoterListByVoterId(voterId);
-//		if(list == null)
-//			throw new VoterNotFoundException("Voter Id + "+voterId+ " does not exits in votered list!");
-//		return list;
-		return null;
+	public VotedList getByVoterId(String voterId) throws VoterNotFoundException {
+		VotedList list = votedListRepository.findByVoterIdCard(voterId);
+		if(list == null)
+			throw new VoterNotFoundException("Voter Id + "+voterId+ " does not exits in votered list!");
+		return list;
+		
 	}
 
 	@Override
-	public List<VotedList> searchByNominatedCandidateId(long candidateId) throws NominatedCandidateNotFoundException {
-
-//		Optional<VotedList> candidate = votedListRepository.findById(candidateId);
-//		if (candidate.isPresent()) {
-//			return candidate.get();
-//		} else
-//			throw new CastedVoteNotFoundException("");
-		return null;
+	public VotedList searchByNominatedCandidateId(long candidateId) {
+		VotedList candidate = votedListRepository.findByNominatedCandidateId(candidateId);
+		
+		if(candidate == null)
+			throw new NominatedCandidateNotFoundException("Nominated Candidate not found in voted list");
+		return candidate;
 	}
+
+
 
 }

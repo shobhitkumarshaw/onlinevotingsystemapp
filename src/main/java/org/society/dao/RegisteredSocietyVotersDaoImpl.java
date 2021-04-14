@@ -5,11 +5,9 @@
 package org.society.dao;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.exceptions.DuplicateEntityFoundException;
-import org.society.exceptions.NominatedCandidateNotFoundException;
 import org.society.exceptions.VoterNotFoundException;
 import org.society.repository.RegisteredSocietyVotersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

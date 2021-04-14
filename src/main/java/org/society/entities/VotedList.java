@@ -131,6 +131,14 @@ public class VotedList implements Serializable {
 		this.endTime = endTime;
 	}
 
+
+	@Override
+	public String toString() {
+		return "VotedList [id=" + id + ", pollingDateTime=" + pollingDateTime + ", cooperativeSociety="
+				+ cooperativeSociety + ", registeredSocietyVoters=" + registeredSocietyVoters + ", nominatedCandidates="
+				+ nominatedCandidates + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+	}
+
 	
 	
 	

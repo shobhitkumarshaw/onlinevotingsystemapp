@@ -61,12 +61,12 @@ public class VotedListServiceImpl implements VotedListService{
 	}
 
 	@Override
-	public VotedList searchByVoterId(long voterId) {
+	public VotedList searchByVoterId(String voterId) {
 		return dao.getByVoterId(voterId);
 	}
 
 	@Override
-	public List<VotedList> searchByNominatedCandidateId(int candidateId) {
+	public VotedList searchByNominatedCandidateId(int candidateId) {
 		return dao.searchByNominatedCandidateId(candidateId);
 	}
 	
