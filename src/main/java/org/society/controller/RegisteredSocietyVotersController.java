@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/RegisteredSocietyVoter")
+@RequestMapping("/api/RegisteredSocietyVoter")
 public class RegisteredSocietyVotersController {
 
 	
