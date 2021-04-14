@@ -129,6 +129,8 @@ public class ElectionResultTest {
 		assertEquals(er2, erDao.getCandidatewiseResult(301l));
 	}
 
+	
+	//AllDetails
 	@Test
 	@DisplayName("Test for displaying list of Election Result")
 	public void getElectionResultList() {
