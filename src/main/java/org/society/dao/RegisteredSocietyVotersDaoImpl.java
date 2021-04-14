@@ -31,7 +31,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 	@Override
 	public RegisteredSocietyVoters update(RegisteredSocietyVoters voter) throws VoterNotFoundException {
 		if (registeredSocietyVotersRepository.existsById(voter.getId())) {
-			registeredSocietyVotersRepository.save(voter);
+			return registeredSocietyVotersRepository.save(voter);
 		}
 		throw new VoterNotFoundException("voter not found to update!");
 

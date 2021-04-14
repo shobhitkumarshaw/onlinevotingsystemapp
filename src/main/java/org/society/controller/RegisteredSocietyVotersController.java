@@ -6,8 +6,11 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.society.entities.ElectionResult;
 import org.society.entities.RegisteredSocietyVoters;
+import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
+import org.society.exceptions.VoterNotFoundException;
 import org.society.service.RegisteredSocietyVotersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +28,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/RegisteredSocietyVoter")
 public class RegisteredSocietyVotersController {
 
-	Logger logger = LoggerFactory.getLogger(RegisteredSocietyVotersController.class);
 	
 	@Autowired
 	RegisteredSocietyVotersService registeredSocietyVotersService;
+	Logger logger = LoggerFactory.getLogger(RegisteredSocietyVotersController.class);
+
 	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<?> getRegisteredSocietyVoterById(@PathVariable("id") String id) {
+	public ResponseEntity<?> getRegisteredSocietyVoterByVoterCardNo(@PathVariable("id") String id) {
 		RegisteredSocietyVoters registeredSocietyVoters = registeredSocietyVotersService.searchByVoterID(id);
+		if (registeredSocietyVoters == null) {
+			logger.error("No data found with this id:"+ id +" in Registered Society Voter database!");
+			throw new VoterNotFoundException("Registered Society Voter not found!");
+		}
 		logger.info("Registered Society Voter id: " + id + " found!");
 		return new ResponseEntity<RegisteredSocietyVoters>(registeredSocietyVoters, HttpStatus.OK);
 	}
@@ -70,6 +78,6 @@ public class RegisteredSocietyVotersController {
 	public String deleteRegisteredSocietyVotersDetailsById(@PathVariable("id") long id) {
 		registeredSocietyVotersService.deleteRegisteredVoter(id);
 		logger.info("Registered Society Voter with id: "+ id + " deleted!");
-		return "Registered Society Voter with id: " + id + " removed successfully !";
+		return "Registered Society Voter removed successfully !";
 	}
 }
