@@ -2,6 +2,9 @@ package org.society.controller;
 
 import java.util.List;
 import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.society.entities.Admin;
 import org.society.entities.ElectionOfficer;
 import org.society.entities.ElectionResult;
@@ -32,11 +35,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class AdminController {
 	@Autowired
 	private AdminService adService;
-	
+	Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@PostMapping
 	public String saveAdmin(@Valid @RequestBody Admin admin) {
 		adService.addAdminDetails(admin);
+		logger.info("Admin added with id: " + admin.getId());
 		return "Admin data successfully saved";
 	}
 
@@ -44,6 +48,7 @@ public class AdminController {
 	public String updateAdmin(@Valid @RequestBody Admin admin) {
 
 		adService.updateAdminDetails(admin);
+		logger.info("Admin with id: " + admin.getId() + " updated!");
 		return "Admin data successfully Updated";
 
 	}
@@ -52,6 +57,7 @@ public class AdminController {
 	public String deleteAdmin(@PathVariable("adminId") long adminId) {
 
 		adService.deleteAdminDetails(adminId);
+		logger.info("Admin with id: " + adminId + " deleted!");
 		return "Admin data successfully deleted";
 
 	}
@@ -59,10 +65,23 @@ public class AdminController {
 	@GetMapping(value = "{adminId}")
 	public ResponseEntity<?> getAdmin(@PathVariable("adminId") long adminId) {
 		Admin ad = adService.viewAdminById(adminId);
-		if (ad == null)
+		if (ad == null) {
+			logger.error("No data found in admin database!");
 			throw new NoAdminFoundException("Election Result not found!");
-
+		}
+		logger.info("Admin id: " + adminId + " found!");
 		return new ResponseEntity<Admin>(ad, HttpStatus.OK);
+	}
+	@GetMapping
+	public List<Admin> getListOfAdmin() {
+
+		List<Admin> adminList = adService.getAllAdminList();
+		if (adminList.size() == 0) {
+			logger.error("No data found in Admin database!");
+			throw new EmptyDataException("No Admin in database!");
+		}
+		logger.info("Admin list found!");
+		return adminList;
 	}
 
 }

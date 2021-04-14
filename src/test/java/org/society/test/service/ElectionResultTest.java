@@ -59,6 +59,7 @@ public class ElectionResultTest {
 	}
 
 //UPDATE
+	@Disabled
 	@Test
 
 	@DisplayName("Test for updating Election Result")
@@ -82,7 +83,7 @@ public class ElectionResultTest {
 	}
 
 //DELETE
-	//@Disabled
+	@Disabled
 	@Test
 
 	@DisplayName("Test for deleting Election Result")
