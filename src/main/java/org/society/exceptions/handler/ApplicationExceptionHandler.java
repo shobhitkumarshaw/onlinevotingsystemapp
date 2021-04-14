@@ -12,6 +12,11 @@ import org.society.exceptions.ElectionOfficerNotFoundException;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
+import org.society.exceptions.NominatedCandidateNotFoundException;
+import org.society.exceptions.SocietyNotFoundException;
+import org.society.exceptions.UserNotFoundException;
+import org.society.exceptions.VoteAllReadyCastedException;
+import org.society.exceptions.VoterNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,19 +42,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
 
 	}
-
-//	@ExceptionHandler(DuplicateEmployeeException.class)
-//	public ResponseEntity<?> handleDumplicateEntity(DuplicateEmployeeException ex) {
-//		log.info("Exception Not able to create Employee object");
-//		Map<String, Object> errorBody = new LinkedHashMap<>();
-//		errorBody.put("error", "Creation Failed");
-//		errorBody.put("timestamp", LocalDateTime.now());
-//		errorBody.put("details", ex.getMessage());
-//		return new ResponseEntity<>(errorBody,HttpStatus.BAD_REQUEST);
-//		
-//		
-//
-//	}
 
 	@ExceptionHandler(DuplicateEntityFoundException.class)
 	public ResponseEntity<?> handleDuplicateEntityFoundException(DuplicateEntityFoundException ex) {
@@ -103,10 +95,51 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("error"," Failed");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);  
+	}
+	
+	@ExceptionHandler(NominatedCandidateNotFoundException.class)
+	public ResponseEntity<?> handleNominatedCandidateNotFound(NominatedCandidateNotFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler(SocietyNotFoundException.class)
+	public ResponseEntity<?> handleSocietyNotFound(SocietyNotFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+	}
 	
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<?> handleUserNotFound(UserNotFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+	}
 	
+	@ExceptionHandler(VoteAllReadyCastedException.class)
+	public ResponseEntity<?> handleVoteAllReadyCasted(VoteAllReadyCastedException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.ALREADY_REPORTED);
+	}
 	
+	@ExceptionHandler(VoterNotFoundException.class)
+	public ResponseEntity<?> handleVoterNotFound(VoterNotFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+	}
 }
