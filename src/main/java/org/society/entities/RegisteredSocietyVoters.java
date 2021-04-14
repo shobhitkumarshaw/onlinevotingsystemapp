@@ -33,60 +33,57 @@ public class RegisteredSocietyVoters implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	// Voter Id card number must be unique
 	@NotNull(message = "Voter Id number can not be null")
 	@Column(unique = true)
 	private String voterIdCardNo;
-	
+
 	@NotNull(message = "Name is Required")
 	@Length(min = 2, max = 30, message = "Name size must be between 5 and 30")
 	private String firstName;
-	
-	
+
 	private String lastName;
-	
-	
+
 	@NotNull(message = "Password is Required")
 	@Length(min = 5, max = 15, message = "Name size must be between 5 and 15")
 	private String password;
-	
-	
+
 	@NotNull(message = "Gender is Required")
 	private String gender;
-	
+
 	@NotBlank(message = "Reservation Category is required")
 	private String reservationCategory;
-	
+
 	@NotNull(message = "Name is Required")
-	@Size(min = 10,max=13, message = "mobile number should be valid")
+	@Length(min = 10, max = 13, message = "mobile number should be valid")
 	private String mobileno;
-	
-	//@email
+
+	// @email
 	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
 	@NotNull(message = "Email is Required")
 	private String emailId;
-	
-	@NotBlank
+
+	@NotNull
 	private String addressLine1;
-	
+
 	private String addressLine2;
-	
-	@NotBlank
+
+	@NotNull
 	private String mandal;
-	
-	@NotBlank
+
+	@NotNull
 	private String district;
-	
+
 	@NotNull(message = "Pincode is required")
 	@Min(6)
 	private int pincode;
 
 	private boolean castedVote;
-	
+
 	// OneToOne relationship one Voter can have only one Society
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL) //added cascade
+	@ManyToOne(cascade = CascadeType.ALL) // added cascade
 	@JoinColumn(name = "cooperative_society_fk")
 	private CooperativeSociety cooperativeSociety;
 
@@ -100,6 +97,28 @@ public class RegisteredSocietyVoters implements Serializable {
 			CooperativeSociety cooperativeSociety) {
 		super();
 		this.id = id;
+		this.voterIdCardNo = voterIdCardNo;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.gender = gender;
+		this.reservationCategory = reservationCategory;
+		this.mobileno = mobileno;
+		this.emailId = emailId;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.mandal = mandal;
+		this.district = district;
+		this.pincode = pincode;
+		this.castedVote = castedVote;
+		this.cooperativeSociety = cooperativeSociety;
+	}
+
+	public RegisteredSocietyVoters(String voterIdCardNo, String firstName, String lastName, String password,
+			String gender, String reservationCategory, String mobileno, String emailId, String addressLine1,
+			String addressLine2, String mandal, String district, int pincode, boolean castedVote,
+			CooperativeSociety cooperativeSociety) {
+		super();
 		this.voterIdCardNo = voterIdCardNo;
 		this.firstName = firstName;
 		this.lastName = lastName;
