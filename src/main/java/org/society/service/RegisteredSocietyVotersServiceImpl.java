@@ -42,6 +42,7 @@ public class RegisteredSocietyVotersServiceImpl implements RegisteredSocietyVote
 		return  dao.getByVoterID(voterId);
 	}
 
+	//left to implement
 	@Override
 	public RegisteredSocietyVoters loginValidate(String userid, String password) {
 		return null;
