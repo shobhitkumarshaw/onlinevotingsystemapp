@@ -20,7 +20,7 @@ public interface VotedListService {
 
 	public VotedList searchByVoterId(String voterId);
 
-	public VotedList searchByNominatedCandidateId(int candidateId);
+	public VotedList searchByNominatedCandidateId(long candidateId);
 
 	public VotedList castVote(long scoietyId, long nominatedCandidateId, String voterIdNumber);
 }

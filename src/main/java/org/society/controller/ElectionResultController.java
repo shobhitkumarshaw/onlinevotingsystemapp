@@ -48,10 +48,10 @@ public class ElectionResultController {
 	public ResponseEntity<?> getResult(@PathVariable("CandidateId") long candidateId) {
 		ElectionResult er = service.viewCandidatewiseResult(candidateId);
 		if (er == null) {
-			logger.error("No data found in Election Result database!");
+			logger.error("No data found with this id:"+ candidateId +" in Election Result database!");
 			throw new ElectionResultNotFoundException("Election Result not found!");
 		}
-		logger.info("Admin id: " + candidateId + " found!");
+		logger.info("Election Result with id: " + candidateId + " found!");
 		return new ResponseEntity<ElectionResult>(er, HttpStatus.OK);
 	}
 
@@ -76,7 +76,6 @@ public class ElectionResultController {
 		service.deleteElectionResult(CandidateId);
 		logger.info("Election Result with id: " + CandidateId + " deleted!");
 		return "Election Result data successfully deleted";
-
 	}
 
 }

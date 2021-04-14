@@ -1,6 +1,4 @@
-/*
- * @author: Aditya Mohapatra
- */
+
 
 package org.society.service;
 
@@ -66,7 +64,7 @@ public class VotedListServiceImpl implements VotedListService{
 	}
 
 	@Override
-	public VotedList searchByNominatedCandidateId(int candidateId) {
+	public VotedList searchByNominatedCandidateId(long candidateId) {
 		return dao.searchByNominatedCandidateId(candidateId);
 	}
 	
