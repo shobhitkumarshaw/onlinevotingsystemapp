@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.society.entities.CooperativeSociety;
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
-import org.society.entities.PollingResult;
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.entities.VotedList;
 import org.society.repository.ElectionResultRepository;
@@ -22,6 +25,9 @@ import com.sun.el.stream.Stream;
 public class DBInitElectionResult implements CommandLineRunner {
 	@Autowired
 	ElectionResultRepository repo;
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -85,9 +91,22 @@ public class DBInitElectionResult implements CommandLineRunner {
 
 		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 70000, 15000, 50, 7500, 50, "loss");
 		repo.save(er3);
-
-		List<PollingResult> list = repo.votedlistResult();
+		
+		List list = repo.votedlistResult();
 		System.out.println(list);
+	
+		
+		//long total = repo.getTotalCastedVotes();
+		//System.out.println("Total vote: "+total);
+		
+		
+		Query total2 = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
+		System.out.println("Total votes: "+ (long)total2.getSingleResult());
+		
+		Query totalVoters = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
+		Query totalNumberOfVotes = em.createNativeQuery("SELECT COUNT(REGISTERED_SOCIETY_VOTERS_FK ) FROM VOTED_LIST");
+		System.out.println("totalvotes"+totalVoters.getSingleResult());
+		System.out.println("totalvotes"+totalNumberOfVotes.getSingleResult());
 	}
 
 }

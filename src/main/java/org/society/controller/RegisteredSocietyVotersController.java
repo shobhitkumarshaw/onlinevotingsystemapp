@@ -80,4 +80,7 @@ public class RegisteredSocietyVotersController {
 		logger.info("Registered Society Voter with id: "+ id + " deleted!");
 		return "Registered Society Voter removed successfully !";
 	}
+	
+	
+	
 }

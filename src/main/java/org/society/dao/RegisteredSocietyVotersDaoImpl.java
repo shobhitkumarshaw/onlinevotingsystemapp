@@ -6,6 +6,8 @@ package org.society.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.VoterNotFoundException;
@@ -36,12 +38,15 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		throw new VoterNotFoundException("voter not found to update!");
 
 	}
-
+	@Transactional
 	@Override
 	public boolean delete(String voterId) throws VoterNotFoundException {
 		RegisteredSocietyVoters voter = registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
 		if (voter == null)
 			throw new VoterNotFoundException("Voter Id not found to delete!");
+		voter.setCooperativeSociety(null);
+		System.out.println(voter.toString());
+		registeredSocietyVotersRepository.save(voter);
 		
 		registeredSocietyVotersRepository.deleteById(voter.getId());
 		return true;

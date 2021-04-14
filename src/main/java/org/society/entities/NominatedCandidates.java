@@ -53,7 +53,7 @@ public class NominatedCandidates implements Serializable {
 	private boolean approvedByElectionOfficer;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name = "registered_society_voter_fk")
 	private RegisteredSocietyVoters registeredSocietyVoter;
 	

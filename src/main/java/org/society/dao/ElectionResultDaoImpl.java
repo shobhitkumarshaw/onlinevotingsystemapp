@@ -1,7 +1,12 @@
 package org.society.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
@@ -16,7 +21,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ElectionResultDaoImpl implements ElectionResultDao {
 	@Autowired
-	ElectionResultRepository repository;
+	private ElectionResultRepository repository;
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public ElectionResult save(ElectionResult result) {
@@ -62,8 +70,13 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	@Override
 	public double viewVotingPercentage() {
-		
-		return 0;
+		Query totalVoters = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
+		Query totalNumberOfVotes = em.createNativeQuery("SELECT COUNT(REGISTERED_SOCIETY_VOTERS_FK ) FROM VOTED_LIST");
+		//System.out.println("totalvotes2"+totalVoters.getSingleResult());
+		//System.out.println("totalvotes2"+totalNumberOfVotes.getSingleResult());
+		long l1 = (long) totalVoters.getSingleResult();
+		long l2 = (long) totalNumberOfVotes.getSingleResult();
+		return ( l2/l1)*100;
 	}
 
 	@Override
@@ -104,7 +117,8 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	@Override
 	public void displayPollingResult() {
-		// TODO Auto-generated method stub
+		List list = repository.votedlistResult();
+		System.out.println("list: "+list);
 		
 	}
 }

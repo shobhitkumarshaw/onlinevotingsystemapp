@@ -10,6 +10,7 @@ import org.society.entities.ElectionResult;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionResultService;
+import org.society.service.RegisteredSocietyVotersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,6 +77,11 @@ public class ElectionResultController {
 		service.deleteElectionResult(CandidateId);
 		logger.info("Election Result with id: " + CandidateId + " deleted!");
 		return "Election Result data successfully deleted";
+	}
+	@GetMapping("per")
+	public double getVotingPercentage() {
+		
+		return service.viewVotingPercentage();
 	}
 
 }

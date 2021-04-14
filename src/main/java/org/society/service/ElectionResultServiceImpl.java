@@ -44,8 +44,8 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 
 	@Override
 	public double viewVotingPercentage() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return dao.viewVotingPercentage();
 	}
 
 	@Override

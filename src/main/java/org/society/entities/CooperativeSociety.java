@@ -51,11 +51,11 @@ public class CooperativeSociety implements Serializable {
 	private String pincode;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = RegisteredSocietyVoters.class)
+	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = RegisteredSocietyVoters.class,orphanRemoval = true)
 	private List<RegisteredSocietyVoters> registeredSocietyVoters = new ArrayList<>();
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = NominatedCandidates.class)
+	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = NominatedCandidates.class, orphanRemoval = true)
 	private List<NominatedCandidates> nominatedCandidates = new ArrayList<>();
 
 	public CooperativeSociety() {
