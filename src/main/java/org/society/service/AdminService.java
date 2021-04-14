@@ -1,6 +1,8 @@
 package org.society.service;
 
 
+import java.util.List;
+
 import org.society.entities.Admin;
 import org.society.entities.CooperativeSociety;
 import org.society.entities.ElectionOfficer;
@@ -11,13 +13,13 @@ import org.society.entities.User;
 import org.society.entities.VotedList;
 
 public interface AdminService {
-	public void addAdminDetails(Admin admin);
+	public Admin addAdminDetails(Admin admin);
 
-	public boolean updateAdminDetails(Admin admin);
+	public Admin updateAdminDetails(Admin admin);
 
 	public boolean deleteAdminDetails(long adminId);
 
 	public Admin viewAdminById(long adminId);
 
-	
+	public List<Admin> getAllAdminList();
 }

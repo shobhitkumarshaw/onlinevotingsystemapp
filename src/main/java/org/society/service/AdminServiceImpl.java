@@ -1,5 +1,7 @@
 package org.society.service;
 
+import java.util.List;
+
 import org.society.dao.AdminDaoImp;
 import org.society.dao.ElectionOfficerDaoImpl;
 import org.society.dao.ElectionResultDaoImpl;
@@ -26,15 +28,15 @@ public class AdminServiceImpl implements AdminService {
 	AdminDaoImp daoAdmin;
 
 	@Override
-	public void addAdminDetails(Admin admin) {
-		daoAdmin.save(admin);
+	public Admin addAdminDetails(Admin admin) {
+		return daoAdmin.save(admin);
 
 	}
 
 	@Override
-	public boolean updateAdminDetails(Admin admin) {
-		daoAdmin.update(admin);
-		return true;
+	public Admin updateAdminDetails(Admin admin) {
+		return  daoAdmin.update(admin);
+		
 	}
 
 	@Override
@@ -47,6 +49,12 @@ public class AdminServiceImpl implements AdminService {
 	public Admin viewAdminById(long adminId) {
 		return daoAdmin.getAdmin(adminId);
 
+	}
+
+	@Override
+	public List<Admin> getAllAdminList() {
+
+		return daoAdmin.getAllAdmin();
 	}
 
 }
