@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.society.exceptions.CastedVoteNotFoundException;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.ElectionOfficerNotFoundException;
 import org.society.exceptions.ElectionResultNotFoundException;
+import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -77,7 +79,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(ElectionOfficerNotFoundException.class)
+	@ExceptionHandler(NoAdminFoundException.class)
 	public ResponseEntity<?> handleNoAdminFound(NoAdminFoundException ex) {
 		Map<String, Object> errorBody = new LinkedHashMap<>();
 		errorBody.put("error", ex.getOperation() + " Failed");
@@ -85,5 +87,26 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(CastedVoteNotFoundException.class)
+	public ResponseEntity<?> handleCastedVoteNot(CastedVoteNotFoundException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", ex.getOperation() + " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(EmptyDataException.class)
+	public ResponseEntity<?> handleEmptyData(EmptyDataException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error"," Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
 	
 }

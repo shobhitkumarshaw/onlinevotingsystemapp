@@ -28,9 +28,9 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	@Override
 	public ElectionResult update(ElectionResult result) {
-		repository.existsById(result.getId());
-		
-		return repository.save(result);
+		if(repository.existsById(result.getId())) {
+		return repository.save(result);}
+		return null;
 	}
 
 	@Override

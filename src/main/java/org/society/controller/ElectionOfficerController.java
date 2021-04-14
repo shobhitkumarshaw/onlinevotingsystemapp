@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.society.entities.ElectionOfficer;
+import org.society.exceptions.ElectionOfficerNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,11 @@ public class ElectionOfficerController {
 
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getElectionOfficerById(@PathVariable("id") long id) {
-		
+		//No need i handle it here
 		//Duplicate validation is done in DAO part. If Exception is thrown than it will be propagated to ApplicationExecptionHandler class
 		ElectionOfficer officer = service.viewElectionOfficerById(id);
-		
+		if (officer == null)
+			throw new ElectionOfficerNotFoundException("Request", "Election Officer not found!");
 		return new ResponseEntity<ElectionOfficer>(officer, HttpStatus.OK);
 	}
 

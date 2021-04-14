@@ -27,10 +27,12 @@ public class AdminDaoImp implements AdminDao {
 	}
 
 	@Override
-	public Admin update(Admin ad) throws NoAdminFoundException  {
-		repository.existsById(ad.getId());
+	public Admin update(Admin ad) throws NoAdminFoundException {
+		if (repository.existsById(ad.getId())) {
 
-		return repository.save(ad);
+			return repository.save(ad);
+		}
+		return null;
 	}
 
 	@Override

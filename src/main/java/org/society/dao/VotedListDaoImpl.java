@@ -38,7 +38,8 @@ public class VotedListDaoImpl implements VotedListDao {
 
 			return votedListRepository.save(votedList);
 		}
-		throw new CastedVoteNotFoundException("Voted List not found to update");
+		return null;
+
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class VotedListDaoImpl implements VotedListDao {
 
 	@Override
 	public List<VotedList> searchByNominatedCandidateId(long candidateId) throws NominatedCandidateNotFoundException {
-		
+
 //		Optional<VotedList> candidate = votedListRepository.findById(candidateId);
 //		if (candidate.isPresent()) {
 //			return candidate.get();

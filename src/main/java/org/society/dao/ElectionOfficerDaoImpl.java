@@ -27,10 +27,10 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 
 	@Override
 	public ElectionOfficer update(ElectionOfficer officer) {
-		if (!repository.existsById(officer.getId()))
-			throw new ElectionOfficerNotFoundException("Election Officer not found!");
+		if(repository.existsById(officer.getId())) {
 
-		return repository.save(officer);
+		return repository.save(officer);}
+		return null;
 	}
 
 	@Override
@@ -39,9 +39,8 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 		if (repository.existsById(officerId)) {
 			repository.deleteById(officerId);
 			return true;
-		} else {
-			throw new ElectionOfficerNotFoundException("Election Officer not found!");
 		}
+		return false;
 
 	}
 
@@ -50,9 +49,8 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 		Optional<ElectionOfficer> officer = repository.findById(officerId);
 		if (officer.isPresent()) {
 			return officer.get();
-		} else
-			throw new ElectionOfficerNotFoundException("Election Officer not found!");
-
+		}
+		return null;
 	}
 
 	@Override

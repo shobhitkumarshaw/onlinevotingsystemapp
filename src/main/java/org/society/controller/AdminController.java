@@ -6,7 +6,7 @@ import org.society.entities.Admin;
 import org.society.entities.ElectionOfficer;
 import org.society.entities.ElectionResult;
 import org.society.entities.User;
-import org.society.exceptions.ElectionResultNotFoundException;
+
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
 import org.society.service.AdminService;
