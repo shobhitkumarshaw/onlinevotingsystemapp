@@ -25,7 +25,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 			throw new DuplicateEntityFoundException("Duplicate Voter can not be saved");
 		}
 		return registeredSocietyVotersRepository.save(voter);
-		
+
 	}
 
 	@Override
@@ -35,15 +35,16 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		}
 		throw new VoterNotFoundException("voter not found to update!");
 
-		}
+	}
 
 	@Override
-	public boolean delete(long voterId) throws VoterNotFoundException {
-		if (registeredSocietyVotersRepository.existsById( voterId)) {
-			registeredSocietyVotersRepository.deleteById( voterId);
-			return true;
-		}
-		throw new VoterNotFoundException("voter not found to delete!");
+	public boolean delete(String voterId) throws VoterNotFoundException {
+		RegisteredSocietyVoters voter = registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
+		if (voter == null)
+			throw new VoterNotFoundException("Voter Id not found to delete!");
+		
+		registeredSocietyVotersRepository.deleteById(voter.getId());
+		return true;
 	}
 
 	@Override
@@ -55,15 +56,14 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 
 	@Override
 	public RegisteredSocietyVoters getByVoterID(String voterId) throws VoterNotFoundException {
-		RegisteredSocietyVoters voter =  registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
-		if(voter == null)
+		RegisteredSocietyVoters voter = registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
+		if (voter == null)
 			throw new VoterNotFoundException("Voter not found!");
-		
+
 		return voter;
-		
-		
+
 	}
-	
+
 	/*
 	 * @Override public RegisteredSocietyVoters loginValidate(String userid, String
 	 * password) throws VoterNotFoundException { return null; }

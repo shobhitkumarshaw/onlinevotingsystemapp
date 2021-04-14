@@ -10,7 +10,7 @@ public interface RegisteredSocietyVotersDao {
 
 	public RegisteredSocietyVoters update(RegisteredSocietyVoters voter) throws VoterNotFoundException;
 
-	public boolean delete(long voterId) throws VoterNotFoundException;
+	public boolean delete(String voterId) throws VoterNotFoundException;
 
 	public List<RegisteredSocietyVoters> getRegisteredVoterList();
 
