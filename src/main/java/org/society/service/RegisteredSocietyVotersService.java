@@ -10,7 +10,7 @@ public interface RegisteredSocietyVotersService {
 
 	public RegisteredSocietyVoters updateRegisteredVoterDetails(RegisteredSocietyVoters voter);
 
-	public boolean deleteRegisteredVoter(long voterId);
+	public boolean deleteRegisteredVoter(String voterId);
 
 	public List<RegisteredSocietyVoters> viewRegisteredVoterList();
 

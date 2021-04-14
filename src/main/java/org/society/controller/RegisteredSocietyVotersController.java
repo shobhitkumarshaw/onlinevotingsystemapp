@@ -74,8 +74,8 @@ public class RegisteredSocietyVotersController {
 		
 	}
 	
-	@DeleteMapping(value = "{id}")
-	public String deleteRegisteredSocietyVotersDetailsById(@PathVariable("id") long id) {
+	@DeleteMapping(value = "{voterId}")
+	public String deleteRegisteredSocietyVotersDetailsById(@PathVariable("voterId") String id) {
 		registeredSocietyVotersService.deleteRegisteredVoter(id);
 		logger.info("Registered Society Voter with id: "+ id + " deleted!");
 		return "Registered Society Voter removed successfully !";

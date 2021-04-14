@@ -27,7 +27,7 @@ public class RegisteredSocietyVotersServiceImpl implements RegisteredSocietyVote
 	}
 	
 	@Override
-	public boolean deleteRegisteredVoter(long voterId) {
+	public boolean deleteRegisteredVoter(String voterId) {
 		dao.delete(voterId);
 		return true;
 	}
