@@ -3,18 +3,12 @@ package org.society.test.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.society.dao.UserDao;
-import org.society.entities.CooperativeSociety;
-import org.society.entities.NominatedCandidates;
-import org.society.entities.RegisteredSocietyVoters;
-import org.society.entities.User;
 import org.society.entities.User;
 import org.society.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
