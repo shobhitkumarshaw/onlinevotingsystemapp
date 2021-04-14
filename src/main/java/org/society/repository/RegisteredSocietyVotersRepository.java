@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface RegisteredSocietyVotersRepository extends JpaRepository<RegisteredSocietyVoters, Long>{
 	List<RegisteredSocietyVoters> findByEmailId (String emailId);
 	
-	RegisteredSocietyVoters findByVoterIdCardNo (String votercardId);
+	RegisteredSocietyVoters findByVoterIdCardNo (String voterId);
 }
