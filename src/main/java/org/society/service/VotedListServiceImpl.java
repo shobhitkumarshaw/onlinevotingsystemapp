@@ -77,6 +77,7 @@ public class VotedListServiceImpl implements VotedListService {
 		CooperativeSociety scoiety = cooperativeSocietyService.viewSocietyById(scoietyId);
 
 		RegisteredSocietyVoters voter = registeredSocietyVotersService.searchByVoterID(voterIdNumber);
+		
 
 		if (!(voter.isCastedVote())) {
 			voter.setCastedVote(true);
