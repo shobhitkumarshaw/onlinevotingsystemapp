@@ -26,8 +26,9 @@ public class NominatedCandidatesTest {
 	@MockBean
 	private NominatedCandidatesRepository nominatedCandidatesRepository;
 
-	//Add
+	//Add Nominated Candidates Details
 	@Test
+	@DisplayName("Test for adding Nominated Candidates Details")
 	public void addNominatedCandidatesDetailsTest() {
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
 				"Dis1", "12345678", null, null);
@@ -38,8 +39,9 @@ public class NominatedCandidatesTest {
 		assertEquals(nc1, nominatedCandidatesDao.save(nc1,"v12345",1l));
 	}
 	
-	// Update
+	// Update Nominated Candidates Details
 	@Test
+	@DisplayName("Test for Updating Nominated Candidates Details")
 	public void updateNominatedCandidatesDetailsTest() {
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
 				"Dis1", "12345678", null, null);
@@ -50,8 +52,9 @@ public class NominatedCandidatesTest {
 		assertThat(nominatedCandidatesRepository.findById(nc1.getCandidateId())).isNotEqualTo(nc1);
 	}
 
-	// Delete
+	// Delete Nominated Candidates Details
 	@Test
+	@DisplayName("Test for Deleting Nominated Candidates Details")
 	public void deleteNominatedCandidatesDetailsTest() {
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
 				"Dis1", "12345678", null, null);
@@ -62,7 +65,7 @@ public class NominatedCandidatesTest {
 		verify(nominatedCandidatesRepository).deleteById(100l);
 	}
 
-	// getById
+	// Method to  get by Id
 	@Test
 	@DisplayName("Test for displaying nominated Candidate by Id")
 	public void getNominatedCandidateByIdDetailsTest() {
