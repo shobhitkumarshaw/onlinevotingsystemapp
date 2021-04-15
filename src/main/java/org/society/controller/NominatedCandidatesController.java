@@ -1,41 +1,82 @@
 package org.society.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
-import org.society.entities.ElectionResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.society.entities.NominatedCandidates;
-import org.society.entities.RegisteredSocietyVoters;
+import org.society.exceptions.EmptyDataException;
+import org.society.exceptions.VoterNotFoundException;
 import org.society.service.NominatedCandidatesService;
-import org.society.service.RegisteredSocietyVotersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @RestController
 @RequestMapping("api/NominatedCandidates")
 public class NominatedCandidatesController {
-	@Autowired
-	private NominatedCandidatesService nominatedCandidatesService;
 
-	@GetMapping(value = "{candidateId}")
-	public ResponseEntity<?> getCandidateById(@PathVariable("candidateId") long id) {
-		NominatedCandidates n = nominatedCandidatesService.searchByCandidateId(id);
-
-		return new ResponseEntity<NominatedCandidates>(n, HttpStatus.OK);
-	}
-
-	@PostMapping
-	public String saveResult(@Valid @RequestBody NominatedCandidates candidate) {
-		nominatedCandidatesService.saveNominatedCandidate(candidate);
-		return "candidate successfully saved";
 	
-}
+	@Autowired
+	NominatedCandidatesService nominatedCandidatesService;
+	Logger logger = LoggerFactory.getLogger(NominatedCandidatesController.class);
+
+	
+	@GetMapping(value = "{id}")
+	public ResponseEntity<?> getNominatedCandidatesById(@PathVariable("id") long id) {
+		NominatedCandidates nominatedCandidates = nominatedCandidatesService.searchByCandidateId(id);
+		if (nominatedCandidates == null) {
+			logger.error("No data found with this id:"+ id +" in Registered Society Voter database!");
+			throw new VoterNotFoundException("Nominated Candidates not found!");
+		}
+		logger.info("Nominated Candidates id: " + id + " found!");
+		return new ResponseEntity<NominatedCandidates>(nominatedCandidates, HttpStatus.OK);
+	}
+	
+
+	@GetMapping
+	public List<NominatedCandidates> getListOfNominatedCandidates() {
+		
+		List<NominatedCandidates> nominatedCandidatesList = nominatedCandidatesService.viewNominatedCandidatesList();
+		if (nominatedCandidatesList.size() == 0) {
+			logger.error("No data found in Nominated Candidates database!");
+			throw new EmptyDataException("No Nominated Candidates in database!");
+		}
+		logger.info("Nominated Candidates list found!");
+		return nominatedCandidatesList;
+	}
+	
+	@PostMapping
+	public String addNominatedCandidateDetails(@Valid @RequestBody NominatedCandidates candidate) {
+		nominatedCandidatesService.saveNominatedCandidate(candidate);
+		logger.info("Nominated Candidates added with id: "+candidate.getCandidateId());
+		return "Nominated Candidates added successfully!";
+	}
+	
+	@PutMapping
+	public String updateNominatedCandidatesDetails(@Valid @RequestBody NominatedCandidates candidate) {
+		
+		nominatedCandidatesService.updateNominatedCandidateDetails(candidate);
+		logger.info("Nominated Candidates with id: "+candidate.getCandidateId() + " updated!");
+		return "Nominated Candidates details updated successfully!";
+		
+	}
+	
+	@DeleteMapping(value = "{id}")
+	public String deleteNominatedCandidatesDetailsById(@PathVariable("id") long id) {
+		nominatedCandidatesService.deleteNominatedCandididate(id);
+		logger.info("Nominated Candidates with id: "+ id + " deleted!");
+		return "Nominated Candidates removed successfully !";
+	}
+	
 }
