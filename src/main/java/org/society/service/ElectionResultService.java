@@ -21,7 +21,7 @@ public interface ElectionResultService {
 
 	public double viewCandidateVotingPercent(long candidateId);
 
-	public void displayVotingStatistics();
+	//public void displayVotingStatistics();
 
 	public NominatedCandidates viewHighestVotingPercentCandidate();
 
@@ -31,6 +31,6 @@ public interface ElectionResultService {
 
 	public List<NominatedCandidates> candidatewiseInvalidVotesList();
 
-	public void displayPollingResult();
+	//public void displayPollingResult();
 
 }

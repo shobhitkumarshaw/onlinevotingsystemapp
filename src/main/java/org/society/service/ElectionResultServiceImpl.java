@@ -34,7 +34,7 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 		return true;
 
 	}
-	
+
 //Method to get Election Result list
 	@Override
 	public List<ElectionResult> viewElectionResultList() {
@@ -50,51 +50,42 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 //Method to view Voting Percentage	
 	@Override
 	public double viewVotingPercentage() {
-
 		return dao.viewVotingPercentage();
 	}
 
-	
 	@Override
 	public double viewCandidateVotingPercent(long candidateId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.viewCandidateVotingPercent(candidateId);
 	}
 
-	@Override
-	public void displayVotingStatistics() {
-		// TODO Auto-generated method stub
-
-	}
-
+	/*
+	 * @Override public void displayVotingStatistics() { // TODO Auto-generated
+	 * method stub }
+	 */
 	@Override
 	public NominatedCandidates viewHighestVotingPercentCandidate() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.viewHighestVotingPercentCandidate();
 	}
 
 	@Override
 	public NominatedCandidates viewLowestVotingPercentCandidate() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.viewLowestVotingPercentCandidate();
 	}
 
 	@Override
 	public int viewInvalidVotes() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.viewInvalidVotes();
 	}
 
 	@Override
 	public List<NominatedCandidates> candidatewiseInvalidVotesList() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.candidatewiseInvalidVotesList();
 	}
 
-	@Override
-	public void displayPollingResult() {
-		// TODO Auto-generated method stub
-
-	}
-
+	/*
+	 * @Override public void displayPollingResult() {
+	 * 
+	 * 
+	 * }
+	 */
 }

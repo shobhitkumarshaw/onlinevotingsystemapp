@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.society.entities.ElectionResult;
+import org.society.entities.NominatedCandidates;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionResultService;
@@ -74,8 +75,52 @@ public class ElectionResultController {
 		return "Election Result data successfully deleted";
 	}
 
-	@GetMapping("per")
-	public double getVotingPercentage() {
+	@GetMapping("VotingPercentage")
+	public double viewVotingPercentage() {
 		return service.viewVotingPercentage();
 	}
+
+	@GetMapping("CandidateVotingPercent")
+	public double viewCandidateVotingPercent(long candidateId) {
+		return service.viewCandidateVotingPercent(candidateId);
+	}
+	
+	@GetMapping("NominatedCandidateWithHighestVotingPercent")
+	public NominatedCandidates viewHighestVotingPercentCandidate() {
+		return service.viewHighestVotingPercentCandidate();
+	}
+	
+	@GetMapping("NominatedCandidateWithLowestVotingPercent")
+	public NominatedCandidates viewLowestVotingPercentCandidate() {
+		return service.viewLowestVotingPercentCandidate();
+	}
+	
+	@GetMapping("InvalidVotes")
+	public double viewInvalidVotes() {
+		return service.viewInvalidVotes();
+	}
+	 
+	@GetMapping("candidatewiseInvalidVotesList")
+	public List<NominatedCandidates> candidatewiseInvalidVotesList() {
+		return service.candidatewiseInvalidVotesList();
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

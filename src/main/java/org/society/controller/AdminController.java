@@ -12,7 +12,7 @@ import org.society.entities.Admin;
 
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
-import org.society.exceptions.NoUserLoggedInException;
+//import org.society.exceptions.NoUserLoggedInException;
 import org.society.repository.AdminRepository;
 import org.society.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
