@@ -1,15 +1,10 @@
 package org.society.dao;
 
-import java.util.Collection;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
 import org.society.entities.RegisteredSocietyVoters;
@@ -86,15 +81,16 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	@Override
 	public double viewVotingPercentage() {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
-		List<RegisteredSocietyVoters> totalVoterInSociety = voterRepo.findAll();
-		return voters.size() / totalVoterInSociety.size();
+		List<RegisteredSocietyVoters> totalVoterInSociety = (List<RegisteredSocietyVoters>)voterRepo.findAll();
+		//return (voters.size() / totalVoterInSociety.size())*100;
+		return voters.size();
 	}
 
 //Method to view Candidate Voting Percentage	
 	@Override
 	public double viewCandidateVotingPercent(long candidateId) {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
-		List<RegisteredSocietyVoters> totalVoterInSociety = voterRepo.findAll();
+		List<RegisteredSocietyVoters> totalVoterInSociety = (List<RegisteredSocietyVoters>)voterRepo.findAll();
 		double result = 0;
 		long totalVotes = 0;
 		double castedVoterForSociety = 0;

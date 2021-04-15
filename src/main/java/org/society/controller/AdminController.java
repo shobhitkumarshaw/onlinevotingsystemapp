@@ -12,7 +12,7 @@ import org.society.entities.Admin;
 
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
-//import org.society.exceptions.NoUserLoggedInException;
+import org.society.exceptions.NoUserLoggedInException;
 import org.society.repository.AdminRepository;
 import org.society.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,18 +39,18 @@ public class AdminController {
 	@Autowired
 	private AdminRepository repo;
 	
-//	private void loginValidate(HttpSession session) {
-//		String userName = (String) session.getAttribute("user_name");
-//		String name = repo.findByName(userName).getAdminName();
-//		if(userName == null && name == null) {
-//			throw new NoUserLoggedInException("Login to access!");
-//		}
-//		
-//		if(userName.equals(name) == false) {
-//			throw new NoUserLoggedInException("Login to access!");
-//		}
-//		
-//	}
+	private void loginValidate(HttpSession session) {
+		String userName = (String) session.getAttribute("AdminName");
+		
+		if(userName == null) {
+			throw new NoUserLoggedInException("Login to access!");
+		}
+		String name = repo.findByName(userName).getAdminName();
+		if(userName.equals(name) == false) {
+			throw new NoUserLoggedInException("Login to access!");
+		}
+		
+	}
 
 	@GetMapping("/login/{user_name}/{user_password}")
 	public ResponseEntity<String> validateLogin(@PathVariable("user_name") String userName,
@@ -59,8 +59,10 @@ public class AdminController {
 		if (adminService.validateLogin(userName, userPassword)) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("AdminName", userName);
-			String userid = (String) session.getAttribute("user_name");
-			System.out.println("***********"+userid+"***************");
+			String hi = (String) session.getAttribute("hello");
+			
+			String userid = (String) session.getAttribute("AdminName");
+
 		}
 		else {
 			throw new NoAdminFoundException("Admin not found to login or wrong user name and password!");
@@ -82,7 +84,7 @@ public class AdminController {
 	@PostMapping
 	public String saveAdmin(@Valid @RequestBody Admin admin, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		//loginValidate( session);
+		loginValidate( session);
 		adminService.addAdminDetails(admin);
 		logger.info("Admin added with id: " + admin.getId());
 		return "Admin data successfully saved";
@@ -91,7 +93,7 @@ public class AdminController {
 	@PutMapping
 	public String updateAdmin(@Valid @RequestBody Admin admin, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		//loginValidate(session);
+		loginValidate(session);
 		adminService.updateAdminDetails(admin);
 		logger.info("Admin with id: " + admin.getId() + " updated!");
 		return "Admin data successfully Updated";
@@ -100,7 +102,7 @@ public class AdminController {
 	@DeleteMapping("{adminId}")
 	public String deleteAdmin(@PathVariable("adminId") long adminId, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		//loginValidate( session);
+		loginValidate( session);
 		adminService.deleteAdminDetails(adminId);
 		logger.info("Admin with id: " + adminId + " deleted!");
 		return "Admin data successfully deleted";
@@ -122,11 +124,9 @@ public class AdminController {
 	public List<Admin> getListOfAdmin(HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
-		//loginValidate(session);
+		loginValidate(session);
 
-		String userid = (String) session.getAttribute("user_name");
-
-		System.out.println("************************" + userid + "**************************");
+		String userid = (String) session.getAttribute("AdminName");
 		
 		List<Admin> adminList = adminService.getAllAdminList();
 		if (adminList.size() == 0) {

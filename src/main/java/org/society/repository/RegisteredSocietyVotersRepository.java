@@ -12,5 +12,6 @@ public interface RegisteredSocietyVotersRepository extends JpaRepository<Registe
 	
 	RegisteredSocietyVoters findByVoterIdCardNo (String voterId);
 	
+	
 	List<RegisteredSocietyVoters> findByCastedVote(boolean flag);
 }
