@@ -1,20 +1,23 @@
 package org.society.dao;
 
-import java.math.BigInteger;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
+import org.society.entities.RegisteredSocietyVoters;
+import org.society.entities.VotedList;
 import org.society.exceptions.DuplicateEntityFoundException;
-import org.society.exceptions.ElectionOfficerNotFoundException;
 import org.society.exceptions.ElectionResultNotFoundException;
-import org.society.exceptions.NominatedCandidateNotFoundException;
 import org.society.repository.ElectionResultRepository;
+import org.society.repository.RegisteredSocietyVotersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +25,15 @@ import org.springframework.stereotype.Component;
 public class ElectionResultDaoImpl implements ElectionResultDao {
 	@Autowired
 	private ElectionResultRepository repository;
-	
-	@PersistenceContext
-	private EntityManager em;
+
+	@Autowired
+	private RegisteredSocietyVotersRepository voterRepo;
+
+	@Autowired
+	private NominatedCandidatesDao candidateDao;
+
+	@Autowired
+	private VotedListDao votedList;
 
 	@Override
 	public ElectionResult save(ElectionResult result) {
@@ -70,49 +79,87 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	@Override
 	public double viewVotingPercentage() {
-//		Query totalVoters = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
-//		Query totalNumberOfVotes = em.createNativeQuery("SELECT COUNT(REGISTERED_SOCIETY_VOTERS_FK ) FROM VOTED_LIST");
-//		//System.out.println("totalvotes2"+totalVoters.getSingleResult());
-//		//System.out.println("totalvotes2"+totalNumberOfVotes.getSingleResult());
-//		long l1 = (long) totalVoters.getSingleResult();
-//		long l2 = (long) totalNumberOfVotes.getSingleResult();
-//		return ( l2/l1)*100;
-		return 0;
+		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
+		List<RegisteredSocietyVoters> totalVoterInSociety = voterRepo.findAll();
+		return voters.size() / totalVoterInSociety.size();
 	}
 
 	@Override
 	public double viewCandidateVotingPercent(long candidateId) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
+		List<RegisteredSocietyVoters> totalVoterInSociety = voterRepo.findAll();
+		double result = 0;
+		long totalVotes = 0;
+		double castedVoterForSociety = 0;
+		if (voters.size() != 0 && totalVoterInSociety.size() != 0) {
+			totalVotes = voters
+					.stream().map(voter -> voter.getCooperativeSociety()).filter(society -> society
+							.getId() == candidateDao.getByCandidateId(candidateId).getCooperativeSociety().getId())
+					.count();
+
+			castedVoterForSociety = totalVoterInSociety
+					.stream().map(voter -> voter.getCooperativeSociety()).filter(society -> society
+							.getId() == candidateDao.getByCandidateId(candidateId).getCooperativeSociety().getId())
+					.count();
+		}
+
+		return (totalVotes / castedVoterForSociety) * 100;
 	}
 
 	@Override
 	public void displayVotingStatistics() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public NominatedCandidates viewHighestVotingPercentCandidate() {
-		// TODO Auto-generated method stub
-		return null;
+		List<VotedList> list = votedList.getVotedList();
+		Map<Long, Long> highResult = list.stream().filter(l -> l.getNominatedCandidates() != null)
+				.map(VotedList::getNominatedCandidates)
+				.collect(Collectors.groupingBy(NominatedCandidates::getCandidateId, Collectors.counting()));
+		long high = 0;
+		long val = highResult.get(1);
+		for (long K : highResult.keySet()) {
+			if (val > highResult.get(K)) {
+				val = highResult.get(K);
+				high = K;
+			}
+		}
+		
+		
+		return candidateDao.getByCandidateId(high);
 	}
 
 	@Override
 	public NominatedCandidates viewLowestVotingPercentCandidate() {
-		// TODO Auto-generated method stub
-		return null;
+		List<VotedList> list = votedList.getVotedList();
+		Map<Long, Long> Result = list.stream().filter(l -> l.getNominatedCandidates() != null)
+				.map(VotedList::getNominatedCandidates)
+				.collect(Collectors.groupingBy(NominatedCandidates::getCandidateId, Collectors.counting()));
+		long low = 0;
+		long val = Result.get(1);
+		for (long K : Result.keySet()) {
+			if (val < Result.get(K)) {
+				val = Result.get(K);
+				low = K;
+			}
+		}
+		
+		
+		return candidateDao.getByCandidateId(low);
+		
 	}
 
 	@Override
 	public int viewInvalidVotes() {
-		// TODO Auto-generated method stub
-		return 0;
+		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(false);
+		return voters.size();
 	}
 
 	@Override
 	public List<NominatedCandidates> candidatewiseInvalidVotesList() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -120,6 +167,6 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	public void displayPollingResult() {
 //		List<Object> list = repository.votedlistResult();
 //		System.out.println("list: "+list);
-		
+
 	}
 }

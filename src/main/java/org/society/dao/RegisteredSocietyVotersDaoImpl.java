@@ -48,11 +48,9 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		RegisteredSocietyVoters voter = registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
 		if (voter == null)
 			throw new VoterNotFoundException("Voter Id not found to delete!");
-		voter.setCooperativeSociety(null);
-		System.out.println(voter.toString());
+		if(voter.getStatus().equalsIgnoreCase("active"))
+			voter.setStatus("Deactivated");
 		registeredSocietyVotersRepository.save(voter);
-		
-		registeredSocietyVotersRepository.deleteById(voter.getId());
 		return true;
 	}
 
