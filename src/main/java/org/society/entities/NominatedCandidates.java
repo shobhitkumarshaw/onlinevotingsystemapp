@@ -65,9 +65,30 @@ public class NominatedCandidates implements Serializable {
 		super();
 	}
 
-
+	
 
 	
+
+	public NominatedCandidates(long candidateId, long nominationFormNo, String partyName, String symbol,
+			@Min(value = 0, message = "Security Deposit should not be less than 0") float securityDeposit,
+			boolean oathOrAffirmationSummited, boolean policeVerificationDone, boolean approvedByElectionOfficer,
+			RegisteredSocietyVoters registeredSocietyVoter, CooperativeSociety cooperativeSociety) {
+		super();
+		this.candidateId = candidateId;
+		this.nominationFormNo = nominationFormNo;
+		this.partyName = partyName;
+		this.symbol = symbol;
+		this.securityDeposit = securityDeposit;
+		this.oathOrAffirmationSummited = oathOrAffirmationSummited;
+		this.policeVerificationDone = policeVerificationDone;
+		this.approvedByElectionOfficer = approvedByElectionOfficer;
+		this.registeredSocietyVoter = registeredSocietyVoter;
+		this.cooperativeSociety = cooperativeSociety;
+	}
+
+
+
+
 
 	public CooperativeSociety getCooperativeSociety() {
 		return cooperativeSociety;
