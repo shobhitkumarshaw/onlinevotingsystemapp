@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.h2.command.dml.MergeUsing.When;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
