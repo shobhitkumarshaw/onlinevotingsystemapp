@@ -9,7 +9,7 @@ import java.util.List;
 import org.society.entities.VotedList;
 
 public interface VotedListService {
-	
+
 	public VotedList addVotedList(VotedList votedList);
 
 	public VotedList updateVotedListDetails(VotedList votedList);

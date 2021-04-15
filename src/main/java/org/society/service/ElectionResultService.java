@@ -6,7 +6,7 @@ import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
 
 public interface ElectionResultService {
-	
+
 	public ElectionResult addElectionResult(ElectionResult result);
 
 	public ElectionResult updateElectionResult(ElectionResult result);
@@ -32,5 +32,5 @@ public interface ElectionResultService {
 	public List<NominatedCandidates> candidatewiseInvalidVotesList();
 
 	public void displayPollingResult();
-	
+
 }

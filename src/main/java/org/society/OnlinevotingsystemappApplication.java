@@ -17,25 +17,19 @@ public class OnlinevotingsystemappApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnlinevotingsystemappApplication.class, args);
-		
 	}
-	
+
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
 				// .apis(RequestHandlerSelectors.basePackage("com"))
-				.paths(PathSelectors.any()).build().apiInfo(metaInfo()); 
-
+				.paths(PathSelectors.any()).build().apiInfo(metaInfo());
 	}
 
 	private ApiInfo metaInfo() {
-
 		@SuppressWarnings("deprecation")
-		ApiInfo apiInfo = new ApiInfo("Online Voting Application", "Sprint:1", "1.0", "", "Group:2",
-				"Licence 2.1.0", "https://www.cg.com");
-
+		ApiInfo apiInfo = new ApiInfo("Online Voting Application", "Sprint:1", "1.0", "", "Group:2", "Licence 2.1.0",
+				"https://www.cg.com");
 		return apiInfo;
 	}
-
-		
 }

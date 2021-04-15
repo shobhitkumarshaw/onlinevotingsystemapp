@@ -22,7 +22,7 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 	@Override
 	public ElectionResult updateElectionResult(ElectionResult result) {
 		return dao.update(result);
-		
+
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 
 	@Override
 	public double viewVotingPercentage() {
-		
+
 		return dao.viewVotingPercentage();
 	}
 

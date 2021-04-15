@@ -5,7 +5,7 @@ import java.util.List;
 import org.society.entities.CooperativeSociety;
 
 public interface CooperativeSocietyService {
-	
+
 	public CooperativeSociety addSocietyDetails(CooperativeSociety society);
 
 	public CooperativeSociety updateSocietyDetails(CooperativeSociety society);

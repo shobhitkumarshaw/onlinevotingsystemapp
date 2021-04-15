@@ -2,7 +2,6 @@ package org.society;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,28 +12,23 @@ import org.society.entities.CooperativeSociety;
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
 import org.society.entities.RegisteredSocietyVoters;
-import org.society.entities.VotedList;
 import org.society.repository.ElectionResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.sun.el.stream.Stream;
-
 @Component
 public class DBInitElectionResult implements CommandLineRunner {
 	@Autowired
 	ElectionResultRepository repo;
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		//First input
-		
-		
+		// First input
 		List<RegisteredSocietyVoters> regList = new ArrayList<>();
 
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadofResult1", "Village1", "mandal1", "dis1",
@@ -51,11 +45,7 @@ public class DBInitElectionResult implements CommandLineRunner {
 		ElectionResult er1 = new ElectionResult(300l, LocalDate.now(), cs1, 20000, 10000, 50, 5000, 50, "loosed");
 		repo.save(er1);
 
-		
-		
-		//Second input
-		
-		
+		// Second input
 		List<RegisteredSocietyVoters> regList2 = new ArrayList<>();
 
 		CooperativeSociety cs2 = new CooperativeSociety("B Society", "HeadofResult2", "village2", "mandal2", "dis2",
@@ -71,42 +61,39 @@ public class DBInitElectionResult implements CommandLineRunner {
 		ElectionResult er2 = new ElectionResult(301l, LocalDate.now(), cs2, 10000, 5000, 50, 2500, 50, "Win");
 		repo.save(er2);
 
-		
-		
-		//Third input
-
-		
-		//List<RegisteredSocietyVoters> regList3 = new ArrayList<>();
-
+		// Third input
+		// List<RegisteredSocietyVoters> regList3 = new ArrayList<>();
 		CooperativeSociety cs3 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",
 				"454321", null, null);
-		//regList3.add(new RegisteredSocietyVoters(201l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
-		//		"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3));
-		//List<NominatedCandidates> candidateList3 = new ArrayList<>();
-		//candidateList3
-			//	.add(new NominatedCandidates(102L, 333, "Shor", "Tiger", 30000, true, true, true,
-				//		new RegisteredSocietyVoters(202l, "v32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc",
-					//			"7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321, true, cs3),
-				//		cs3));
+		// regList3.add(new RegisteredSocietyVoters(201l, "v32345", "Aditya", "Kumar",
+		// "Bcrec3", "Male", "obc",
+		// "7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321,
+		// true, cs3));
+		// List<NominatedCandidates> candidateList3 = new ArrayList<>();
+		// candidateList3
+		// .add(new NominatedCandidates(102L, 333, "Shor", "Tiger", 30000, true, true,
+		// true,
+		// new RegisteredSocietyVoters(202l, "v32345", "Aditya", "Kumar", "Bcrec3",
+		// "Male", "obc",
+		// "7876543210", "aditya@email.com", "add3", "add4", "mondal3", "Dis3", 454321,
+		// true, cs3),
+		// cs3));
 
 		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 70000, 15000, 50, 7500, 50, "loss");
 		repo.save(er3);
-		
-		List list = repo.votedlistResult();
+
+		List<?> list = repo.votedlistResult();
 		System.out.println(list);
-	
-		
-		//long total = repo.getTotalCastedVotes();
-		//System.out.println("Total vote: "+total);
-		
-		
+
+		// long total = repo.getTotalCastedVotes();
+		// System.out.println("Total vote: "+total);
+
 		Query total2 = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
-		System.out.println("Total votes: "+ (long)total2.getSingleResult());
-		
+		System.out.println("Total votes: " + (long) total2.getSingleResult());
+
 		Query totalVoters = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
 		Query totalNumberOfVotes = em.createNativeQuery("SELECT COUNT(REGISTERED_SOCIETY_VOTERS_FK ) FROM VOTED_LIST");
-		System.out.println("totalvotes"+totalVoters.getSingleResult());
-		System.out.println("totalvotes"+totalNumberOfVotes.getSingleResult());
+		System.out.println("totalvotes" + totalVoters.getSingleResult());
+		System.out.println("totalvotes" + totalNumberOfVotes.getSingleResult());
 	}
-
 }
