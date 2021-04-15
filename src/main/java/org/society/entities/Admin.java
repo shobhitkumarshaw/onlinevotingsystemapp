@@ -20,9 +20,11 @@ public class Admin implements Serializable {
 	private long id;
 	
 	@NotNull
+	@Column(name = "admin_name")
 	private String adminName;
 	
 	@NotNull
+	@Column(name = "admin_password")
 	private String adminPassword;
 	
 	public Admin() {

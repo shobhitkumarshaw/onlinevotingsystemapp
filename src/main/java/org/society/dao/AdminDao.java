@@ -15,4 +15,6 @@ public interface AdminDao {
 	public Admin getAdmin(long adminId) throws NoAdminFoundException;
 
 	public List<Admin> getAllAdmin();
+	
+	public boolean validateLogin(String user, String password);
 }

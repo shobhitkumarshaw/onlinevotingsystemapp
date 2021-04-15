@@ -14,4 +14,6 @@ public interface AdminService {
 	public Admin viewAdminById(long adminId);
 
 	public List<Admin> getAllAdminList();
+	
+	public boolean validateLogin(String user, String password);
 }

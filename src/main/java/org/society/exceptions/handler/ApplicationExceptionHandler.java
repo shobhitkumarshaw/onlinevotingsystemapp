@@ -12,6 +12,7 @@ import org.society.exceptions.ElectionOfficerNotFoundException;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
+import org.society.exceptions.NoUserLoggedInException;
 import org.society.exceptions.NominatedCandidateNotFoundException;
 import org.society.exceptions.SocietyNotFoundException;
 import org.society.exceptions.UserNotFoundException;
@@ -142,4 +143,15 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(NoUserLoggedInException.class)
+	public ResponseEntity<?> handleNoUserLoggedInException(NoUserLoggedInException ex) {
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("error", " Failed");
+		errorBody.put("timestamp", LocalDateTime.now());
+		errorBody.put("details", ex.getMessage());
+		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+	}
+	
+	
 }
