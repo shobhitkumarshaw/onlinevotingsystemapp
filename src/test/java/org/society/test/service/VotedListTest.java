@@ -139,16 +139,3 @@ public class VotedListTest {
 			assertEquals(vl2, vlDao.searchByNominatedCandidateId(nc2.getCandidateId()));
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
