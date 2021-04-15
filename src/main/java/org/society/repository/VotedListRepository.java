@@ -1,8 +1,5 @@
 package org.society.repository;
 
-
-import java.util.List;
-
 import org.society.entities.VotedList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,6 +1,5 @@
 package org.society.test.service;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -24,7 +23,7 @@ public class AdminTest {
 	@MockBean
 	private AdminRepository adRepo;
 
-	//Add
+	// Add
 	@Test
 	@DisplayName("Test for adding Admin in database")
 	public void addAdminDetailsTest() {
@@ -33,10 +32,8 @@ public class AdminTest {
 		when(adRepo.save(ad)).thenReturn(ad);
 		assertEquals(ad, adDao.save(ad));
 	}
-	
-	
-	//update 
-	
+
+	// update
 	@Test
 	@DisplayName("Test for updating Admin")
 	public void updateAdminDetailsTest() {
@@ -44,9 +41,8 @@ public class AdminTest {
 		ad.setAdminName("FullLife");
 		assertThat(adRepo.findById(ad.getId())).isNotEqualTo(ad);
 	}
-	
-	//Delete
-	
+
+	// Delete
 	@Test
 	@DisplayName("Test for deleting Admin")
 	public void deleteAdminDetailsTest() {
@@ -55,9 +51,8 @@ public class AdminTest {
 		adDao.delete(ad.getId());
 		verify(adRepo).deleteById(111l);
 	}
-	
-	//getById
-	
+
+	// getById
 	@Test
 	@DisplayName("Test for displaying Admin by Id")
 	public void getAdminDetailsTest() {
@@ -65,15 +60,13 @@ public class AdminTest {
 		when(adRepo.findById(111l)).thenReturn(Optional.of(ad));
 		assertEquals(ad, adDao.getAdmin(111l));
 	}
-	
-	//getList
+
+	// getList
 	@Test
 	@DisplayName("Test for displaying list of Admin")
 	public void getAdminList() {
-		when(adRepo.findAll()).thenReturn(Stream
-				.of(new Admin(1111l, "Life", "Dead"),new Admin(123l, "Water","Fire"))
+		when(adRepo.findAll()).thenReturn(Stream.of(new Admin(1111l, "Life", "Dead"), new Admin(123l, "Water", "Fire"))
 				.collect(Collectors.toList()));
 		assertEquals(2, adDao.getAllAdmin().size());
 	}
-		
 }
