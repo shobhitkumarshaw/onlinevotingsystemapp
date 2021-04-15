@@ -1,5 +1,6 @@
 package org.society.test.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -7,7 +8,6 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.h2.command.dml.MergeUsing.When;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.society.dao.UserDao;
@@ -36,13 +36,13 @@ public class UserTest {
 	}
 
 //Update
-	/*@Test
+	@Test
 	@DisplayName("Test for updating User in database")
 	public void updateUserDetailsTest() {
 		User u1 = new User(55l,"fdfd","bha","pra","mail@","6262","nominated condiadate");
         u1.setFirstName("bhanu");
-		assertThat(repo,findById(u1.getId())).isNotEqualTo(u1);
-	}*/
+		assertThat(repo.findById(u1.getId())).isNotEqualTo(u1);
+	}
 
 	// Delete
 	@Test

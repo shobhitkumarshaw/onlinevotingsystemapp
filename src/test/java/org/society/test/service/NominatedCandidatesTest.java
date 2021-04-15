@@ -1,6 +1,8 @@
 package org.society.test.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -41,7 +43,7 @@ public class NominatedCandidatesTest {
 	}
 
 //Update
-	/*@Test
+	@Test
 	public void updateNominatedCandidatesDetailsTest() {
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
 				"Dis1", "12345678", null, null);
@@ -50,12 +52,12 @@ public class NominatedCandidatesTest {
 		NominatedCandidates nc1 = new NominatedCandidates(100l, 111, "Life", "Water", 10000, true, true, true, rs1,
 				cs1);
 
-		when(nominatedCandidatesRepository.save(nc1)).thenReturn(nc1);
-		assertEquals(nc1, nominatedCandidatesDao.update(nc1));
+		nc1.setSecurityDeposit(25000);
+		assertThat(nominatedCandidatesRepository.findById(nc1.getCandidateId())).isNotEqualTo(nc1);
 	}
-*/
+
 	// Delete
-	/*@Test
+	@Test
 	public void deleteNominatedCandidatesDetailsTest() {
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
 				"Dis1", "12345678", null, null);
@@ -63,10 +65,11 @@ public class NominatedCandidatesTest {
 				"obc", "9876543210", "mihir@email.com", "add1", "add2", "mondal1", "Dis1", 678543, true, cs1);
 		NominatedCandidates nc1 = new NominatedCandidates(100l, 111, "Life", "Water", 10000, true, true, true, rs1,
 				cs1);
-		nominatedCandidatesRepository.deleteById(100l);
-		assertEquals(null, nominatedCandidatesDao.getByCandidateId(100l));
+		when(nominatedCandidatesRepository.existsById(nc1.getCandidateId())).thenReturn(true);
+		nominatedCandidatesDao.delete(nc1.getCandidateId());
+		verify(nominatedCandidatesRepository).deleteById(300l);
 	}
-*/
+
 	// getById
 	@Test
 	@DisplayName("Test for displaying nominated Candidate by Id")
