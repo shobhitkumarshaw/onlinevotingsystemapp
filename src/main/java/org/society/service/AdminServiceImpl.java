@@ -48,4 +48,10 @@ public class AdminServiceImpl implements AdminService {
 		return daoAdmin.getAllAdmin();
 	}
 
+	@Override
+	public boolean validateLogin(String user, String password) {
+		
+		return daoAdmin.validateLogin(user, password);
+	}
+
 }
