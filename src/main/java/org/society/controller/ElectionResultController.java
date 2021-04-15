@@ -76,7 +76,6 @@ public class ElectionResultController {
 
 	@GetMapping("per")
 	public double getVotingPercentage() {
-
 		return service.viewVotingPercentage();
 	}
 }

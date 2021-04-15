@@ -13,6 +13,6 @@ public class DBinitNominatedCandidate implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		nominatedCandidatesRepository.save(new NominatedCandidates(55l, 523698l, "yoga", "cycle", 5632014f, false, false, false, null, null));
+		nominatedCandidatesRepository.save(new NominatedCandidates(523698l, "yoga", "cycle", 5632014f, false, false, false, null, null));
 	}
 }
