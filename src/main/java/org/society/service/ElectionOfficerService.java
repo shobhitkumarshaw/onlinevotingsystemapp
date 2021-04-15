@@ -15,6 +15,5 @@ public interface ElectionOfficerService {
 	public ElectionOfficer viewElectionOfficerById(long officerId);
 
 	public List<ElectionOfficer> viewElectionOfficerList();
-	
-	
+
 }

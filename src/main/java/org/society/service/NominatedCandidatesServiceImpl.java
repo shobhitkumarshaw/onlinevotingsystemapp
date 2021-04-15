@@ -2,7 +2,6 @@ package org.society.service;
 
 import java.util.List;
 
-import org.society.dao.ElectionResultDaoImpl;
 import org.society.dao.NominatedCandidatesDaoImpl;
 import org.society.entities.NominatedCandidates;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,12 @@ public class NominatedCandidatesServiceImpl implements NominatedCandidatesServic
 
 	@Override
 	public NominatedCandidates saveNominatedCandidate(NominatedCandidates candidate) {
-       return dao.save(candidate);		
+		return dao.save(candidate);
 	}
 
 	@Override
 	public NominatedCandidates updateNominatedCandidateDetails(NominatedCandidates candidate) {
-		
+
 		return dao.update(candidate);
 	}
 
@@ -40,6 +39,3 @@ public class NominatedCandidatesServiceImpl implements NominatedCandidatesServic
 
 	}
 }
-	
-
-	
