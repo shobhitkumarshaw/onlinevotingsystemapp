@@ -92,9 +92,9 @@ public class DBInitElectionResult implements CommandLineRunner {
 		ElectionResult er3 = new ElectionResult(302l, LocalDate.now(), cs3, 70000, 15000, 50, 7500, 50, "loss");
 		repo.save(er3);
 		
-		List list = repo.votedlistResult();
-		System.out.println(list);
-	
+//		List list = repo.votedlistResult();
+//		System.out.println(list);
+//	
 		
 		//long total = repo.getTotalCastedVotes();
 		//System.out.println("Total vote: "+total);
@@ -103,10 +103,14 @@ public class DBInitElectionResult implements CommandLineRunner {
 		Query total2 = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
 		System.out.println("Total votes: "+ (long)total2.getSingleResult());
 		
-		Query totalVoters = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
-		Query totalNumberOfVotes = em.createNativeQuery("SELECT COUNT(REGISTERED_SOCIETY_VOTERS_FK ) FROM VOTED_LIST");
-		System.out.println("totalvotes"+totalVoters.getSingleResult());
-		System.out.println("totalvotes"+totalNumberOfVotes.getSingleResult());
+//		Query totalVoters = em.createQuery("SELECT COUNT(id) FROM RegisteredSocietyVoters v");
+//		Query totalNumberOfVotes = em.createNativeQuery("SELECT COUNT(REGISTERED_SOCIETY_VOTERS_FK ) FROM VOTED_LIST");
+//		System.out.println("totalvotes"+(long)totalVoters.getSingleResult());
+//		System.out.println("totalvotes"+(long)totalNumberOfVotes.getSingleResult());
+		
+//		Query t = em.createQuery("select count(v.id) from VotedList v",VotedList.class);
+//		Long result = (Long)t.getSingleResult();
+//		System.out.print(result);
+		
 	}
-
 }

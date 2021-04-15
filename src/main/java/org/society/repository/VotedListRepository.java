@@ -19,7 +19,6 @@ public interface VotedListRepository extends JpaRepository<VotedList, Long>{
 			+ " WHERE vl.REGISTERED_SOCIETY_VOTERS_FK  = rg.ID "
 			+ " AND  rg.VOTER_ID_CARD_NO = :voterId",
 			nativeQuery = true)
-	
 	VotedList findByVoterIdCard(@Param("voterId") String voterId);
 	
 	

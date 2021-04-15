@@ -19,13 +19,17 @@ import org.springframework.stereotype.Component;
 public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDao {
 
 	@Autowired
-	RegisteredSocietyVotersRepository registeredSocietyVotersRepository;
+	private RegisteredSocietyVotersRepository registeredSocietyVotersRepository;
+	
+	@Autowired
+	private CooperativeSocietyDao societyDao;
 
 	@Override
-	public RegisteredSocietyVoters save(RegisteredSocietyVoters voter) {
+	public RegisteredSocietyVoters save(RegisteredSocietyVoters voter, long societyId) {
 		if (registeredSocietyVotersRepository.existsById(voter.getId())) {
 			throw new DuplicateEntityFoundException("Duplicate Voter can not be saved");
 		}
+		voter.setCooperativeSociety(societyDao.getById(societyId));
 		return registeredSocietyVotersRepository.save(voter);
 
 	}

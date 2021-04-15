@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.society.dao.RegisteredSocietyVotersDao;
+import org.society.entities.CooperativeSociety;
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.repository.RegisteredSocietyVotersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,13 @@ public class RegisteredSocietyVotersTest {
 
 	@Test
 	public void addRegisteredSocietyVotersDetailsTest() {
+		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadOfCooperativeSociety1", "Village1", "mondal1", "Dis1", "654321", null, null);
 		RegisteredSocietyVoters registeredSocietyVoters = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar",
 				"Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543,
-				true, null);
+				true, cs1);
 
 		when(registeredSocietyVotersRepository.save(registeredSocietyVoters)).thenReturn(registeredSocietyVoters);
-		assertEquals(registeredSocietyVoters, registeredSocietyVotersDao.save(registeredSocietyVoters));
+		assertEquals(registeredSocietyVoters, registeredSocietyVotersDao.save(registeredSocietyVoters,1l));
 	}
 
 	@Test

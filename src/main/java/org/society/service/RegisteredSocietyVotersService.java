@@ -6,7 +6,7 @@ import java.util.List;
 import org.society.entities.RegisteredSocietyVoters;
 
 public interface RegisteredSocietyVotersService {
-	public RegisteredSocietyVoters voterRegistration(RegisteredSocietyVoters voter);
+	public RegisteredSocietyVoters voterRegistration(RegisteredSocietyVoters voter, long societyId);
 
 	public RegisteredSocietyVoters updateRegisteredVoterDetails(RegisteredSocietyVoters voter);
 

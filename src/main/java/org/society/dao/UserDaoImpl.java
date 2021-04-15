@@ -7,22 +7,24 @@ import org.society.entities.ElectionOfficer;
 import org.society.entities.User;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.ElectionOfficerNotFoundException;
+import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.UserNotFoundException;
+import org.society.model.UserModel;
 import org.society.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserDaoImpl implements UserDao {
-	
+
 	@Autowired
 	private UserRepository repository;
 
 	@Override
 	public User save(User user) {
-		if(repository.existsById(user.getId())) {
+		if (repository.existsById(user.getId())) {
 			throw new DuplicateEntityFoundException("Save user", "User is duplicate");
-			
+
 		}
 
 		return repository.save(user);
@@ -30,17 +32,17 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User update(User user) {
-		if(repository.existsById(user.getId())) {
+		if (repository.existsById(user.getId())) {
 			return repository.save(user);
-			
+
 		}
 		throw new UserNotFoundException("User not found to update!");
-		
+
 	}
 
 	@Override
-	public boolean delete(long userId){
-		if(repository.existsById(userId)) {
+	public boolean delete(long userId) {
+		if (repository.existsById(userId)) {
 			repository.deleteById(userId);
 			return true;
 		}

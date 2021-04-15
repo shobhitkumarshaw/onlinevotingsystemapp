@@ -6,7 +6,7 @@ import org.society.entities.RegisteredSocietyVoters;
 import org.society.exceptions.VoterNotFoundException;
 
 public interface RegisteredSocietyVotersDao {
-	public RegisteredSocietyVoters save(RegisteredSocietyVoters voter);
+	public RegisteredSocietyVoters save(RegisteredSocietyVoters voter, long societyId);
 
 	public RegisteredSocietyVoters update(RegisteredSocietyVoters voter) throws VoterNotFoundException;
 

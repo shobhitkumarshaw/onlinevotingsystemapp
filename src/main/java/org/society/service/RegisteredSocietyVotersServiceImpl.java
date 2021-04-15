@@ -16,8 +16,8 @@ public class RegisteredSocietyVotersServiceImpl implements RegisteredSocietyVote
 	RegisteredSocietyVotersDaoImpl dao;
 
 	@Override
-	public RegisteredSocietyVoters voterRegistration(RegisteredSocietyVoters voter) {
-		return dao.save(voter);
+	public RegisteredSocietyVoters voterRegistration(RegisteredSocietyVoters voter, long societyId) {
+		return dao.save(voter, societyId);
 	}
 
 	@Override
