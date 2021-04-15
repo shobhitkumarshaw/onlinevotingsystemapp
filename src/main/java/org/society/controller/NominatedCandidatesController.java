@@ -36,7 +36,7 @@ public class NominatedCandidatesController {
 	public ResponseEntity<?> getNominatedCandidatesById(@PathVariable("id") long id) {
 		NominatedCandidates nominatedCandidates = nominatedCandidatesService.searchByCandidateId(id);
 		if (nominatedCandidates == null) {
-			logger.error("No data found with this id:"+ id +" in Registered Society Voter database!");
+			logger.error("No data found with this id:"+ id +" in Nominated Candidates database!");
 			throw new VoterNotFoundException("Nominated Candidates not found!");
 		}
 		logger.info("Nominated Candidates id: " + id + " found!");
@@ -82,7 +82,7 @@ public class NominatedCandidatesController {
 	public String deleteNominatedCandidatesDetailsById(@PathVariable("id") long id) {
 		nominatedCandidatesService.deleteNominatedCandididate(id);
 		logger.info("Nominated Candidates with id: "+ id + " deleted!");
-		return "Nominated Candidates removed successfully !";
+		return "Nominated Candidates removed successfully!";
 	}
 	
 }
