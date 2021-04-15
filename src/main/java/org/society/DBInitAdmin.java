@@ -20,5 +20,4 @@ public class DBInitAdmin implements CommandLineRunner {
 		Admin ad3 = new Admin(323L, "AdminBright", "Dark");
 		repository.save(ad3);
 	}
-
 }

@@ -10,7 +10,6 @@ import org.society.entities.ElectionResult;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionResultService;
-import org.society.service.RegisteredSocietyVotersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @RestController
 @RequestMapping("/api/ElectionResult")
@@ -43,12 +40,11 @@ public class ElectionResultController {
 		return list;
 	}
 
-	
 	@GetMapping(value = "{CandidateId}")
 	public ResponseEntity<?> getResult(@PathVariable("CandidateId") long candidateId) {
 		ElectionResult er = service.viewCandidatewiseResult(candidateId);
 		if (er == null) {
-			logger.error("No data found with this id:"+ candidateId +" in Election Result database!");
+			logger.error("No data found with this id:" + candidateId + " in Election Result database!");
 			throw new ElectionResultNotFoundException("Election Result not found!");
 		}
 		logger.info("Election Result with id: " + candidateId + " found!");
@@ -77,10 +73,10 @@ public class ElectionResultController {
 		logger.info("Election Result with id: " + CandidateId + " deleted!");
 		return "Election Result data successfully deleted";
 	}
+
 	@GetMapping("per")
 	public double getVotingPercentage() {
-		
+
 		return service.viewVotingPercentage();
 	}
-
 }
