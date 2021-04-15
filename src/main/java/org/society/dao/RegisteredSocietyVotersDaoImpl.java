@@ -24,6 +24,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 	@Autowired
 	private CooperativeSocietyDao societyDao;
 
+//Save Method for Registered Society Voters	
 	@Override
 	public RegisteredSocietyVoters save(RegisteredSocietyVoters voter, long societyId) {
 		if (registeredSocietyVotersRepository.existsById(voter.getId())) {
@@ -34,6 +35,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 
 	}
 
+//Update Method for Registered Society Voters	
 	@Override
 	public RegisteredSocietyVoters update(RegisteredSocietyVoters voter) throws VoterNotFoundException {
 		if (registeredSocietyVotersRepository.existsById(voter.getId())) {
@@ -42,6 +44,8 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		throw new VoterNotFoundException("voter not found to update!");
 
 	}
+	
+//Delete Method for Registered Society Voters	
 	@Transactional
 	@Override
 	public boolean delete(String voterId) throws VoterNotFoundException {
@@ -56,13 +60,16 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		return true;
 	}
 
+	
+// Method to get Registered Voters List
 	@Override
 	public List<RegisteredSocietyVoters> getRegisteredVoterList() {
 		List<RegisteredSocietyVoters> list = (List<RegisteredSocietyVoters>) registeredSocietyVotersRepository
 				.findAll();
 		return list;
 	}
-
+	
+//Method to get Registered voters by their Voter ID
 	@Override
 	public RegisteredSocietyVoters getByVoterID(String voterId) throws VoterNotFoundException {
 		RegisteredSocietyVoters voter = registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);

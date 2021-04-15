@@ -20,6 +20,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private UserRepository repository;
 
+//Save Method for User Module	
 	@Override
 	public User save(User user) {
 		if (repository.existsById(user.getId())) {
@@ -30,6 +31,7 @@ public class UserDaoImpl implements UserDao {
 		return repository.save(user);
 	}
 
+//Update Method for User Module	
 	@Override
 	public User update(User user) {
 		if (repository.existsById(user.getId())) {
@@ -40,6 +42,7 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+//Delete Method for User Module	
 	@Override
 	public boolean delete(long userId) {
 		if (repository.existsById(userId)) {
@@ -49,13 +52,15 @@ public class UserDaoImpl implements UserDao {
 
 		throw new UserNotFoundException("User not found to delete!");
 	}
-
+	
+// Method to view User List 
 	@Override
 	public List<User> viewUserList() {
 		List<User> userList = repository.findAll();
 		return userList;
 	}
-
+	
+//Method to find by User ID
 	@Override
 	public User findByUserId(long userId) {
 		Optional<User> user = repository.findById(userId);

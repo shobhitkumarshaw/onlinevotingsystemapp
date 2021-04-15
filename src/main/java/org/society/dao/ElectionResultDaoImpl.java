@@ -26,6 +26,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	@PersistenceContext
 	private EntityManager em;
 
+//Save Method for Election Result Module	
 	@Override
 	public ElectionResult save(ElectionResult result) {
 		if (repository.existsById(result.getId())) {
@@ -35,6 +36,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	}
 
+//Update Method for Election Result Module	
 	@Override
 	public ElectionResult update(ElectionResult result) throws ElectionResultNotFoundException {
 		if (repository.existsById(result.getId())) {
@@ -43,6 +45,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found to update!");
 	}
 
+//Delete Method for Election Result Module	
 	@Override
 	public boolean delete(long candidateId) throws ElectionResultNotFoundException {
 		if (repository.existsById(candidateId)) {
@@ -52,12 +55,14 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found to delete!");
 	}
 
+//Method to get the list of Election Result	
 	@Override
 	public List<ElectionResult> getElectionResultList() {
 		List<ElectionResult> list = (List<ElectionResult>) repository.findAll();
 		return list;
 	}
 
+//Method to get Candidate wise Result	
 	@Override
 	public ElectionResult getCandidatewiseResult(long candidateId) throws ElectionResultNotFoundException {
 		Optional<ElectionResult> er = repository.findById(candidateId);
@@ -67,6 +72,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		}
 		throw new ElectionResultNotFoundException("Election Result not found ");
 	}
+	
 
 	@Override
 	public double viewVotingPercentage() {
@@ -80,6 +86,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		return 0;
 	}
 
+//Method to view Candidate Voting Percentage	
 	@Override
 	public double viewCandidateVotingPercent(long candidateId) {
 		// TODO Auto-generated method stub
