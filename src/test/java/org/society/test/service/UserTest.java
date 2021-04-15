@@ -1,11 +1,14 @@
 package org.society.test.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.h2.command.dml.MergeUsing.When;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.society.dao.UserDao;
@@ -24,6 +27,7 @@ public class UserTest {
 	@MockBean
 	private UserRepository repo;
 	@Test
+	@DisplayName("Test for adding User in database")
 	public void addUserDetailsTest() {
 		User u1 = new User(44l,"pass","bhanu","prakash","mail","9951","User");
 		
@@ -33,21 +37,23 @@ public class UserTest {
 	}
 
 //Update
-/*	@Test
+	/*@Test
+	@DisplayName("Test for updating User in database")
 	public void updateUserDetailsTest() {
 		User u1 = new User(55l,"fdfd","bha","pra","mail@","6262","nominated condiadate");
-
-		when(repo.save(u1)).thenReturn(u1);
-		assertEquals(u1,userService.update(u1));
-	}
+        u1.setFirstName("bhanu");
+		assertThat(repo,findById(u1.getId())).isNotEqualTo(u1);
+	}*/
 
 	// Delete
 	@Test
+	@DisplayName("Test for deleting User in database")
 	public void deleteUserDetailsTest() {
 		User u1 = new User(212l,"gaja","yhsh","hshs","mailll","43536","voter");
-		repo.deleteById(212l);
-		assertEquals(null, userService.delete(212l));
-	}*/
+		when(repo.existsById(u1.getId())).thenReturn(true);
+		userService.delete(u1.getId());
+		verify(repo).deleteById(212l);
+	}
 
 	// getById
 	@Test

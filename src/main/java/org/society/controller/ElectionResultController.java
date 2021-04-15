@@ -32,7 +32,6 @@ public class ElectionResultController {
 	private ElectionResultService service;
 	Logger logger = LoggerFactory.getLogger(ElectionResultController.class);
 
-	
 	@GetMapping
 	public List<ElectionResult> getAllResult() {
 		List<ElectionResult> list = service.viewElectionResultList();
