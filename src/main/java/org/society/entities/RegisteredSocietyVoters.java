@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -33,7 +34,8 @@ public class RegisteredSocietyVoters implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
+	
+	
 	// Voter Id card number must be unique
 	@NotNull(message = "Voter Id number can not be null")
 	@Column(unique = true)
@@ -65,9 +67,8 @@ public class RegisteredSocietyVoters implements Serializable {
 	private String emailId;
 
 	@NotNull
-	private String addressLine1;
+	private String address;
 
-	private String addressLine2;
 
 	@NotNull
 	private String mandal;
@@ -81,6 +82,9 @@ public class RegisteredSocietyVoters implements Serializable {
 
 	private boolean castedVote;
 
+	// active & inactive
+	private String status;
+	
 	// OneToOne relationship one Voter can have only one Society
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL) // added cascade
@@ -91,32 +95,16 @@ public class RegisteredSocietyVoters implements Serializable {
 		super();
 	}
 
-	public RegisteredSocietyVoters(long id, String voterIdCardNo, String firstName, String lastName, String password,
-			String gender, String reservationCategory, String mobileno, String emailId, String addressLine1,
-			String addressLine2, String mandal, String district, int pincode, boolean castedVote,
-			CooperativeSociety cooperativeSociety) {
-		super();
-		this.id = id;
-		this.voterIdCardNo = voterIdCardNo;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.gender = gender;
-		this.reservationCategory = reservationCategory;
-		this.mobileno = mobileno;
-		this.emailId = emailId;
-		this.addressLine1 = addressLine1;
-		this.addressLine2 = addressLine2;
-		this.mandal = mandal;
-		this.district = district;
-		this.pincode = pincode;
-		this.castedVote = castedVote;
-		this.cooperativeSociety = cooperativeSociety;
-	}
-
-	public RegisteredSocietyVoters(String voterIdCardNo, String firstName, String lastName, String password,
-			String gender, String reservationCategory, String mobileno, String emailId, String addressLine1,
-			String addressLine2, String mandal, String district, int pincode, boolean castedVote,
+	public RegisteredSocietyVoters(@NotNull(message = "Voter Id number can not be null") String voterIdCardNo,
+			@NotNull(message = "Name is Required") @Length(min = 2, max = 30, message = "Name size must be between 5 and 30") String firstName,
+			String lastName,
+			@NotNull(message = "Password is Required") @Length(min = 5, max = 15, message = "Name size must be between 5 and 15") String password,
+			@NotNull(message = "Gender is Required") String gender,
+			@NotBlank(message = "Reservation Category is required") String reservationCategory,
+			@NotNull(message = "Name is Required") @Length(min = 10, max = 13, message = "mobile number should be valid") String mobileno,
+			@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$") @NotNull(message = "Email is Required") String emailId,
+			@NotNull String address, @NotNull String mandal, @NotNull String district,
+			@NotNull(message = "Pincode is required") @Min(6) int pincode, boolean castedVote, String status,
 			CooperativeSociety cooperativeSociety) {
 		super();
 		this.voterIdCardNo = voterIdCardNo;
@@ -127,12 +115,12 @@ public class RegisteredSocietyVoters implements Serializable {
 		this.reservationCategory = reservationCategory;
 		this.mobileno = mobileno;
 		this.emailId = emailId;
-		this.addressLine1 = addressLine1;
-		this.addressLine2 = addressLine2;
+		this.address = address;
 		this.mandal = mandal;
 		this.district = district;
 		this.pincode = pincode;
 		this.castedVote = castedVote;
+		this.status = status;
 		this.cooperativeSociety = cooperativeSociety;
 	}
 
@@ -208,20 +196,12 @@ public class RegisteredSocietyVoters implements Serializable {
 		this.emailId = emailId;
 	}
 
-	public String getAddressLine1() {
-		return addressLine1;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddressLine1(String addressLine1) {
-		this.addressLine1 = addressLine1;
-	}
-
-	public String getAddressLine2() {
-		return addressLine2;
-	}
-
-	public void setAddressLine2(String addressLine2) {
-		this.addressLine2 = addressLine2;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getMandal() {
@@ -256,6 +236,14 @@ public class RegisteredSocietyVoters implements Serializable {
 		this.castedVote = castedVote;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public CooperativeSociety getCooperativeSociety() {
 		return cooperativeSociety;
 	}
@@ -263,15 +251,7 @@ public class RegisteredSocietyVoters implements Serializable {
 	public void setCooperativeSociety(CooperativeSociety cooperativeSociety) {
 		this.cooperativeSociety = cooperativeSociety;
 	}
-
-	@Override
-	public String toString() {
-		return "RegisteredSocietyVoters [id=" + id + ", voterIdCardNo=" + voterIdCardNo + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", password=" + password + ", gender=" + gender + ", reservationCategory="
-				+ reservationCategory + ", mobileno=" + mobileno + ", emailId=" + emailId + ", addressLine1="
-				+ addressLine1 + ", addressLine2=" + addressLine2 + ", mandal=" + mandal + ", district=" + district
-				+ ", pincode=" + pincode + ", castedVote=" + castedVote + ", cooperativeSociety=" + cooperativeSociety
-				+ "]";
-	}
+	
+	
 
 }

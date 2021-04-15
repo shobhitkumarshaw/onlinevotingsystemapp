@@ -1,6 +1,7 @@
 package org.society.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -79,8 +80,7 @@ public class VotedListServiceImpl implements VotedListService {
 
 		NominatedCandidates candidate = nominatedCandidatesService.searchByCandidateId(nominatedCandidateId);
 
-		VotedList vote = new VotedList(0L, LocalDate.now(), scoiety, voter, candidate, LocalTime.now(),
-				LocalTime.now());
+		VotedList vote = new VotedList(LocalDateTime.now(), scoiety, voter, candidate);
 		dao.save(vote);
 
 		return vote;

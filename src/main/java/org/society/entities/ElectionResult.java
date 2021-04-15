@@ -38,11 +38,6 @@ public class ElectionResult implements Serializable {
 	@Basic
 	private LocalDate pollingDate;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "nominated_candidates_fk")
-//	private NominatedCandidates nominatedCandidates;
-//	@Transient
-//	private String cooperativeSocietyName;
 	
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
@@ -61,11 +56,10 @@ public class ElectionResult implements Serializable {
 		super();
 	}
 
-	public ElectionResult(long id, LocalDate pollingDate, CooperativeSociety cooperativeSociety, int totalSocietyVotes,
+	public ElectionResult(LocalDate pollingDate, CooperativeSociety cooperativeSociety, int totalSocietyVotes,
 			int totalPolledVotes, float totalPollingPercentage, int totalCandidateVotes, float candidateVotesPercentage,
 			@NotNull(message = "Result can not be null") String result) {
 		super();
-		this.id = id;
 		this.pollingDate = pollingDate;
 		this.cooperativeSociety = cooperativeSociety;
 		this.totalSocietyVotes = totalSocietyVotes;
@@ -148,16 +142,6 @@ public class ElectionResult implements Serializable {
 		this.result = result;
 	}
 
-	@Override
-	public String toString() {
-		return "ElectionResult [id=" + id + ", pollingDate=" + pollingDate + ", cooperativeSociety="
-				+ cooperativeSociety + ", totalSocietyVotes=" + totalSocietyVotes + ", totalPolledVotes="
-				+ totalPolledVotes + ", totalPollingPercentage=" + totalPollingPercentage + ", totalCandidateVotes="
-				+ totalCandidateVotes + ", candidateVotesPercentage=" + candidateVotesPercentage + ", result=" + result
-				+ "]";
-	}
-
-	
 	
 	
 

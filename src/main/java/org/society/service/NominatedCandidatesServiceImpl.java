@@ -13,8 +13,8 @@ public class NominatedCandidatesServiceImpl implements NominatedCandidatesServic
 	NominatedCandidatesDaoImpl dao;
 
 	@Override
-	public NominatedCandidates saveNominatedCandidate(NominatedCandidates candidate) {
-		return dao.save(candidate);
+	public NominatedCandidates saveNominatedCandidate(NominatedCandidates candidate, String voterId, long societyId) {
+		return dao.save(candidate,voterId, societyId);
 	}
 
 	@Override

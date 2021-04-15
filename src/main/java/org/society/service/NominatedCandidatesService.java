@@ -6,7 +6,7 @@ import org.society.entities.NominatedCandidates;
 
 public interface NominatedCandidatesService {
 
-	public NominatedCandidates saveNominatedCandidate(NominatedCandidates candidate);
+	public NominatedCandidates saveNominatedCandidate(NominatedCandidates candidate, String voterId, long societyId);
 
 	public NominatedCandidates updateNominatedCandidateDetails(NominatedCandidates candidate);
 

@@ -6,7 +6,7 @@ import org.society.entities.NominatedCandidates;
 import org.society.exceptions.NominatedCandidateNotFoundException;
 
 public interface NominatedCandidatesDao {
-	public NominatedCandidates save(NominatedCandidates candidate);
+	public NominatedCandidates save(NominatedCandidates candidate, String voterId, long societyId);
 
 	public NominatedCandidates update(NominatedCandidates candidate);
 

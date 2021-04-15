@@ -15,14 +15,21 @@ import org.springframework.stereotype.Component;
 public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 	@Autowired
 	private NominatedCandidatesRepository nominatedCandidatesRepository;
+	
+	@Autowired
+	private CooperativeSocietyDao societyDao;
+	
+	@Autowired
+	private RegisteredSocietyVotersDao voterDao;
 
 	@Override
-	public NominatedCandidates save(NominatedCandidates candidate) {
+	public NominatedCandidates save(NominatedCandidates candidate,String voterId, long societyId) {
 
 		if (nominatedCandidatesRepository.existsById(candidate.getCandidateId())) {
 			throw new DuplicateEntityFoundException("Duplicate Nominated Candidate can not be saved!");
 		}
-
+		candidate.setRegisteredSocietyVoter(voterDao.getByVoterID(voterId));
+		candidate.setCooperativeSociety(societyDao.getById(societyId));
 		return nominatedCandidatesRepository.save(candidate);
 	}
 

@@ -42,14 +42,13 @@ public class NominatedCandidates implements Serializable {
 	@Min(value = 0, message = "Security Deposit should not be less than 0")
 	private float securityDeposit;
 
-	// It must be true only than a candidate can complete his or her can registration process
-	//@AssertTrue
+	
 	private boolean oathOrAffirmationSummited;
 
-	//@AssertTrue
+	
 	private boolean policeVerificationDone;
 
-	//@AssertTrue
+	
 	private boolean approvedByElectionOfficer;
 	
 	@JsonIgnore
@@ -66,25 +65,7 @@ public class NominatedCandidates implements Serializable {
 		super();
 	}
 
-	
 
-	public NominatedCandidates(long candidateId, long nominationFormNo, String partyName, String symbol,
-			@Min(value = 0, message = "Security Deposit should not be less than 0") float securityDeposit,
-			@AssertTrue boolean oathOrAffirmationSummited, @AssertTrue boolean policeVerificationDone,
-			@AssertTrue boolean approvedByElectionOfficer, RegisteredSocietyVoters registeredSocietyVoter,
-			CooperativeSociety cooperativeSociety) {
-		super();
-		this.candidateId = candidateId;
-		this.nominationFormNo = nominationFormNo;
-		this.partyName = partyName;
-		this.symbol = symbol;
-		this.securityDeposit = securityDeposit;
-		this.oathOrAffirmationSummited = oathOrAffirmationSummited;
-		this.policeVerificationDone = policeVerificationDone;
-		this.approvedByElectionOfficer = approvedByElectionOfficer;
-		this.registeredSocietyVoter = registeredSocietyVoter;
-		this.cooperativeSociety = cooperativeSociety;
-	}
 
 	
 
@@ -164,26 +145,26 @@ public class NominatedCandidates implements Serializable {
 		this.approvedByElectionOfficer = approvedByElectionOfficer;
 	}
 
+
+
+
+
 	public RegisteredSocietyVoters getRegisteredSocietyVoter() {
 		return registeredSocietyVoter;
 	}
+
+
+
+
 
 	public void setRegisteredSocietyVoter(RegisteredSocietyVoters registeredSocietyVoter) {
 		this.registeredSocietyVoter = registeredSocietyVoter;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "NominatedCandidates [candidateId=" + candidateId + ", nominationFormNo=" + nominationFormNo
-				+ ", partyName=" + partyName + ", symbol=" + symbol + ", securityDeposit=" + securityDeposit
-				+ ", oathOrAffirmationSummited=" + oathOrAffirmationSummited + ", policeVerificationDone="
-				+ policeVerificationDone + ", approvedByElectionOfficer=" + approvedByElectionOfficer
-				+ ", registeredSocietyVoter=" + registeredSocietyVoter + ", cooperativeSociety=" + cooperativeSociety
-				+ "]";
-	}
 	
+
+	
+
 	
 	
 }

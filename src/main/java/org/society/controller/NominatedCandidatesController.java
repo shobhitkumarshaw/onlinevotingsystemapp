@@ -56,9 +56,11 @@ public class NominatedCandidatesController {
 		return nominatedCandidatesList;
 	}
 	
-	@PostMapping
-	public String addNominatedCandidateDetails(@Valid @RequestBody NominatedCandidates candidate) {
-		nominatedCandidatesService.saveNominatedCandidate(candidate);
+	@PostMapping("{voterIdNumber}/{societyId}")
+	public String addNominatedCandidateDetails(@Valid @RequestBody NominatedCandidates candidate,
+			@PathVariable("voterIdNumber") String voterId, 
+			@PathVariable("societyId") long societyId) {
+		nominatedCandidatesService.saveNominatedCandidate(candidate, voterId, societyId);
 		logger.info("Nominated Candidates added with id: "+candidate.getCandidateId());
 		return "Nominated Candidates added successfully!";
 	}
