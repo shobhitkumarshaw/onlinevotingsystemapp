@@ -30,6 +30,7 @@ public class CooperativeSocietyController {
 		return service.viewSocietyById(id);
 	}
 	
+//Method to add Co-operative Society Details 	
 	@PostMapping
 	public String addCooperativeSociety(@Valid @RequestBody CooperativeSociety society) {
 		
@@ -39,6 +40,7 @@ public class CooperativeSocietyController {
 		
 	}
 	
+//Method to Update Co-operative Society Details	
 	@PutMapping
 	public String updateCooperativeSociety(@Valid @RequestBody CooperativeSociety society) {
 		
@@ -48,6 +50,7 @@ public class CooperativeSocietyController {
 		
 	}
 	
+//Method to delete Co-operative Society Details	
 	@DeleteMapping(value = "{societyId}")
 	public String deleteCooperativeScoiety(@PathVariable("societyId") long societyId) {
 		
@@ -57,6 +60,7 @@ public class CooperativeSocietyController {
 		
 	}
 	
+//Method to get the list of Co-operative Society 	
 	@GetMapping
 	public List<CooperativeSociety> getCooperativeSocietyList(){
 		

@@ -31,7 +31,7 @@ public class NominatedCandidatesController {
 	NominatedCandidatesService nominatedCandidatesService;
 	Logger logger = LoggerFactory.getLogger(NominatedCandidatesController.class);
 
-	
+//Method to	get Nominated Candidates List by their ID
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getNominatedCandidatesById(@PathVariable("id") long id) {
 		NominatedCandidates nominatedCandidates = nominatedCandidatesService.searchByCandidateId(id);
@@ -44,6 +44,7 @@ public class NominatedCandidatesController {
 	}
 	
 
+//Method to get List of Nominated Candidates	
 	@GetMapping
 	public List<NominatedCandidates> getListOfNominatedCandidates() {
 		
@@ -56,6 +57,7 @@ public class NominatedCandidatesController {
 		return nominatedCandidatesList;
 	}
 	
+//Method to Add Nominated Candidate Details 	
 	@PostMapping("{voterIdNumber}/{societyId}")
 	public String addNominatedCandidateDetails(@Valid @RequestBody NominatedCandidates candidate,
 			@PathVariable("voterIdNumber") String voterId, 
@@ -64,7 +66,8 @@ public class NominatedCandidatesController {
 		logger.info("Nominated Candidates added with id: "+candidate.getCandidateId());
 		return "Nominated Candidates added successfully!";
 	}
-	
+
+//Method to Update Nominated Candidate Details	
 	@PutMapping
 	public String updateNominatedCandidatesDetails(@Valid @RequestBody NominatedCandidates candidate) {
 		
@@ -74,6 +77,7 @@ public class NominatedCandidatesController {
 		
 	}
 	
+//Method to Delete Nominated Candidate Details	
 	@DeleteMapping(value = "{id}")
 	public String deleteNominatedCandidatesDetailsById(@PathVariable("id") long id) {
 		nominatedCandidatesService.deleteNominatedCandididate(id);
