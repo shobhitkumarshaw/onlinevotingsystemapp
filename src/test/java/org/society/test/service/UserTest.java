@@ -56,7 +56,7 @@ public class UserTest {
 
 	// getById
 	@Test
-	@DisplayName("Test for displaying nominated Candidate by Id")
+	@DisplayName("Test for displaying user by Id")
 	public void getUserTest() {
 		User u1 = new User(2121l, "gaja", "yhsh", "hshs", "mailll", "43536", "voter");
 		when(repo.findById(2121l)).thenReturn(Optional.of(u1));
@@ -65,7 +65,7 @@ public class UserTest {
 
 	// getAll
 	@Test
-	@DisplayName("Test for displaying list of nominated Candidate")
+	@DisplayName("Test for displaying list of user")
 	public void getUserListDetailsTest() {
 		User u1 = new User(212l, "gaja", "yhsh", "hshs", "mailll", "43536", "voter");
 		User u2 = new User(55l, "fdfd", "bha", "pra", "mail@", "6262", "nominated condiadate");

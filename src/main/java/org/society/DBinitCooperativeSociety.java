@@ -25,7 +25,4 @@ public class DBinitCooperativeSociety implements CommandLineRunner{
 		CooperativeSociety cs3 = new CooperativeSociety("C Society", "HeadOfCooperativeSociety3", "Village3", "mondal3", "Dis3", "454321", null, null);
 		repo.save(cs3);
 	}
-	
-	
-
 }

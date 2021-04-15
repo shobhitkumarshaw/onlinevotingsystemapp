@@ -1,5 +1,3 @@
-
-
 package org.society;
 
 import org.society.entities.RegisteredSocietyVoters;
@@ -23,9 +21,4 @@ public class DBinitRegisteredSocietyVoters implements CommandLineRunner {
 		//RegisteredSocietyVoters rs = registeredSocietyVotersRepository.findByVoterIdCardNo("12345");
 		//System.out.println("Reg voter: "+rs.toString());
 	}
-
 }
-
-
-
-

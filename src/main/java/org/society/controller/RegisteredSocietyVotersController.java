@@ -6,9 +6,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.society.entities.ElectionResult;
 import org.society.entities.RegisteredSocietyVoters;
-import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.VoterNotFoundException;
 import org.society.service.RegisteredSocietyVotersService;
@@ -56,10 +54,12 @@ public class RegisteredSocietyVotersController {
 		return registeredSocietyVotersList;
 	}
 
+
 	@PostMapping("{societyId}")
 	public String addRegisteredSocietyVotersDetails(@Valid @RequestBody RegisteredSocietyVoters voter,
 			@PathVariable("societyId") long societyId) {
 		registeredSocietyVotersService.voterRegistration(voter, societyId);
+
 		logger.info("Registered Society Voter added with id: " + voter.getId());
 		return "Voter Details added successfully!";
 	}

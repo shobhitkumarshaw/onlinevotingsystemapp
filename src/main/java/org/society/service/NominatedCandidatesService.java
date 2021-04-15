@@ -5,7 +5,7 @@ import java.util.List;
 import org.society.entities.NominatedCandidates;
 
 public interface NominatedCandidatesService {
-	
+
 	public NominatedCandidates saveNominatedCandidate(NominatedCandidates candidate);
 
 	public NominatedCandidates updateNominatedCandidateDetails(NominatedCandidates candidate);

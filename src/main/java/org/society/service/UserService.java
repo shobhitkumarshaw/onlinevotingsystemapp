@@ -5,7 +5,7 @@ import java.util.List;
 import org.society.entities.User;
 
 public interface UserService {
-	
+
 	public User save(User user);
 
 	public User update(User user);

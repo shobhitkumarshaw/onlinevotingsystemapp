@@ -1,5 +1,3 @@
-
-
 package org.society.service;
 
 import java.time.LocalDate;
@@ -14,42 +12,39 @@ import org.society.entities.NominatedCandidates;
 import org.society.entities.RegisteredSocietyVoters;
 import org.society.entities.VotedList;
 import org.society.exceptions.VoteAllReadyCastedException;
-import org.society.repository.RegisteredSocietyVotersRepository;
-import org.society.repository.VotedListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VotedListServiceImpl implements VotedListService{
+public class VotedListServiceImpl implements VotedListService {
 
 	@Autowired
 	private VotedListDaoImpl dao;
-	
+
 	@Autowired
 	private CooperativeSocietyService cooperativeSocietyService;
-	
+
 	@Autowired
 	private RegisteredSocietyVotersService registeredSocietyVotersService;
-	
-	
+
 	@Autowired
 	private NominatedCandidatesService nominatedCandidatesService;
-	
+
 	@Override
 	public VotedList addVotedList(VotedList votedList) {
-		
+
 		return dao.save(votedList);
 	}
 
 	@Override
 	public VotedList updateVotedListDetails(VotedList votedList) {
-		
+
 		return dao.update(votedList);
 	}
 
 	@Override
 	public boolean deletedVotedListDetails(long id) {
-		
+
 		return dao.delete(id);
 	}
 
@@ -67,29 +62,27 @@ public class VotedListServiceImpl implements VotedListService{
 	public VotedList searchByNominatedCandidateId(long candidateId) {
 		return dao.searchByNominatedCandidateId(candidateId);
 	}
-	
+
 	@Transactional
 	@Override
 	public VotedList castVote(long scoietyId, long nominatedCandidateId, String voterIdNumber) {
-		
+
 		CooperativeSociety scoiety = cooperativeSocietyService.viewSocietyById(scoietyId);
-		
+
 		RegisteredSocietyVoters voter = registeredSocietyVotersService.searchByVoterID(voterIdNumber);
-	
-		if(!(voter.isCastedVote())) {
+
+		if (!(voter.isCastedVote())) {
 			voter.setCastedVote(true);
-		}
-		else {
+		} else {
 			throw new VoteAllReadyCastedException("Vote is already casted");
 		}
-		
-		NominatedCandidates candidate = nominatedCandidatesService.searchByCandidateId(nominatedCandidateId);
-		
-		VotedList vote = new VotedList(0L, LocalDate.now(), scoiety, voter, candidate, LocalTime.now(), LocalTime.now());
-		dao.save(vote);
-		
-		return vote;
-		
-	}
 
+		NominatedCandidates candidate = nominatedCandidatesService.searchByCandidateId(nominatedCandidateId);
+
+		VotedList vote = new VotedList(0L, LocalDate.now(), scoiety, voter, candidate, LocalTime.now(),
+				LocalTime.now());
+		dao.save(vote);
+
+		return vote;
+	}
 }

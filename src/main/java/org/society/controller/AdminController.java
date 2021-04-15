@@ -6,16 +6,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.society.entities.Admin;
-import org.society.entities.ElectionOfficer;
-import org.society.entities.ElectionResult;
-import org.society.entities.User;
 
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.NoAdminFoundException;
 import org.society.service.AdminService;
-import org.society.service.ElectionOfficerService;
-import org.society.service.ElectionResultService;
-import org.society.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @RestController
 @RequestMapping("/api/Admins")
@@ -50,7 +42,6 @@ public class AdminController {
 		adService.updateAdminDetails(admin);
 		logger.info("Admin with id: " + admin.getId() + " updated!");
 		return "Admin data successfully Updated";
-
 	}
 
 	@DeleteMapping("{adminId}")
@@ -72,6 +63,7 @@ public class AdminController {
 		logger.info("Admin id: " + adminId + " found!");
 		return new ResponseEntity<Admin>(ad, HttpStatus.OK);
 	}
+
 	@GetMapping
 	public List<Admin> getListOfAdmin() {
 
