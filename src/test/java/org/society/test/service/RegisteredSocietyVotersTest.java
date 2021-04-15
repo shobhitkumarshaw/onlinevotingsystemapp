@@ -1,13 +1,19 @@
 package org.society.test.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.society.dao.RegisteredSocietyVotersDao;
 import org.society.entities.CooperativeSociety;
@@ -23,35 +29,88 @@ public class RegisteredSocietyVotersTest {
 
 	@Autowired
 	private RegisteredSocietyVotersDao registeredSocietyVotersDao;
-	
+
 	@MockBean
 	private RegisteredSocietyVotersRepository registeredSocietyVotersRepository;
-	
+
 	@Test
 	public void addRegisteredSocietyVotersDetailsTest() {
-		//RegisteredSocietyVoters  registeredSocietyVoters= new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar", "Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543, true, null);
-		//when(registeredSocietyVotersRepository.save(registeredSocietyVoters)).thenReturn(registeredSocietyVoters);
-		//assertEquals(registeredSocietyVoters, registeredSocietyVotersDao.save(registeredSocietyVoters));
+		RegisteredSocietyVoters registeredSocietyVoters = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar",
+				"Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543,
+				true, null);
+		when(registeredSocietyVotersRepository.save(registeredSocietyVoters)).thenReturn(registeredSocietyVoters);
+		assertEquals(registeredSocietyVoters, registeredSocietyVotersDao.save(registeredSocietyVoters));
+
+	}
+
+	@Test
+	@DisplayName("Test for updating Registered Society Voters")
+	public void updateRegisteredSocietyVotersTest() {
+		RegisteredSocietyVoters registeredSocietyVoters = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar",
+				"Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543,
+				true, null);
+		registeredSocietyVoters.setFirstName("Mohit");
+		assertThat(registeredSocietyVotersRepository.findById(registeredSocietyVoters.getId()))
+				.isNotEqualTo(registeredSocietyVoters);
+
+	}
+
+	@Test
+
+	@DisplayName("Test for deleting Registered Society Voters")
+	public void deleteRegisteredSocietyVotersTest() {
+		RegisteredSocietyVoters registeredSocietyVoters = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar",
+				"Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543,
+				true, null);
+		when(registeredSocietyVotersRepository.findByVoterIdCardNo(registeredSocietyVoters.getVoterIdCardNo())).thenReturn(registeredSocietyVoters);
+		registeredSocietyVotersDao.delete(registeredSocietyVoters.getVoterIdCardNo());
+		verify(registeredSocietyVotersRepository).findByVoterIdCardNo("32345");
+
+	}
+
+	@Test
+
+	@DisplayName("Test for displaying  Registered Society Voters by VoterId Number")
+	public void getVoterByVoterIdDetailsTest() {
+		RegisteredSocietyVoters registeredSocietyVoters = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar",
+				"Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543,
+				true, null);
+
+		when(registeredSocietyVotersRepository.findByVoterIdCardNo("32345")).thenReturn(registeredSocietyVoters);
+		assertEquals(registeredSocietyVoters, registeredSocietyVotersDao.getByVoterID("32345"));
+	}
 	
-	
-/*
-		List<RegisteredSocietyVoters> regList = new ArrayList<>();
-		List<NominatedCandidates> candidateList = new ArrayList<>();
-		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadofResult1", "Village1", "mandal1", "dis1",
-				"654321",regList,candidateList);
-		regList.add(new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Bcrec1", "Male", "obc", "9876543210",
-				"mihir@email.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1));
+	@Test
+	@DisplayName("Test for displaying list of Registered Society Voters")
+	public void getRegisteredVoterListTest() {
+
+		RegisteredSocietyVoters registeredSocietyVoters1 = new RegisteredSocietyVoters(3l, "32345", "Aditya", "Kumar",
+				"Bcrec3", "Male", "obc", "2876543210", "aditya@email.com", "add1", "add23", "mondal", "Dis", 278543,
+				true, null);
+		RegisteredSocietyVoters registeredSocietyVoters2=new RegisteredSocietyVoters(2l, "22345", "Shobit", "Kumar", "Bcrec1", "Male", "gen", "1876543210", "shobit@email.com", "add1", "add23", "mondal", "Dis", 178543, false, null);
 		
-		candidateList
-				.add(new NominatedCandidates(100L, 111, "Life", "Water", 10000, true, true, true,
-						new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Bcrec1", "Male", "obc",
-								"9876543210", "mihir@email.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1),
-						cs1));
-		
-		RegisteredSocietyVoters rs1=new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw","Bcrec1", "Male", "obc", "9876543210", "mihir@gmail.com", "add1", "add2", "mondal1", "Dis1", 654321, true, cs1);
-		when(registeredSocietyVotersRepository.save(rs1)).thenReturn(rs1);
-		assertEquals(rs1, registeredSocietyVotersDao.save(rs1));
+		when(registeredSocietyVotersRepository.findAll()).thenReturn(
+				Stream.of(registeredSocietyVoters1, registeredSocietyVoters2)
+						.collect(Collectors.toList()));
+		assertEquals(2, registeredSocietyVotersDao.getRegisteredVoterList().size());
 	
-	*/
+	
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

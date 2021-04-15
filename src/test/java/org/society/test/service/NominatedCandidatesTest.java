@@ -67,7 +67,7 @@ public class NominatedCandidatesTest {
 				cs1);
 		when(nominatedCandidatesRepository.existsById(nc1.getCandidateId())).thenReturn(true);
 		nominatedCandidatesDao.delete(nc1.getCandidateId());
-		verify(nominatedCandidatesRepository).deleteById(300l);
+		verify(nominatedCandidatesRepository).deleteById(100l);
 	}
 
 	// getById
