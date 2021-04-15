@@ -11,4 +11,6 @@ public interface RegisteredSocietyVotersRepository extends JpaRepository<Registe
 	List<RegisteredSocietyVoters> findByEmailId (String emailId);
 	
 	RegisteredSocietyVoters findByVoterIdCardNo (String voterId);
+	
+	List<RegisteredSocietyVoters> findByCastedVote(boolean flag);
 }

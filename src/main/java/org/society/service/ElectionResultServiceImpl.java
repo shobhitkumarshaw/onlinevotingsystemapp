@@ -13,41 +13,48 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 	@Autowired
 	ElectionResultDaoImpl dao;
 
+//Method to Add Election Result 	
 	@Override
 	public ElectionResult addElectionResult(ElectionResult result) {
 		return dao.save(result);
 
 	}
 
+//Method to Update Election Result	
 	@Override
 	public ElectionResult updateElectionResult(ElectionResult result) {
 		return dao.update(result);
 
 	}
 
+//Method to Delete Election Result	
 	@Override
 	public boolean deleteElectionResult(long candidateId) {
 		dao.delete(candidateId);
 		return true;
 
 	}
-
+	
+//Method to get Election Result list
 	@Override
 	public List<ElectionResult> viewElectionResultList() {
 		return dao.getElectionResultList();
 	}
 
+//Method to view Candidate Wise Result	
 	@Override
 	public ElectionResult viewCandidatewiseResult(long candidateId) {
 		return dao.getCandidatewiseResult(candidateId);
 	}
 
+//Method to view Voting Percentage	
 	@Override
 	public double viewVotingPercentage() {
 
 		return dao.viewVotingPercentage();
 	}
 
+	
 	@Override
 	public double viewCandidateVotingPercent(long candidateId) {
 		// TODO Auto-generated method stub

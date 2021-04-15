@@ -16,7 +16,7 @@ public class AdminDaoImp implements AdminDao {
 
 	@Autowired
 	AdminRepository repository;
-
+//Save Method for Admin Module	
 	@Override
 	public Admin save(Admin ad) throws DuplicateEntityFoundException {
 		if (repository.existsById(ad.getId())) {
@@ -26,7 +26,7 @@ public class AdminDaoImp implements AdminDao {
 		return repository.save(ad);
 
 	}
-
+//Update Method for Admin Module
 	@Override
 	public Admin update(Admin ad) throws NoAdminFoundException {
 		if (repository.existsById(ad.getId())) {
@@ -36,6 +36,7 @@ public class AdminDaoImp implements AdminDao {
 		throw new NoAdminFoundException("Admin not found to update!");
 	}
 
+//Delete Method for Admin Module
 	@Override
 	public boolean delete(long adminId) throws NoAdminFoundException{
 		if (repository.existsById(adminId)) {
@@ -45,6 +46,7 @@ public class AdminDaoImp implements AdminDao {
 		throw new NoAdminFoundException("Admin not found to delete!");
 	}
 
+//Get Admin ID of a single person in a list
 	@Override
 	public Admin getAdmin(long adminId) throws NoAdminFoundException {
 		Optional<Admin> an = repository.findById(adminId);
@@ -55,6 +57,7 @@ public class AdminDaoImp implements AdminDao {
 			throw new NoAdminFoundException("Admin not found!");
 	}
 
+//Get ID of all the people in the list
 	@Override
 	public List<Admin> getAllAdmin() {
 		List<Admin> adI = (List<Admin>) repository.findAll();

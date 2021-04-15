@@ -22,6 +22,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 	@Autowired
 	private RegisteredSocietyVotersDao voterDao;
 
+//Save Method for Nominated Candidates Module	
 	@Override
 	public NominatedCandidates save(NominatedCandidates candidate,String voterId, long societyId) {
 
@@ -32,7 +33,8 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 		candidate.setCooperativeSociety(societyDao.getById(societyId));
 		return nominatedCandidatesRepository.save(candidate);
 	}
-
+	
+//Update Method for Nominated Candidates Module
 	@Override
 	public NominatedCandidates update(NominatedCandidates candidate) throws NominatedCandidateNotFoundException {
 		if(nominatedCandidatesRepository.existsById(candidate.getCandidateId())) {
@@ -42,6 +44,7 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 
 	}
 
+//Delete Method for Nominated Candidates Module	
 	@Override
 	public boolean delete(long candidateId) throws NominatedCandidateNotFoundException {
 
@@ -51,13 +54,15 @@ public class NominatedCandidatesDaoImpl implements NominatedCandidatesDao {
 		}
 		throw new NominatedCandidateNotFoundException("Nominated Candidate not found to delete!");
 	}
-
+	
+//Method to get Nominated Candidates List
 	@Override
 	public List<NominatedCandidates> getNominatedCandidatesList() {
 		List<NominatedCandidates> list = (List<NominatedCandidates>) nominatedCandidatesRepository.findAll();
 		return list;
 	}
 
+//Method to get List of Nominated Candidates by their Candidate ID	
 	@Override
 	public NominatedCandidates getByCandidateId(long candidateId) throws NominatedCandidateNotFoundException{
 		Optional<NominatedCandidates> candidate = nominatedCandidatesRepository.findById(candidateId);

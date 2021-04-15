@@ -13,30 +13,35 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDaoImpl dao;
 
+//Method to save User details	
 	@Override
 	public User save(User user) {
 
 		return dao.save(user);
 	}
-
+	
+//Method to Update User details 
 	@Override
 	public User update(User user) {
 
 		return dao.update(user);
 	}
 
+//Method to Delete User Details	
 	@Override
 	public boolean delete(long userId) {
 
 		return dao.delete(userId);
 	}
 
+//Method to view Users List	
 	@Override
 	public List<User> viewUserList() {
 
 		return dao.viewUserList();
 	}
 
+//Method to Find User by their USer ID	
 	@Override
 	public User findByUserId(long userId) {
 
