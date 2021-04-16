@@ -17,20 +17,11 @@ public interface ElectionResultService {
 
 	public ElectionResult viewCandidatewiseResult(long candidateId);
 
-	public double viewVotingPercentage();
-
-	public double viewCandidateVotingPercent(long candidateId);
-
-	//public void displayVotingStatistics();
 
 	public NominatedCandidates viewHighestVotingPercentCandidate();
 
 	public NominatedCandidates viewLowestVotingPercentCandidate();
 
 	public int viewInvalidVotes();
-
-	public List<NominatedCandidates> candidatewiseInvalidVotesList();
-
-	//public void displayPollingResult();
 
 }

@@ -1,3 +1,7 @@
+/*
+ *@author: Ritik Kumar 
+ */
+
 package org.society.dao;
 
 import java.util.List;
@@ -15,7 +19,7 @@ public class CooperativeSocietyDaoImpl implements CooperativeSocietyDao {
 
 	@Autowired
 	private CooporativeSocietyRepository repository;
-// Save method for Co-operative Society module
+	// Save method for Co-operative Society module
 	@Override
 	public CooperativeSociety save(CooperativeSociety society) {
 		if (repository.existsById(society.getId())) {
@@ -23,7 +27,7 @@ public class CooperativeSocietyDaoImpl implements CooperativeSocietyDao {
 		}
 		return repository.save(society);
 	}
-//Update Method for Co-operative Society module
+	//Update Method for Co-operative Society module
 	@Override
 	public CooperativeSociety update(CooperativeSociety society) {
 		if (repository.existsById(society.getId())) {
@@ -32,7 +36,7 @@ public class CooperativeSocietyDaoImpl implements CooperativeSocietyDao {
 
 		throw new SocietyNotFoundException("Society not found to update!");
 	}
-//Delete Method for Co-operative Society Module
+	//Delete Method for Co-operative Society Module
 	@Override
 	public boolean delete(long societyId) throws SocietyNotFoundException {
 		if (repository.existsById(societyId)) {
@@ -41,13 +45,13 @@ public class CooperativeSocietyDaoImpl implements CooperativeSocietyDao {
 		}
 		throw new SocietyNotFoundException("Society not found to delete!");
 	}
-//Method to get the list of all members of Co-operative society
+	//Method to get the list of all members of Co-operative society
 	@Override
 	public List<CooperativeSociety> getAll() {
 		List<CooperativeSociety> societyList = repository.findAll();
 		return societyList;
 	}
-//Method to get the list of members by their ID
+	//Method to get the list of members by their ID
 	@Override
 	public CooperativeSociety getById(long societyId) throws SocietyNotFoundException {
 		Optional<CooperativeSociety> society = repository.findById(societyId);

@@ -1,3 +1,7 @@
+/*
+ *@author: Ritik Kumar 
+ */
+
 package org.society.entities;
 
 import java.io.Serializable;

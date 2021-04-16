@@ -1,3 +1,7 @@
+/*
+ *@author: Ritik Kumar 
+ */
+
 package org.society.service;
 
 import java.util.List;
@@ -13,21 +17,21 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 	@Autowired
 	ElectionResultDaoImpl dao;
 
-//Method to Add Election Result 	
+	//Method to Add Election Result 	
 	@Override
 	public ElectionResult addElectionResult(ElectionResult result) {
 		return dao.save(result);
 
 	}
 
-//Method to Update Election Result	
+	//Method to Update Election Result	
 	@Override
 	public ElectionResult updateElectionResult(ElectionResult result) {
 		return dao.update(result);
 
 	}
 
-//Method to Delete Election Result	
+	//Method to Delete Election Result	
 	@Override
 	public boolean deleteElectionResult(long candidateId) {
 		dao.delete(candidateId);
@@ -35,62 +39,35 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 
 	}
 
-//Method to get Election Result list
+	//Method to get Election Result list
 	@Override
 	public List<ElectionResult> viewElectionResultList() {
 		return dao.getElectionResultList();
 	}
 
-//Method to view Candidate Wise Result	
+	//Method to view Candidate Wise Result	
 	@Override
 	public ElectionResult viewCandidatewiseResult(long candidateId) {
 		return dao.getCandidatewiseResult(candidateId);
 	}
 
-//Method to view Voting Percentage
-	@Override
-	public double viewVotingPercentage() {
-		return dao.viewVotingPercentage();
-	}
-	
-//Method to view Candidate Voting Percentage	
-	@Override
-	public double viewCandidateVotingPercent(long candidateId) {
-		return dao.viewCandidateVotingPercent(candidateId);
-	}
 
-//Method to display Voting Statistics
-	 /* @Override public void displayVotingStatistics() { // TODO Auto-generated
-	 * method stub }
-	 */
 	
-//Method to get Nominated Candidate which has highest Voting Percentage
+	//Method to get Nominated Candidate which has highest Voting Percentage
 	@Override
 	public NominatedCandidates viewHighestVotingPercentCandidate() {
 		return dao.viewHighestVotingPercentCandidate();
 	}
 
-//Method to get Nominated Candidate which has lowest Voting Percentage
+	//Method to get Nominated Candidate which has lowest Voting Percentage
 	@Override
 	public NominatedCandidates viewLowestVotingPercentCandidate() {
 		return dao.viewLowestVotingPercentCandidate();
 	}
 
-//Method to get Invalid Votes
+	//Method to get Invalid Votes
 	@Override
 	public int viewInvalidVotes() {
 		return dao.viewInvalidVotes();
 	}
-
-	@Override
-	public List<NominatedCandidates> candidatewiseInvalidVotesList() {
-		return dao.candidatewiseInvalidVotesList();
-	}
-
-	/*
-	 * @Override public void displayPollingResult() {
-	 * 
-	 * 
-	 * }
-	 */
 }

@@ -80,12 +80,6 @@ public class ElectionResultController {
 		return "Election Result data successfully deleted";
 	}
 
-	// Method to view Voting Percentage
-	@GetMapping("TotalValidVotes")
-	public double validVotes() {
-		return service.viewVotingPercentage();
-	}
-
 	// Method to view Nominated Candidate with Highest Voting Percentage
 	@GetMapping("NominatedCandidateWithHighestVotingPercent")
 	public NominatedCandidates viewHighestVotingPercentCandidate() {

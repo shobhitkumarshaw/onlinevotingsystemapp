@@ -1,3 +1,7 @@
+/*
+ *@author: Ritik Kumar 
+ */
+
 package org.society.dao;
 
 import java.util.List;
@@ -79,50 +83,6 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found ");
 	}
 
-//Method to view Voting Percentage
-	@Override
-	public double viewVotingPercentage() {
-		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
-		List<RegisteredSocietyVoters> totalVoterInSociety = voterDao.getRegisteredVoterList();
-		
-		long votes = totalVoterInSociety.size();
-		System.out.println("***** "+ votes);
-		long validVotes = voters.size();
-		System.out.println("***** "+votes );
-		double result = validVotes/votes;
-		System.out.println("***** "+ result);
-		return result*100;
-		//return voters.size();
-	}
-
-//Method to view Candidate Voting Percentage	
-	@Override
-	public double viewCandidateVotingPercent(long candidateId) {
-		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
-		List<RegisteredSocietyVoters> totalVoterInSociety = (List<RegisteredSocietyVoters>)voterRepo.findAll();
-		long totalVotes = 0;
-		double castedVoterForSociety = 0;
-		if (voters.size() != 0 && totalVoterInSociety.size() != 0) {
-			totalVotes = voters
-					.stream().map(voter -> voter.getCooperativeSociety()).filter(society -> society
-							.getId() == candidateDao.getByCandidateId(candidateId).getCooperativeSociety().getId())
-					.count();
-
-			castedVoterForSociety = totalVoterInSociety
-					.stream().map(voter -> voter.getCooperativeSociety()).filter(society -> society
-							.getId() == candidateDao.getByCandidateId(candidateId).getCooperativeSociety().getId())
-					.count();
-		}
-
-		return (totalVotes / castedVoterForSociety) * 100;
-	}
-
-//Method to display Voting Statistics
-	@Override
-	public void displayVotingStatistics() {
-		// TODO Auto-generated method stub
-
-	}
 
 //Method to get Nominated Candidate which has highest Voting Percentage
 	@Override
@@ -162,7 +122,6 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		}
 
 		return candidateDao.getByCandidateId(low);
-
 	}
 
 //Method to get Invalid Votes
@@ -170,20 +129,5 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	public int viewInvalidVotes() {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(false);
 		return voters.size();
-	}
-
-//Method to get list of candidate wise Invalid Votes
-	@Override
-	public List<NominatedCandidates> candidatewiseInvalidVotesList() {
-
-		return null;
-	}
-
-//Method to display Polling Result
-	@Override
-	public void displayPollingResult() {
-//		List<Object> list = repository.votedlistResult();
-//		System.out.println("list: "+list);
-
 	}
 }
