@@ -18,6 +18,7 @@ public class DBinitVotedList implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		
 
 		CooperativeSociety cs = new CooperativeSociety("E Society", "HeadOfCooperativeSociety1", "Village1", "mondal1", "Dis1", "654321", null, null);
@@ -31,5 +32,8 @@ public class DBinitVotedList implements CommandLineRunner {
 		NominatedCandidates nc1 = new NominatedCandidates(123698, "Win", "Fan", 66000, true, true, true, rs1, cs1);
 		votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs1, nc1));
 		
+		//RegisteredSocietyVoters rs3 = new RegisteredSocietyVoters("v1", null, null, null, null, null, null, null, null, null, null, 0, false, null, cs1)
+		//votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs2, nc1));
+
 	}
 }

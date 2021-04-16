@@ -52,18 +52,7 @@ public class NominatedCandidatesTest {
 		assertThat(nominatedCandidatesRepository.findById(nc1.getCandidateId())).isNotEqualTo(nc1);
 	}
 
-	// Delete Nominated Candidates Details
-	@Test
-	@DisplayName("Test for Deleting Nominated Candidates Details")
-	public void deleteNominatedCandidatesDetailsTest() {
-		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
-				"Dis1", "12345678", null, null);
-		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters("v56324", "Ashish", "Singh", "plmokn", "Male", "sc", "8521674392", "ashish.singh@yahoo.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs1);
-		NominatedCandidates nc1 = new NominatedCandidates(523698l, "yoga", "cycle", 5632014f, true, true, true, rs1, cs1);
-		when(nominatedCandidatesRepository.existsById(nc1.getCandidateId())).thenReturn(true);
-		nominatedCandidatesDao.delete(nc1.getCandidateId());
-		verify(nominatedCandidatesRepository).deleteById(100l);
-	}
+	
 
 	// Method to  get by Id
 	@Test

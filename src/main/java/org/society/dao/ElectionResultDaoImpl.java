@@ -28,6 +28,9 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	@Autowired
 	private VotedListDao votedList;
+	
+	@Autowired
+	private RegisteredSocietyVotersDao voterDao;
 
 //Method to Save Election Result	
 	@Override
@@ -80,16 +83,23 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	@Override
 	public double viewVotingPercentage() {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
-		List<RegisteredSocietyVoters> totalVoterInSociety = voterRepo.findAll();
-		return voters.size() / totalVoterInSociety.size();
+		List<RegisteredSocietyVoters> totalVoterInSociety = voterDao.getRegisteredVoterList();
+		
+		long votes = totalVoterInSociety.size();
+		System.out.println("***** "+ votes);
+		long validVotes = voters.size();
+		System.out.println("***** "+votes );
+		double result = validVotes/votes;
+		System.out.println("***** "+ result);
+		return result*100;
+		//return voters.size();
 	}
 
 //Method to view Candidate Voting Percentage	
 	@Override
 	public double viewCandidateVotingPercent(long candidateId) {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
-		List<RegisteredSocietyVoters> totalVoterInSociety = voterRepo.findAll();
-		double result = 0;
+		List<RegisteredSocietyVoters> totalVoterInSociety = (List<RegisteredSocietyVoters>)voterRepo.findAll();
 		long totalVotes = 0;
 		double castedVoterForSociety = 0;
 		if (voters.size() != 0 && totalVoterInSociety.size() != 0) {
@@ -121,10 +131,12 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		Map<Long, Long> highResult = list.stream().filter(l -> l.getNominatedCandidates() != null)
 				.map(VotedList::getNominatedCandidates)
 				.collect(Collectors.groupingBy(NominatedCandidates::getCandidateId, Collectors.counting()));
+		
 		long high = 0;
-		long val = highResult.get(1);
+		long val = highResult.get(3l);
+		System.out.println(val);
 		for (long K : highResult.keySet()) {
-			if (val > highResult.get(K)) {
+			if (val >= highResult.get(K)) {
 				val = highResult.get(K);
 				high = K;
 			}
@@ -140,10 +152,10 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		Map<Long, Long> Result = list.stream().filter(l -> l.getNominatedCandidates() != null)
 				.map(VotedList::getNominatedCandidates)
 				.collect(Collectors.groupingBy(NominatedCandidates::getCandidateId, Collectors.counting()));
-		long low = 0;
-		long val = Result.get(1);
+		long low = 3l;
+		long val = Result.get(3l);
 		for (long K : Result.keySet()) {
-			if (val < Result.get(K)) {
+			if (val <= Result.get(K)) {
 				val = Result.get(K);
 				low = K;
 			}

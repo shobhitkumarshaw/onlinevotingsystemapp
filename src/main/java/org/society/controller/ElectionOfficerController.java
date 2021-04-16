@@ -7,8 +7,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.society.entities.ElectionOfficer;
+import org.society.entities.NominatedCandidates;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionOfficerService;
+import org.society.service.NominatedCandidatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,9 @@ public class ElectionOfficerController {
 
 	@Autowired
 	private ElectionOfficerService service;
+	
+	@Autowired
+	private NominatedCandidatesService candidateService;
 
 //Method to get Election Officer Details by their ID	
 	@GetMapping(value = "{id}")
@@ -82,4 +87,31 @@ public class ElectionOfficerController {
 		logger.info("Election Officer with id: "+ id + " deleted!");
 		return "Election Officer with id: " + id + " removed successfully !";
 	}
+	
+	@GetMapping(value = "{candidateId}/{approval}")
+	public String approveCandidate(@PathVariable("candidateId") long id, 
+			@PathVariable("approval") String approval) {
+		if(approval.equalsIgnoreCase("PASS")) {
+			NominatedCandidates candidate = candidateService.searchByCandidateId(id);
+			candidate.setApprovedByElectionOfficer(true);
+			candidate.setOathOrAffirmationSummited(true);
+			candidate.setPoliceVerificationDone(true);
+			candidateService.updateNominatedCandidateDetails(candidate);
+			return "Nominated Candidate with id: "+id+" approval successfull!";
+		}
+		else if(approval.equalsIgnoreCase("REJECTED")) {
+			NominatedCandidates candidate = candidateService.searchByCandidateId(id);
+			candidate.setApprovedByElectionOfficer(false);
+			candidate.setOathOrAffirmationSummited(false);
+			candidate.setPoliceVerificationDone(false);
+			candidateService.updateNominatedCandidateDetails(candidate);
+			return "Nominated Candidate with id: "+id+" approval rejected!";
+			
+		}
+		else
+			return "Wrong input for approval. Enter pass or rejected!";
+		
+	}
+		
+	
 }

@@ -55,8 +55,9 @@ public class RegisteredSocietyVoters implements Serializable {
 
 	@NotBlank(message = "Reservation Category is required")
 	private String reservationCategory;
-
-	@NotNull(message = "Name is Required")
+	
+	@Pattern(regexp = "^[0][1-9]\\d{9}$|^[1-9]\\d{9}$")
+	@NotNull(message = "Mobile is Required")
 	@Length(min = 10, max = 13, message = "mobile number should be valid")
 	private String mobileno;
 
