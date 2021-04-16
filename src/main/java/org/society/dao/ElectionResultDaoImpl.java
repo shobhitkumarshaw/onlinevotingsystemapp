@@ -36,7 +36,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	@Autowired
 	private RegisteredSocietyVotersDao voterDao;
 
-//Method to Save Election Result	
+	//Method to Save Election Result	
 	@Override
 	public ElectionResult save(ElectionResult result) {
 		if (repository.existsById(result.getId())) {
@@ -46,7 +46,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	}
 
-//Method to Update Election Result	
+	//Method to Update Election Result	
 	@Override
 	public ElectionResult update(ElectionResult result) throws ElectionResultNotFoundException {
 		if (repository.existsById(result.getId())) {
@@ -55,7 +55,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found to update!");
 	}
 
-//Method to Delete Election Result	
+	//Method to Delete Election Result	
 	@Override
 	public boolean delete(long candidateId) throws ElectionResultNotFoundException {
 		if (repository.existsById(candidateId)) {
@@ -65,14 +65,14 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found to delete!");
 	}
 
-//Method to get list of Election Result	
+	//Method to get list of Election Result	
 	@Override
 	public List<ElectionResult> getElectionResultList() {
 		List<ElectionResult> list = (List<ElectionResult>) repository.findAll();
 		return list;
 	}
 
-//Method to get Candidate wise Election Result	
+	//Method to get Candidate wise Election Result	
 	@Override
 	public ElectionResult getCandidatewiseResult(long candidateId) throws ElectionResultNotFoundException {
 		Optional<ElectionResult> er = repository.findById(candidateId);
@@ -83,8 +83,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found ");
 	}
 
-
-//Method to get Nominated Candidate which has highest Voting Percentage
+	//Method to get Nominated Candidate which has highest Voting Percentage
 	@Override
 	public NominatedCandidates viewHighestVotingPercentCandidate() {
 		List<VotedList> list = votedList.getVotedList();
@@ -105,7 +104,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		return candidateDao.getByCandidateId(high);
 	}
 
-//Method to get Nominated Candidate which has lowest Voting Percentage
+	//Method to get Nominated Candidate which has lowest Voting Percentage
 	@Override
 	public NominatedCandidates viewLowestVotingPercentCandidate() {
 		List<VotedList> list = votedList.getVotedList();
@@ -124,7 +123,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		return candidateDao.getByCandidateId(low);
 	}
 
-//Method to get Invalid Votes
+	//Method to get Invalid Votes
 	@Override
 	public int viewInvalidVotes() {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(false);

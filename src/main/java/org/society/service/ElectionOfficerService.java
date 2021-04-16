@@ -15,5 +15,7 @@ public interface ElectionOfficerService {
 	public ElectionOfficer viewElectionOfficerById(long officerId);
 
 	public List<ElectionOfficer> viewElectionOfficerList();
+	
+	String approveCandidate(long id,String approval);
 
 }

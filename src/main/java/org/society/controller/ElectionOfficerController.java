@@ -7,10 +7,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.society.entities.ElectionOfficer;
-import org.society.entities.NominatedCandidates;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionOfficerService;
-import org.society.service.NominatedCandidatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,28 +24,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/ElectionOfficer")
 public class ElectionOfficerController {
-
+	
+	
 	Logger logger = LoggerFactory.getLogger(ElectionOfficerController.class);
 
 	@Autowired
 	private ElectionOfficerService service;
 	
-	@Autowired
-	private NominatedCandidatesService candidateService;
+	
 
-//Method to get Election Officer Details by their ID	
+	//Method to get Election Officer Details by their ID	
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getElectionOfficerById(@PathVariable("id") long id) {
+		
 		// Duplicate validation is done in DAO part. If Exception is thrown than it will
 		// be propagated to ApplicationExecptionHandler class
-		
 		ElectionOfficer officer = service.viewElectionOfficerById(id);
 		logger.info("Election Officer id: " + id + " found!");
 		return new ResponseEntity<ElectionOfficer>(officer, HttpStatus.OK);
 		
 	}
 
-//Method to get the list of Election Officer 	
+	//Method to get the list of Election Officer 	
 	@GetMapping
 	public List<ElectionOfficer> getListOfElectionOfficer() {
 
@@ -60,7 +58,7 @@ public class ElectionOfficerController {
 		return officerList;
 	}
 
-//Method to add Election Officer Details	
+	//Method to add Election Officer Details	
 	@PostMapping
 	public String addElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
 
@@ -70,7 +68,7 @@ public class ElectionOfficerController {
 
 	}
 
-//Method to update Election Officer Details	
+	//Method to update Election Officer Details	
 	@PutMapping
 	public String updateElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
 
@@ -80,7 +78,7 @@ public class ElectionOfficerController {
 
 	}
 
-//Method to delete Election Officer Details by their ID	
+	//Method to delete Election Officer Details by their ID	
 	@DeleteMapping(value = "{id}")
 	public String deleteElectionOfficerDetailsById(@PathVariable("id") long id) {
 		service.deleteElectionOfficer(id);
@@ -88,30 +86,11 @@ public class ElectionOfficerController {
 		return "Election Officer with id: " + id + " removed successfully !";
 	}
 	
+	//Method to approve or reject the Nominated candidate
 	@GetMapping(value = "{candidateId}/{approval}")
 	public String approveCandidate(@PathVariable("candidateId") long id, 
 			@PathVariable("approval") String approval) {
-		if(approval.equalsIgnoreCase("PASS")) {
-			NominatedCandidates candidate = candidateService.searchByCandidateId(id);
-			candidate.setApprovedByElectionOfficer(true);
-			candidate.setOathOrAffirmationSummited(true);
-			candidate.setPoliceVerificationDone(true);
-			candidateService.updateNominatedCandidateDetails(candidate);
-			return "Nominated Candidate with id: "+id+" approval successfull!";
-		}
-		else if(approval.equalsIgnoreCase("REJECTED")) {
-			NominatedCandidates candidate = candidateService.searchByCandidateId(id);
-			candidate.setApprovedByElectionOfficer(false);
-			candidate.setOathOrAffirmationSummited(false);
-			candidate.setPoliceVerificationDone(false);
-			candidateService.updateNominatedCandidateDetails(candidate);
-			return "Nominated Candidate with id: "+id+" approval rejected!";
-			
-		}
-		else
-			return "Wrong input for approval. Enter pass or rejected!";
+		return service.approveCandidate(id, approval);
 		
 	}
-		
-	
 }

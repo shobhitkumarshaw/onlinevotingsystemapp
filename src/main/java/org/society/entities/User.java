@@ -1,3 +1,6 @@
+/*
+  * @author: Nagidi Bhanu prakash
+ */
 package org.society.entities;
 import java.io.Serializable;
 

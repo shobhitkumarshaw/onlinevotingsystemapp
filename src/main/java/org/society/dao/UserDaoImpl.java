@@ -1,13 +1,13 @@
+/*
+  * @author: Nagidi Bhanu prakash
+ */
 package org.society.dao;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.society.entities.ElectionOfficer;
 import org.society.entities.User;
 import org.society.exceptions.DuplicateEntityFoundException;
-import org.society.exceptions.ElectionOfficerNotFoundException;
-import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.UserNotFoundException;
 import org.society.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private UserRepository repository;
 
-//Save Method for User Module	
+	//Save Method for User Module	
 	@Override
 	public User save(User user) {
 		if (repository.existsById(user.getId())) {
@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 		return repository.save(user);
 	}
 
-//Update Method for User Module	
+	//Update Method for User Module	
 	@Override
 	public User update(User user) {
 		if (repository.existsById(user.getId())) {
@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-//Delete Method for User Module	
+	//Delete Method for User Module	
 	@Override
 	public boolean delete(long userId) {
 		if (repository.existsById(userId)) {
@@ -52,14 +52,14 @@ public class UserDaoImpl implements UserDao {
 		throw new UserNotFoundException("User not found to delete!");
 	}
 	
-// Method to view User List 
+	// Method to view User List 
 	@Override
 	public List<User> viewUserList() {
 		List<User> userList = repository.findAll();
 		return userList;
 	}
 	
-//Method to find by User ID
+	//Method to find by User ID
 	@Override
 	public User findByUserId(long userId) {
 		Optional<User> user = repository.findById(userId);
@@ -68,5 +68,4 @@ public class UserDaoImpl implements UserDao {
 		} else
 			throw new UserNotFoundException("User not found!");
 	}
-
 }

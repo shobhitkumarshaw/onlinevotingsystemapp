@@ -1,3 +1,6 @@
+/*
+  * @author: Nagidi Bhanu prakash
+ */
 package org.society.exceptions;
 
 public class UserNotFoundException extends RuntimeException{
