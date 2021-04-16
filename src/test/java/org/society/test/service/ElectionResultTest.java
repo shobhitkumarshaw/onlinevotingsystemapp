@@ -29,7 +29,7 @@ public class ElectionResultTest {
 	@MockBean
 	private ElectionResultRepository erRepo;
 
-//Add
+	// Test For Add
 	@Test
 	@DisplayName("Test for adding Election Result")
 	public void addElectionResultDetailsTest() {
@@ -42,7 +42,7 @@ public class ElectionResultTest {
 		assertEquals(er1, erDao.save(er1));
 	}
 
-//UPDATE
+	// Test For Update
 	@Test
 	@DisplayName("Test for updating Election Result")
 	public void updateElectionResultDetailsTest() {
@@ -50,16 +50,16 @@ public class ElectionResultTest {
 		CooperativeSociety cs3 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",
 				"454321", null, null);
 		ElectionResult er3 = new ElectionResult(LocalDate.now(), cs3, 30000, 15000, 50, 7500, 50, "loss");
-		
+
 		er3.setResult("Win");
 		assertThat(erRepo.findById(er3.getId())).isNotEqualTo(er3);
 	}
 
-//DELETE
+	// Test For Delete
 	@Test
 	@DisplayName("Test for deleting Election Result")
 	public void deleteElectionResultDetailsTest() {
-		
+
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadofResult1", "Village1", "mandal1", "dis1",
 				"654321", null, null);
 		ElectionResult er1 = new ElectionResult(LocalDate.now(), cs1, 20000, 10000, 50, 5000, 50, "loosed");
@@ -69,7 +69,7 @@ public class ElectionResultTest {
 		verify(erRepo).deleteById(er1.getId());
 	}
 
-//DetailsById
+	// Test For DetailsById
 	@Test
 	@DisplayName("Test for displaying Election Result by Id")
 	public void getCandidatewiseResultDetailsTest() {
@@ -81,18 +81,18 @@ public class ElectionResultTest {
 		when(erRepo.findById(301l)).thenReturn(Optional.of(er2));
 		assertEquals(er2, erDao.getCandidatewiseResult(301l));
 	}
-	
-//AllDetails
+
+	// Test For AllDetails
 	@Test
 	@DisplayName("Test for displaying list of Election Result")
 	public void getElectionResultList() {
 
-  //First input
+		// First input
 		CooperativeSociety cs2 = new CooperativeSociety("B Society", "HeadofResult2", "village2", "mandal2", "dis2",
 				"554321", null, null);
 		ElectionResult er2 = new ElectionResult(LocalDate.now(), cs2, 10000, 5000, 50, 2500, 50, "Win");
 
-  //Second input
+		// Second input
 		CooperativeSociety cs3 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",
 				"454321", null, null);
 		ElectionResult er3 = new ElectionResult(LocalDate.now(), cs3, 30000, 15000, 50, 7500, 50, "loss");

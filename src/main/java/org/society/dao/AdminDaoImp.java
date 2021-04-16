@@ -6,12 +6,9 @@ import java.util.Optional;
 import org.society.entities.Admin;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.NoAdminFoundException;
-import org.society.exceptions.UserNotFoundException;
 import org.society.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import ch.qos.logback.classic.Logger;
 
 @Component
 public class AdminDaoImp implements AdminDao {

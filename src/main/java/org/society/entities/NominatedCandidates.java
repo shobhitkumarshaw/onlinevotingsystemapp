@@ -9,7 +9,6 @@ package org.society.entities;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,7 +40,6 @@ public class NominatedCandidates implements Serializable {
 	@Min(value = 0, message = "Security Deposit should not be less than 0")
 	private float securityDeposit;
 
-	
 	private boolean oathOrAffirmationSummited;
 
 	
@@ -65,10 +62,6 @@ public class NominatedCandidates implements Serializable {
 		super();
 	}
 
-	
-
-	
-
 	public NominatedCandidates(long nominationFormNo, String partyName, String symbol,
 			@Min(value = 0, message = "Security Deposit should not be less than 0") float securityDeposit,
 			boolean oathOrAffirmationSummited, boolean policeVerificationDone, boolean approvedByElectionOfficer,
@@ -86,21 +79,13 @@ public class NominatedCandidates implements Serializable {
 		this.cooperativeSociety = cooperativeSociety;
 	}
 
-
-
-
-
 	public CooperativeSociety getCooperativeSociety() {
 		return cooperativeSociety;
 	}
 
-
-
 	public void setCooperativeSociety(CooperativeSociety cooperativeSociety) {
 		this.cooperativeSociety = cooperativeSociety;
 	}
-
-
 
 	public long getCandidateId() {
 		return candidateId;
@@ -166,26 +151,11 @@ public class NominatedCandidates implements Serializable {
 		this.approvedByElectionOfficer = approvedByElectionOfficer;
 	}
 
-
-
-
-
 	public RegisteredSocietyVoters getRegisteredSocietyVoter() {
 		return registeredSocietyVoter;
 	}
-
-
-
-
-
+	
 	public void setRegisteredSocietyVoter(RegisteredSocietyVoters registeredSocietyVoter) {
 		this.registeredSocietyVoter = registeredSocietyVoter;
-	}
-
-	
-
-	
-
-	
-	
+	}	
 }

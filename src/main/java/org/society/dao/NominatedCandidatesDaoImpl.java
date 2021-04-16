@@ -9,7 +9,6 @@ import java.util.Optional;
 
 import org.society.entities.NominatedCandidates;
 import org.society.exceptions.DuplicateEntityFoundException;
-import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.NominatedCandidateNotFoundException;
 import org.society.repository.NominatedCandidatesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
