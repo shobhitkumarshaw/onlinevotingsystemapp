@@ -96,7 +96,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		long val = highResult.get(3l);
 		System.out.println(val);
 		for (long K : highResult.keySet()) {
-			if (val >= highResult.get(K)) {
+			if (val <= highResult.get(K)) {
 				val = highResult.get(K);
 				high = K;
 			}
@@ -115,7 +115,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		long low = 3l;
 		long val = Result.get(3l);
 		for (long K : Result.keySet()) {
-			if (val <= Result.get(K)) {
+			if (val >= Result.get(K)) {
 				val = Result.get(K);
 				low = K;
 			}

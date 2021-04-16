@@ -7,7 +7,9 @@ import org.society.entities.ElectionOfficer;
 import org.society.entities.NominatedCandidates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/*
+ * @author: Shobhit Kumar Shaw
+ */
 @Service
 public class ElectionOfficerServiceImpl implements ElectionOfficerService {
 
@@ -17,42 +19,42 @@ public class ElectionOfficerServiceImpl implements ElectionOfficerService {
 	@Autowired
 	private NominatedCandidatesService candidateService;
 
-//Method to Add Election Officer Details	
+	//Method to Add Election Officer Details	
 	@Override
 	public ElectionOfficer addElectionOfficerDetails(ElectionOfficer officer) {
 
 		return dao.save(officer);
 	}
 
-//Method to Update Election Officer Details	
+	//Method to Update Election Officer Details	
 	@Override
 	public ElectionOfficer updateElectionOfficerDetails(ElectionOfficer officer) {
 
 		return dao.update(officer);
 	}
 
-//Method to Delete Election Officer Details
+	//Method to Delete Election Officer Details
 	@Override
 	public boolean deleteElectionOfficer(long officerId) {
 
 		return dao.delete(officerId);
 	}
 
-//Method to get Election officer details by their Officer ID	
+	//Method to get Election officer details by their Officer ID	
 	@Override
 	public ElectionOfficer viewElectionOfficerById(long officerId) {
 
 		return dao.getElectionOfficerById(officerId);
 	}
 
-//Method to get Election Officer List	
+	//Method to get Election Officer List	
 	@Override
 	public List<ElectionOfficer> viewElectionOfficerList() {
 
 		return dao.getElectionOfficerList();
 	}
-	
-	//Method to approve or reject the Nominated candidate
+
+	// Method to approve or reject the Nominated candidate
 	@Override
 	public String approveCandidate(long id, String approval) {
 
@@ -62,16 +64,20 @@ public class ElectionOfficerServiceImpl implements ElectionOfficerService {
 			candidate.setOathOrAffirmationSummited(true);
 			candidate.setPoliceVerificationDone(true);
 			candidateService.updateNominatedCandidateDetails(candidate);
+			
 			return "Nominated Candidate with id: " + id + " approval successfull!";
+			
 		} else if (approval.equalsIgnoreCase("REJECTED")) {
 			NominatedCandidates candidate = candidateService.searchByCandidateId(id);
 			candidate.setApprovedByElectionOfficer(false);
 			candidate.setOathOrAffirmationSummited(false);
 			candidate.setPoliceVerificationDone(false);
 			candidateService.updateNominatedCandidateDetails(candidate);
+			
 			return "Nominated Candidate with id: " + id + " approval rejected!";
 
 		} else
+			
 			return "Wrong input for approval. Enter pass or rejected!";
 	}
 

@@ -6,6 +6,7 @@ package org.society;
 
 import java.time.LocalDateTime;
 
+import org.society.dao.RegisteredSocietyVotersDao;
 import org.society.entities.CooperativeSociety;
 import org.society.entities.NominatedCandidates;
 import org.society.entities.RegisteredSocietyVoters;
@@ -19,7 +20,10 @@ import org.springframework.stereotype.Component;
 public class DBinitVotedList implements CommandLineRunner {
 	@Autowired
 	VotedListRepository votedListRepository;
-
+	
+	@Autowired
+	RegisteredSocietyVotersDao regDao;
+	
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -37,8 +41,8 @@ public class DBinitVotedList implements CommandLineRunner {
 		votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs1, nc1));
 
 		
-		//RegisteredSocietyVoters rs3 = new RegisteredSocietyVoters("v34321", "Ritik", "Kumar", "Bcrec1", "Male", "Obc", "9876543210","ritik@gmail.com", "ad1", "mondal1", "saran", 841301, true, "active", cs1);
-		//votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs3, nc1));
+//		RegisteredSocietyVoters rs3 = regDao.getByVoterID("v12345");
+//		votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs3, nc1));
 
 
 	}
