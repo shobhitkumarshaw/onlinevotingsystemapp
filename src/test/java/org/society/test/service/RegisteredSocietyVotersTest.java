@@ -28,6 +28,7 @@ public class RegisteredSocietyVotersTest {
 	private RegisteredSocietyVotersRepository registeredSocietyVotersRepository;
 
 	@Test
+	@DisplayName("Test for adding Registered Society VotersDetails")
 	public void addRegisteredSocietyVotersDetailsTest() {
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadOfCooperativeSociety1", "Village1", "mondal1", "Dis1", "654321", null, null);
 		RegisteredSocietyVoters registeredSocietyVoters = new RegisteredSocietyVoters("v15976", "Rasmita", "Panda", "fcv 5210", "Female", "gen", "5463128795", "rasmita.panda@yahoo.com", "Berhampur", "Brahama Nagar", "Berhampur", 521463, false, "active", cs1);

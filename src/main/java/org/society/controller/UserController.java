@@ -29,6 +29,7 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
+//Method to get the User Details by their ID	
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getUserById(@PathVariable("id") long id) {
 
@@ -37,6 +38,7 @@ public class UserController {
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
+//Method to get the User List 	
 	@GetMapping
 	public List<User> getUserList() {
 
@@ -50,6 +52,7 @@ public class UserController {
 
 	}
 
+//Method for Registration of the User	
 	@PostMapping
 	public String registerUser(@Valid @RequestBody User user) {
 		service.save(user);
@@ -57,6 +60,7 @@ public class UserController {
 		return "User registation successful!";
 	}
 
+//Method to Update the User Details	
 	@PutMapping
 	public String updateUser(@Valid @RequestBody User user) {
 
@@ -66,6 +70,7 @@ public class UserController {
 		return "User details updated!";
 	}
 
+//Method to Delete the User Details	
 	@DeleteMapping(value = "{userId}")
 	public String deleteUser(@PathVariable("userId") long userId) {
 

@@ -30,6 +30,7 @@ public class VotedListController {
 	@Autowired
 	private VotedListService service;
 
+//Method for Casting Vote	
 	@PutMapping("{scoietyId}/{nominatedCandidateId}/{voterIdNumber}")
 	public String castVote(@PathVariable("scoietyId") long scoietyId,
 			@PathVariable("nominatedCandidateId") long nominatedCandidateId,
@@ -41,6 +42,7 @@ public class VotedListController {
 
 	}
 
+//Method to get the Voted List 	
 	@GetMapping
 	public List<VotedList> getVotedList() {
 		List<VotedList> votedList = service.viewVotedList();
@@ -50,6 +52,7 @@ public class VotedListController {
 		return votedList;
 	}
 
+//Method to Add the Voted List Details	
 	@PostMapping
 	public String addVotedListDetails(@Valid @RequestBody VotedList votedList) {
 		service.addVotedList(votedList);
@@ -57,6 +60,7 @@ public class VotedListController {
 		return "VotedList successfully saved";
 	}
 
+//Method to Update the Voted List details	
 	@PutMapping
 	public String updateVotedList(@Valid @RequestBody VotedList votedList) {
 
@@ -65,6 +69,7 @@ public class VotedListController {
 		return "VotedList successfully Updated";
 	}
 
+//Method to Delete the Voted List details	
 	@DeleteMapping("{id}")
 	public String deleteVotedList(@PathVariable("id") long id) {
 
@@ -73,6 +78,7 @@ public class VotedListController {
 		return "VotedList data successfully deleted";
 	}
 
+//Method to get the Voted List by their Voter ID	
 	@GetMapping(value = "{voterId}")
 	public ResponseEntity<?> getVotedListByVoterId(@PathVariable("voterId") String voterId) {
 		VotedList vl = service.searchByVoterId(voterId);
@@ -83,7 +89,8 @@ public class VotedListController {
 		logger.info("Voter id with: " + voterId + " is found in VotedList database!");
 		return new ResponseEntity<VotedList>(vl, HttpStatus.OK);
 	}
-
+	
+//Method to get the Voted List by their Nominated Candidate ID
 	@GetMapping(value = "{nominatedCandidateId}")
 	public ResponseEntity<?> getVotedListByNominatedCandidateId(
 			@PathVariable("nominatedCandidateId") long nominatedCandidateId) {
