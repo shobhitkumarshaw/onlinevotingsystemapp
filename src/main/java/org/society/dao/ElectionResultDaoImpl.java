@@ -1,15 +1,9 @@
 package org.society.dao;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
 import org.society.entities.RegisteredSocietyVoters;
@@ -35,7 +29,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	@Autowired
 	private VotedListDao votedList;
 
-//Save Method for Election Result Module	
+//Method to Save Election Result	
 	@Override
 	public ElectionResult save(ElectionResult result) {
 		if (repository.existsById(result.getId())) {
@@ -45,7 +39,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 
 	}
 
-//Update Method for Election Result Module	
+//Method to Update Election Result	
 	@Override
 	public ElectionResult update(ElectionResult result) throws ElectionResultNotFoundException {
 		if (repository.existsById(result.getId())) {
@@ -54,7 +48,7 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found to update!");
 	}
 
-//Delete Method for Election Result Module	
+//Method to Delete Election Result	
 	@Override
 	public boolean delete(long candidateId) throws ElectionResultNotFoundException {
 		if (repository.existsById(candidateId)) {
@@ -64,14 +58,14 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		throw new ElectionResultNotFoundException("Election Result not found to delete!");
 	}
 
-//Method to get the list of Election Result	
+//Method to get list of Election Result	
 	@Override
 	public List<ElectionResult> getElectionResultList() {
 		List<ElectionResult> list = (List<ElectionResult>) repository.findAll();
 		return list;
 	}
 
-//Method to get Candidate wise Result	
+//Method to get Candidate wise Election Result	
 	@Override
 	public ElectionResult getCandidatewiseResult(long candidateId) throws ElectionResultNotFoundException {
 		Optional<ElectionResult> er = repository.findById(candidateId);
@@ -81,8 +75,8 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		}
 		throw new ElectionResultNotFoundException("Election Result not found ");
 	}
-	
 
+//Method to view Voting Percentage
 	@Override
 	public double viewVotingPercentage() {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(true);
@@ -113,12 +107,14 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		return (totalVotes / castedVoterForSociety) * 100;
 	}
 
+//Method to display Voting Statistics
 	@Override
 	public void displayVotingStatistics() {
 		// TODO Auto-generated method stub
 
 	}
 
+//Method to get Nominated Candidate which has highest Voting Percentage
 	@Override
 	public NominatedCandidates viewHighestVotingPercentCandidate() {
 		List<VotedList> list = votedList.getVotedList();
@@ -133,11 +129,11 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 				high = K;
 			}
 		}
-		
-		
+
 		return candidateDao.getByCandidateId(high);
 	}
 
+//Method to get Nominated Candidate which has lowest Voting Percentage
 	@Override
 	public NominatedCandidates viewLowestVotingPercentCandidate() {
 		List<VotedList> list = votedList.getVotedList();
@@ -152,24 +148,26 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 				low = K;
 			}
 		}
-		
-		
+
 		return candidateDao.getByCandidateId(low);
-		
+
 	}
 
+//Method to get Invalid Votes
 	@Override
 	public int viewInvalidVotes() {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(false);
 		return voters.size();
 	}
 
+//Method to get list of candidate wise Invalid Votes
 	@Override
 	public List<NominatedCandidates> candidatewiseInvalidVotesList() {
 
 		return null;
 	}
 
+//Method to display Polling Result
 	@Override
 	public void displayPollingResult() {
 //		List<Object> list = repository.votedlistResult();

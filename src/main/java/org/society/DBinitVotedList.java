@@ -18,12 +18,19 @@ public class DBinitVotedList implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
-		CooperativeSociety cs = new CooperativeSociety("A Society", "HeadOfCooperativeSociety1", "Village1", "mondal1", "Dis1", "654321", null, null);
-		RegisteredSocietyVoters regv = new RegisteredSocietyVoters("v56324", "Ashish", "Singh", "plmokn", "Male", "sc", "8521674392", "ashish.singh@yahoo.com", "Rayagada", "Kotepada", "Gunupur", 573942, false, "active", null);
-		NominatedCandidates cand = new NominatedCandidates(523698l, "yoga", "cycle", 5632014f, false, false, false, null, null);
+		
+		CooperativeSociety cs = new CooperativeSociety("E Society", "HeadOfCooperativeSociety1", "Village1", "mondal1", "Dis1", "654321", null, null);
+		RegisteredSocietyVoters rs = new RegisteredSocietyVoters("v54321", "Ashish", "Singh", "plmokn", "Male", "sc", "5521674392", "ashish.singh@gmail.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs);
+		NominatedCandidates nc = new NominatedCandidates(523698, "yoga", "cycle", 56000, true, true, true, rs, cs);
 
-		votedListRepository.save(new VotedList(LocalDateTime.now(), cs, regv, cand));
-		*/
+		votedListRepository.save(new VotedList(LocalDateTime.now(), cs, rs, nc));
+		
+		
+		CooperativeSociety cs1 = new CooperativeSociety("C Society", "HeadOfCooperativeSociety2", "Village2", "mondal2", "Dis2", "754321", null, null);
+		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters("v44321", "Shanu", "Singh", "plmokn", "Male", "gen", "9521674392", "ashish.singh@gmail.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs1);
+		NominatedCandidates nc1 = new NominatedCandidates(123698, "Win", "Fan", 66000, true, true, true, rs1, cs1);
+
+		votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs1, nc1));
+		
 	}
 }

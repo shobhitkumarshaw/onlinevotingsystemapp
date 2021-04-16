@@ -47,31 +47,36 @@ public class ElectionResultServiceImpl implements ElectionResultService {
 		return dao.getCandidatewiseResult(candidateId);
 	}
 
-//Method to view Voting Percentage	
+//Method to view Voting Percentage
 	@Override
 	public double viewVotingPercentage() {
 		return dao.viewVotingPercentage();
 	}
-
+	
+//Method to view Candidate Voting Percentage	
 	@Override
 	public double viewCandidateVotingPercent(long candidateId) {
 		return dao.viewCandidateVotingPercent(candidateId);
 	}
 
-	/*
-	 * @Override public void displayVotingStatistics() { // TODO Auto-generated
+//Method to display Voting Statistics
+	 /* @Override public void displayVotingStatistics() { // TODO Auto-generated
 	 * method stub }
 	 */
+	
+//Method to get Nominated Candidate which has highest Voting Percentage
 	@Override
 	public NominatedCandidates viewHighestVotingPercentCandidate() {
 		return dao.viewHighestVotingPercentCandidate();
 	}
 
+//Method to get Nominated Candidate which has lowest Voting Percentage
 	@Override
 	public NominatedCandidates viewLowestVotingPercentCandidate() {
 		return dao.viewLowestVotingPercentCandidate();
 	}
 
+//Method to get Invalid Votes
 	@Override
 	public int viewInvalidVotes() {
 		return dao.viewInvalidVotes();
