@@ -1,3 +1,7 @@
+/*
+ * @author: Aditya Mohapatra
+ */
+
 package org.society.service;
 
 import java.util.List;
@@ -14,7 +18,4 @@ public interface RegisteredSocietyVotersService {
 	public List<RegisteredSocietyVoters> viewRegisteredVoterList();
 
 	public RegisteredSocietyVoters searchByVoterID(String voterId);
-
-	public RegisteredSocietyVoters loginValidate(String userid, String password);
-
 }

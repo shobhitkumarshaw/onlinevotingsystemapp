@@ -1,3 +1,7 @@
+/*
+ * @author: Aditya Mohapatra
+ */
+
 package org.society.dao;
 
 import java.util.List;
@@ -15,6 +19,4 @@ public interface RegisteredSocietyVotersDao {
 	public List<RegisteredSocietyVoters> getRegisteredVoterList();
 
 	public RegisteredSocietyVoters getByVoterID(String voterId) throws VoterNotFoundException;
-
-	//public RegisteredSocietyVoters loginValidate(String userid, String password) throws VoterNotFoundException;
 }
