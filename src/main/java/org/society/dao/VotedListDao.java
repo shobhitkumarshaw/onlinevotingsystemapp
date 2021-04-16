@@ -22,8 +22,6 @@ public interface VotedListDao {
 	public List<VotedList> getVotedList();
 
 	public VotedList getByVoterId(String voterId) throws VoterNotFoundException;
-
-	//public List<VotedList> searchByNominatedCandidateId(long candidateId) throws NominatedCandidateNotFoundException;
 	
 	VotedList searchByNominatedCandidateId(long candidateId) throws NominatedCandidateNotFoundException;
 }

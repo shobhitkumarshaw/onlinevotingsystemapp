@@ -30,7 +30,7 @@ public class ElectionResultController {
 	private ElectionResultService service;
 	Logger logger = LoggerFactory.getLogger(ElectionResultController.class);
 
-//Method to Get the Election Result	list
+	// Method to Get the Election Result list
 	@GetMapping
 	public List<ElectionResult> getAllResult() {
 		List<ElectionResult> list = service.viewElectionResultList();
@@ -42,7 +42,7 @@ public class ElectionResultController {
 		return list;
 	}
 
-//Method to get Election Result by their ID 	
+	// Method to get Election Result by their ID
 	@GetMapping(value = "{CandidateId}")
 	public ResponseEntity<?> getResult(@PathVariable("CandidateId") long candidateId) {
 		ElectionResult er = service.viewCandidatewiseResult(candidateId);
@@ -54,7 +54,7 @@ public class ElectionResultController {
 		return new ResponseEntity<ElectionResult>(er, HttpStatus.OK);
 	}
 
-//Method to save the Election Result  	
+	// Method to save the Election Result
 	@PostMapping
 	public String saveResult(@Valid @RequestBody ElectionResult result) {
 		service.addElectionResult(result);
@@ -62,7 +62,7 @@ public class ElectionResultController {
 		return "Election Result successfully saved";
 	}
 
-//Method to Update the Election Result	
+	// Method to Update the Election Result
 	@PutMapping
 	public String updateResult(@Valid @RequestBody ElectionResult result) {
 
@@ -71,7 +71,7 @@ public class ElectionResultController {
 		return "Election Result successfully Updated";
 	}
 
-//Method to Delete the Election Result details 	
+	// Method to Delete the Election Result details
 	@DeleteMapping("{CandidateId}")
 	public String deleteResult(@PathVariable("CandidateId") long CandidateId) {
 
@@ -80,56 +80,28 @@ public class ElectionResultController {
 		return "Election Result data successfully deleted";
 	}
 
-//Method to view Voting Percentage 	
-	@GetMapping("VotingPercentage")
-	public double viewVotingPercentage() {
+	// Method to view Voting Percentage
+	@GetMapping("TotalValidVotes")
+	public double validVotes() {
 		return service.viewVotingPercentage();
 	}
 
-//Method to View Candidate Voting Percentage	
-	@GetMapping("CandidateVotingPercent")
-	public double viewCandidateVotingPercent(long candidateId) {
-		return service.viewCandidateVotingPercent(candidateId);
-	}
-	
-//Method to view Nominated Candidate with Highest Voting Percentage 	
+	// Method to view Nominated Candidate with Highest Voting Percentage
 	@GetMapping("NominatedCandidateWithHighestVotingPercent")
 	public NominatedCandidates viewHighestVotingPercentCandidate() {
 		return service.viewHighestVotingPercentCandidate();
 	}
-	
-//Method to view Nominated Candidate with Lowest Voting Percentage	
+
+	// Method to view Nominated Candidate with Lowest Voting Percentage
 	@GetMapping("NominatedCandidateWithLowestVotingPercent")
 	public NominatedCandidates viewLowestVotingPercentCandidate() {
 		return service.viewLowestVotingPercentCandidate();
 	}
-//Method for Invalid Votes	
+
+	// Method for Invalid Votes
 	@GetMapping("InvalidVotes")
 	public double viewInvalidVotes() {
 		return service.viewInvalidVotes();
 	}
-//Method to get Candidate Wise Invalid Votes List	 
-	@GetMapping("candidatewiseInvalidVotesList")
-	public List<NominatedCandidates> candidatewiseInvalidVotesList() {
-		return service.candidatewiseInvalidVotesList();
-	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
