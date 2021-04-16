@@ -1,3 +1,7 @@
+/*
+ * Author- Govind Kidambi
+ */
+
 package org.society.exceptions;
 
 public class NominatedCandidateNotFoundException extends RuntimeException{
