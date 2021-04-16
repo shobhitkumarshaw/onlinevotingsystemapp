@@ -1,3 +1,7 @@
+/*
+ * @author: Aditya Mohapatra
+ */
+
 package org.society;
 
 import java.time.LocalDateTime;
@@ -31,9 +35,11 @@ public class DBinitVotedList implements CommandLineRunner {
 		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters("v44321", "Shanu", "Singh", "plmokn", "Male", "gen", "9521674392", "ashish.singh@gmail.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs1);
 		NominatedCandidates nc1 = new NominatedCandidates(123698, "Win", "Fan", 66000, true, true, true, rs1, cs1);
 		votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs1, nc1));
+
 		
 		//RegisteredSocietyVoters rs3 = new RegisteredSocietyVoters("v34321", "Ritik", "Kumar", "Bcrec1", "Male", "Obc", "9876543210","ritik@gmail.com", "ad1", "mondal1", "saran", 841301, true, "active", cs1);
 		//votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs3, nc1));
+
 
 	}
 }

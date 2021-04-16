@@ -24,7 +24,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 	@Autowired
 	private CooperativeSocietyDao societyDao;
 
-//Save Method for Registered Society Voters	
+	//Save Method for Registered Society Voters	
 	@Override
 	public RegisteredSocietyVoters save(RegisteredSocietyVoters voter, long societyId) {
 		if (registeredSocietyVotersRepository.existsById(voter.getId())) {
@@ -35,7 +35,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 
 	}
 
-//Update Method for Registered Society Voters	
+	//Update Method for Registered Society Voters	
 	@Override
 	public RegisteredSocietyVoters update(RegisteredSocietyVoters voter) throws VoterNotFoundException {
 		if (registeredSocietyVotersRepository.existsById(voter.getId())) {
@@ -45,7 +45,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 
 	}
 	
-//Delete Method for Registered Society Voters	
+	//Delete Method for Registered Society Voters	
 	@Transactional
 	@Override
 	public boolean delete(String voterId) throws VoterNotFoundException {
@@ -57,9 +57,8 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		registeredSocietyVotersRepository.save(voter);
 		return true;
 	}
-
 	
-// Method to get Registered Voters List
+	// Method to get Registered Voters List
 	@Override
 	public List<RegisteredSocietyVoters> getRegisteredVoterList() {
 		List<RegisteredSocietyVoters> list = (List<RegisteredSocietyVoters>) registeredSocietyVotersRepository
@@ -67,7 +66,7 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		return list;
 	}
 	
-//Method to get Registered voters by their Voter ID
+	//Method to get Registered voters by their Voter ID
 	@Override
 	public RegisteredSocietyVoters getByVoterID(String voterId) throws VoterNotFoundException {
 		RegisteredSocietyVoters voter = registeredSocietyVotersRepository.findByVoterIdCardNo(voterId);
@@ -77,9 +76,4 @@ public class RegisteredSocietyVotersDaoImpl implements RegisteredSocietyVotersDa
 		return voter;
 
 	}
-
-	/*
-	 * @Override public RegisteredSocietyVoters loginValidate(String userid, String
-	 * password) throws VoterNotFoundException { return null; }
-	 */
 }
