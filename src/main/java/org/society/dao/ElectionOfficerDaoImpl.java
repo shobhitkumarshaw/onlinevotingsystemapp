@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.society.entities.ElectionOfficer;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.ElectionOfficerNotFoundException;
-import org.society.exceptions.SocietyNotFoundException;
 import org.society.repository.ElectionOfficerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,8 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 
 	@Autowired
 	private ElectionOfficerRepository repository;
-//Save method in Election Officer Module
+	
+	//Save method in Election Officer Module
 	@Override
 	public ElectionOfficer save(ElectionOfficer officer) {
 		if (repository.existsById(officer.getId())) {
@@ -25,7 +25,8 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 		return repository.save(officer);
 
 	}
-//Update method in Election Officer Module
+	
+	//Update method in Election Officer Module
 	@Override
 	public ElectionOfficer update(ElectionOfficer officer) throws ElectionOfficerNotFoundException{
 		if(repository.existsById(officer.getId())) {
@@ -34,7 +35,8 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 		}
 		throw new ElectionOfficerNotFoundException("Election Officer not found to update!");
 	}
-//Delete method in Election Officer Module
+	
+	//Delete method in Election Officer Module
 	@Override
 	public boolean delete(long officerId) throws ElectionOfficerNotFoundException{
 
@@ -46,7 +48,7 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 
 	}
 
-//Method to get Election officer by their ID
+	//Method to get Election officer by their ID
 	@Override
 	public ElectionOfficer getElectionOfficerById(long officerId)throws ElectionOfficerNotFoundException {
 		Optional<ElectionOfficer> officer = repository.findById(officerId);
@@ -56,7 +58,7 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 		throw new ElectionOfficerNotFoundException("Election Officer not found");
 	}
 
-//Method to get Election Officer List	
+	//Method to get Election Officer List	
 	@Override
 	public List<ElectionOfficer> getElectionOfficerList() {
 		
@@ -64,5 +66,4 @@ public class ElectionOfficerDaoImpl implements ElectionOfficerDao {
 
 		return list;
 	}
-
 }

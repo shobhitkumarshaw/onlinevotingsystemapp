@@ -3,7 +3,6 @@ package org.society.service;
 import java.util.List;
 
 import org.society.entities.ElectionOfficer;
-import org.springframework.web.bind.annotation.PathVariable;
 
 public interface ElectionOfficerService {
 
