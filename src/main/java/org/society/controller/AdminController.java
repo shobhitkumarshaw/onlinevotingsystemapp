@@ -52,6 +52,7 @@ public class AdminController {
 		
 	}
 
+//Method to Validate Login	
 	@GetMapping("/login/{user_name}/{user_password}")
 	public ResponseEntity<String> validateLogin(@PathVariable("user_name") String userName,
 			@PathVariable("user_password") String userPassword, HttpServletRequest request) {
@@ -72,6 +73,7 @@ public class AdminController {
 
 	}
 
+// Method to Log out a User	
 	@GetMapping("/logout")
 	public ResponseEntity<String> logoutUser(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -81,6 +83,7 @@ public class AdminController {
 		return new ResponseEntity<String>("Logout Success!", HttpStatus.OK);
 	}
 
+//Method to Save Admin Details	
 	@PostMapping
 	public String saveAdmin(@Valid @RequestBody Admin admin, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -89,7 +92,8 @@ public class AdminController {
 		logger.info("Admin added with id: " + admin.getId());
 		return "Admin data successfully saved";
 	}
-
+	
+//Method to update admin Details
 	@PutMapping
 	public String updateAdmin(@Valid @RequestBody Admin admin, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -99,6 +103,7 @@ public class AdminController {
 		return "Admin data successfully Updated";
 	}
 
+//Method to Delete Admin details
 	@DeleteMapping("{adminId}")
 	public String deleteAdmin(@PathVariable("adminId") long adminId, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -109,6 +114,7 @@ public class AdminController {
 
 	}
 
+//Method to get Admin by their admin ID	
 	@GetMapping(value = "{adminId}")
 	public ResponseEntity<?> getAdmin(@PathVariable("adminId") long adminId) {
 		Admin ad = adminService.viewAdminById(adminId);
@@ -120,6 +126,7 @@ public class AdminController {
 		return new ResponseEntity<Admin>(ad, HttpStatus.OK);
 	}
 
+//Method to get the list of Admin details	
 	@GetMapping
 	public List<Admin> getListOfAdmin(HttpServletRequest request) {
 

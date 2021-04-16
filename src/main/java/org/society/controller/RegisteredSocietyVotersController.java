@@ -30,6 +30,7 @@ public class RegisteredSocietyVotersController {
 	RegisteredSocietyVotersService registeredSocietyVotersService;
 	Logger logger = LoggerFactory.getLogger(RegisteredSocietyVotersController.class);
 
+//Method to get Registered Society Voter by their Voter Card Number 	
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getRegisteredSocietyVoterByVoterCardNo(@PathVariable("id") String id) {
 		RegisteredSocietyVoters registeredSocietyVoters = registeredSocietyVotersService.searchByVoterID(id);
@@ -41,6 +42,7 @@ public class RegisteredSocietyVotersController {
 		return new ResponseEntity<RegisteredSocietyVoters>(registeredSocietyVoters, HttpStatus.OK);
 	}
 
+//Method to get the list of Registered Society Voters	
 	@GetMapping
 	public List<RegisteredSocietyVoters> getListOfRegisteredSocietyVoters() {
 
@@ -54,7 +56,8 @@ public class RegisteredSocietyVotersController {
 		return registeredSocietyVotersList;
 	}
 
-
+	
+//Method to add the Registered Society Voters Details
 	@PostMapping("{societyId}")
 	public String addRegisteredSocietyVotersDetails(@Valid @RequestBody RegisteredSocietyVoters voter,
 			@PathVariable("societyId") long societyId) {
@@ -64,6 +67,7 @@ public class RegisteredSocietyVotersController {
 		return "Voter Details added successfully!";
 	}
 
+//Method to Update the Registered Society Voters Details	
 	@PutMapping
 	public String updateRegisteredSocietyVotersDetails(@Valid @RequestBody RegisteredSocietyVoters voter) {
 
@@ -73,6 +77,7 @@ public class RegisteredSocietyVotersController {
 
 	}
 
+//Method to Delete the Registered Society Voters Details by their ID 	
 	@DeleteMapping(value = "{voterId}")
 	public String deleteRegisteredSocietyVotersDetailsById(@PathVariable("voterId") String id) {
 		registeredSocietyVotersService.deleteRegisteredVoter(id);

@@ -35,6 +35,7 @@ public class ElectionOfficerController {
 	@Autowired
 	private NominatedCandidatesService candidateService;
 
+//Method to get Election Officer Details by their ID	
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getElectionOfficerById(@PathVariable("id") long id) {
 		// Duplicate validation is done in DAO part. If Exception is thrown than it will
@@ -46,6 +47,7 @@ public class ElectionOfficerController {
 		
 	}
 
+//Method to get the list of Election Officer 	
 	@GetMapping
 	public List<ElectionOfficer> getListOfElectionOfficer() {
 
@@ -58,6 +60,7 @@ public class ElectionOfficerController {
 		return officerList;
 	}
 
+//Method to add Election Officer Details	
 	@PostMapping
 	public String addElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
 
@@ -67,6 +70,7 @@ public class ElectionOfficerController {
 
 	}
 
+//Method to update Election Officer Details	
 	@PutMapping
 	public String updateElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
 
@@ -76,6 +80,7 @@ public class ElectionOfficerController {
 
 	}
 
+//Method to delete Election Officer Details by their ID	
 	@DeleteMapping(value = "{id}")
 	public String deleteElectionOfficerDetailsById(@PathVariable("id") long id) {
 		service.deleteElectionOfficer(id);

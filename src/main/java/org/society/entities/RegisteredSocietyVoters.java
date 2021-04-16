@@ -34,8 +34,7 @@ public class RegisteredSocietyVoters implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	
+
 	// Voter Id card number must be unique
 	@NotNull(message = "Voter Id number can not be null")
 	@Column(unique = true)
@@ -70,7 +69,6 @@ public class RegisteredSocietyVoters implements Serializable {
 	@NotNull
 	private String address;
 
-
 	@NotNull
 	private String mandal;
 
@@ -85,7 +83,7 @@ public class RegisteredSocietyVoters implements Serializable {
 
 	// active & inactive
 	private String status;
-	
+
 	// OneToOne relationship one Voter can have only one Society
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL) // added cascade
@@ -252,7 +250,5 @@ public class RegisteredSocietyVoters implements Serializable {
 	public void setCooperativeSociety(CooperativeSociety cooperativeSociety) {
 		this.cooperativeSociety = cooperativeSociety;
 	}
-	
-	
 
 }
