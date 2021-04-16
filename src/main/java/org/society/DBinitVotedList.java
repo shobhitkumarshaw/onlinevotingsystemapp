@@ -31,6 +31,9 @@ public class DBinitVotedList implements CommandLineRunner {
 		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters("v44321", "Shanu", "Singh", "plmokn", "Male", "gen", "9521674392", "ashish.singh@gmail.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs1);
 		NominatedCandidates nc1 = new NominatedCandidates(123698, "Win", "Fan", 66000, true, true, true, rs1, cs1);
 		votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs1, nc1));
+		
+		//RegisteredSocietyVoters rs3 = new RegisteredSocietyVoters("v1", null, null, null, null, null, null, null, null, null, null, 0, false, null, cs1)
+		//votedListRepository.save(new VotedList(LocalDateTime.of(2021, 05, 15, 8, 00), cs1, rs2, nc1));
 
 	}
 }

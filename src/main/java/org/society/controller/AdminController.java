@@ -39,6 +39,7 @@ public class AdminController {
 	@Autowired
 	private AdminRepository repo;
 	
+	//Method to validate the current login session
 	private void loginValidate(HttpSession session) {
 		String userName = (String) session.getAttribute("AdminName");
 		
