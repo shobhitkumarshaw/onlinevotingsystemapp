@@ -32,12 +32,12 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
-//Method to get the User Details by their ID	
-	@GetMapping(value = "{id}")
-	public ResponseEntity<?> getUserById(@PathVariable("id") String id) {
+//Method to get the User Details by their UserName	
+	@GetMapping(value = "{userName}")
+	public ResponseEntity<?> getUserByUserName(@PathVariable("userName") String userName) {
 
-		User user = service.findByUserId(id);
-		logger.info("User id : " + id + "found!");
+		User user = service.findByUserName(userName);
+		logger.info("User name : " + userName + "found!");
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 
@@ -59,7 +59,7 @@ public class UserController {
 	@PostMapping
 	public String registerUser(@Valid @RequestBody User user) {
 		service.save(user);
-		logger.info("User register with id: " + user.getUserName());
+		logger.info("User register with name: " + user.getUserName());
 		return "User registation successful!";
 	}
 
@@ -68,18 +68,18 @@ public class UserController {
 	public String updateUser(@Valid @RequestBody User user) {
 
 		service.update(user);
-		logger.info("User with id: " + user.getUserName() + "udated!");
+		logger.info("User with name: " + user.getUserName() + "udated!");
 
 		return "User details updated!";
 	}
 
 //Method to Delete the User Details	
-	@DeleteMapping(value = "{userId}")
-	public String deleteUser(@PathVariable("userId") String userId) {
+	@DeleteMapping(value = "{userName}")
+	public String deleteUser(@PathVariable("userName") String userName) {
 
-		service.delete(userId);
-		logger.info("User with Id:" + userId + " deleted!");
+		service.delete(userName);
+		logger.info("User with name:" + userName + " deleted!");
 
-		return "User with Id: " + userId + " deleted!";
+		return "User with name: " + userName + " deleted!";
 	}
 }

@@ -1,6 +1,4 @@
-/*
-  * @author: Nagidi Bhanu prakash
- */
+
 package org.society.service;
 
 import java.util.List;
@@ -17,5 +15,5 @@ public interface UserService {
 
 	public List<User> viewUserList();
 
-	public User findByUserId(String userName);
+	public User findByUserName(String userName);
 }

@@ -63,7 +63,7 @@ public class UserTest {
 	public void getUserTest() {
 		User u1 = new User("Shobhit", "pass2", "ElectionOfficer");
 		when(repo.findById(u1.getUserName())).thenReturn(Optional.of(u1));
-		assertEquals(u1, userService.findByUserId("Shobhit"));
+		assertEquals(u1, userService.findByUserName("Shobhit"));
 	}
 
 	// getAll

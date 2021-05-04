@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
 //Method to Find User by their USer ID	
 	@Override
-	public User findByUserId(String userName) {
+	public User findByUserName(String userName) {
 
 		return dao.findByUserName(userName);
 	}
