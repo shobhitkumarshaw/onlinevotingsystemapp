@@ -82,8 +82,8 @@ public class RegisteredSocietyVoters implements Serializable {
 	// active & inactive
 	private String status;
 
-	// OneToOne relationship one Voter can have only one Society
-	@JsonIgnore
+	// ManyToOne relationship one Society can have many voters
+ 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL) // added cascade
 	@JoinColumn(name = "cooperative_society_fk")
 	private CooperativeSociety cooperativeSociety;

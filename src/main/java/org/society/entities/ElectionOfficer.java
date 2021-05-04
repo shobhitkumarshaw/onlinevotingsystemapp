@@ -27,6 +27,7 @@ public class ElectionOfficer implements Serializable {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	
 	private String password;
 	private String gender;
 	private String mobileno;

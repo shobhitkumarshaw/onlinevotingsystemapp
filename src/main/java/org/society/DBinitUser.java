@@ -16,9 +16,7 @@ public class DBinitUser implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User qs = new User(25L, "abcd", "bhanu", "prakash", "bhanu@gmail", "9951976511", "voter");
-		repo.save(qs);
-		User as = new User(24L, "pqrs", "showbit", "kumar", "kumar@gmail", "6303316156", "nominated condiadate");
-		repo.save(as);
+
+		
 	}
 }

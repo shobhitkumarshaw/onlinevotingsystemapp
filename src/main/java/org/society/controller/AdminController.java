@@ -44,6 +44,11 @@ public class AdminController {
 
 	// Method to validate the current login session
 	private void loginValidate(HttpSession session) {
+		
+		if(session == null) {
+			throw new NoUserLoggedInException("Login first");
+		}
+		
 		String userName = (String) session.getAttribute("AdminName");
 
 		if (userName == null) {
@@ -82,7 +87,7 @@ public class AdminController {
 	// Method to Log out a User
 	@GetMapping("/logout")
 	public ResponseEntity<String> logoutUser(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 
 		session.invalidate();
 		logger.info(" Logged Out Successfully!");
@@ -93,7 +98,7 @@ public class AdminController {
 	@PostMapping
 	public String saveAdmin(@Valid @RequestBody Admin admin, HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		loginValidate(session);
 		adminService.addAdminDetails(admin);
 		logger.info("Admin added with id: " + admin.getId());
@@ -106,7 +111,7 @@ public class AdminController {
 	@PutMapping
 	public String updateAdmin(@Valid @RequestBody Admin admin, HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		loginValidate(session);
 		adminService.updateAdminDetails(admin);
 		logger.info("Admin with id: " + admin.getId() + " updated!");
@@ -118,7 +123,7 @@ public class AdminController {
 	@DeleteMapping("{adminId}")
 	public String deleteAdmin(@PathVariable("adminId") long adminId, HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		loginValidate(session);
 		adminService.deleteAdminDetails(adminId);
 		logger.info("Admin with id: " + adminId + " deleted!");
@@ -146,7 +151,7 @@ public class AdminController {
 	@GetMapping
 	public List<Admin> getListOfAdmin(HttpServletRequest request) {
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		loginValidate(session);
 
 

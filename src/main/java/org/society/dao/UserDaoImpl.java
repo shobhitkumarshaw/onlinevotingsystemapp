@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
 	//Save Method for User Module	
 	@Override
 	public User save(User user) {
-		if (repository.existsById(user.getId())) {
+		if (repository.existsById(user.getUserName())) {
 			throw new DuplicateEntityFoundException("Save user", "User is duplicate");
 
 		}
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 	//Update Method for User Module	
 	@Override
 	public User update(User user) {
-		if (repository.existsById(user.getId())) {
+		if (repository.existsById(user.getUserName())) {
 			return repository.save(user);
 
 		}
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 
 	//Delete Method for User Module	
 	@Override
-	public boolean delete(long userId) {
+	public boolean delete(String userId) {
 		if (repository.existsById(userId)) {
 			repository.deleteById(userId);
 			return true;
@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 	
 	//Method to find by User ID
 	@Override
-	public User findByUserId(long userId) {
+	public User findByUserId(String userId) {
 		Optional<User> user = repository.findById(userId);
 		if (user.isPresent()) {
 			return user.get();

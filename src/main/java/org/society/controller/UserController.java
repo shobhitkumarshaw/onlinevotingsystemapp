@@ -34,7 +34,7 @@ public class UserController {
 
 //Method to get the User Details by their ID	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<?> getUserById(@PathVariable("id") long id) {
+	public ResponseEntity<?> getUserById(@PathVariable("id") String id) {
 
 		User user = service.findByUserId(id);
 		logger.info("User id : " + id + "found!");
@@ -59,7 +59,7 @@ public class UserController {
 	@PostMapping
 	public String registerUser(@Valid @RequestBody User user) {
 		service.save(user);
-		logger.info("User register with id: " + user.getId());
+		logger.info("User register with id: " + user.getUserName());
 		return "User registation successful!";
 	}
 
@@ -68,14 +68,14 @@ public class UserController {
 	public String updateUser(@Valid @RequestBody User user) {
 
 		service.update(user);
-		logger.info("User with id: " + user.getId() + "udated!");
+		logger.info("User with id: " + user.getUserName() + "udated!");
 
 		return "User details updated!";
 	}
 
 //Method to Delete the User Details	
 	@DeleteMapping(value = "{userId}")
-	public String deleteUser(@PathVariable("userId") long userId) {
+	public String deleteUser(@PathVariable("userId") String userId) {
 
 		service.delete(userId);
 		logger.info("User with Id:" + userId + " deleted!");

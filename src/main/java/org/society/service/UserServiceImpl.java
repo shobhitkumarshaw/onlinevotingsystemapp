@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 //Method to Delete User Details	
 	@Override
-	public boolean delete(long userId) {
+	public boolean delete(String userId) {
 
 		return dao.delete(userId);
 	}
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
 //Method to Find User by their USer ID	
 	@Override
-	public User findByUserId(long userId) {
+	public User findByUserId(String userId) {
 
 		return dao.findByUserId(userId);
 	}

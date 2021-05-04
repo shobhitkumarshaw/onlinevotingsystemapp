@@ -14,9 +14,9 @@ public interface UserDao {
 
 	public User update(User user) throws UserNotFoundException;
 
-	public boolean delete(long userId) throws UserNotFoundException;
+	public boolean delete(String userId) throws UserNotFoundException;
 
 	public List<User> viewUserList();
 
-	public User findByUserId(long userId) throws UserNotFoundException;
+	public User findByUserId(String userId) throws UserNotFoundException;
 }
