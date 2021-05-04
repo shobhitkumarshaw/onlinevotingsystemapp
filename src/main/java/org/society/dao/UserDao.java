@@ -1,6 +1,3 @@
-/*
-  * @author: Nagidi Bhanu prakash
- */
 package org.society.dao;
 
 import java.util.List;
@@ -14,9 +11,9 @@ public interface UserDao {
 
 	public User update(User user) throws UserNotFoundException;
 
-	public boolean delete(String userId) throws UserNotFoundException;
+	public boolean delete(String userName) throws UserNotFoundException;
 
 	public List<User> viewUserList();
 
-	public User findByUserId(String userId) throws UserNotFoundException;
+	public User findByUserName(String userName) throws UserNotFoundException;
 }

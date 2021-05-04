@@ -42,9 +42,9 @@ public class UserDaoImpl implements UserDao {
 
 	//Delete Method for User Module	
 	@Override
-	public boolean delete(String userId) {
-		if (repository.existsById(userId)) {
-			repository.deleteById(userId);
+	public boolean delete(String userName) {
+		if (repository.existsById(userName)) {
+			repository.deleteById(userName);
 			return true;
 		}
 
@@ -60,8 +60,8 @@ public class UserDaoImpl implements UserDao {
 	
 	//Method to find by User ID
 	@Override
-	public User findByUserId(String userId) {
-		Optional<User> user = repository.findById(userId);
+	public User findByUserName(String userName) {
+		Optional<User> user = repository.findById(userName);
 		if (user.isPresent()) {
 			return user.get();
 		} else
