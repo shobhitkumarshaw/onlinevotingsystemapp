@@ -1,6 +1,5 @@
-/*
-  * @author: Nagidi Bhanu prakash
- */
+
+
 package org.society.dao;
 
 import java.util.List;

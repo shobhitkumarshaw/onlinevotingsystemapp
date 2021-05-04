@@ -32,7 +32,7 @@ public class UserTest {
 	@Test
 	@DisplayName("Test for adding User in database")
 	public void addUserDetailsTest() {
-		User u1 = new User(44l, "pass", "bhanu", "prakash", "mail", "9951", "User");
+		User u1 = new User("Ritik", "pass1", "Admin");
 
 		when(repo.save(u1)).thenReturn(u1);
 		assertEquals(u1, userService.save(u1));
@@ -42,36 +42,36 @@ public class UserTest {
 	@Test
 	@DisplayName("Test for updating User in database")
 	public void updateUserDetailsTest() {
-		User u1 = new User(55l, "fdfd", "bha", "pra", "mail@", "6262", "nominated condiadate");
-		u1.setFirstName("bhanu");
-		assertThat(repo.findById(u1.getId())).isNotEqualTo(u1);
+		User u1 = new User("Shobhit", "pass2", "ElectionOfficer");
+		u1.setUserName("Bhanu");
+		assertThat(repo.findById(u1.getUserName())).isNotEqualTo(u1);
 	}
 
 	// Delete
 	@Test
 	@DisplayName("Test for deleting User in database")
 	public void deleteUserDetailsTest() {
-		User u1 = new User(212l, "gaja", "yhsh", "hshs", "mailll", "43536", "voter");
-		when(repo.existsById(u1.getId())).thenReturn(true);
-		userService.delete(u1.getId());
-		verify(repo).deleteById(212l);
+		User u1 = new User("Shobhit", "pass2", "ElectionOfficer");
+		when(repo.existsById(u1.getUserName())).thenReturn(true);
+		userService.delete(u1.getUserName());
+		verify(repo).deleteById("Shobhit");
 	}
 
 	// getById
 	@Test
 	@DisplayName("Test for displaying user by Id")
 	public void getUserTest() {
-		User u1 = new User(2121l, "gaja", "yhsh", "hshs", "mailll", "43536", "voter");
-		when(repo.findById(2121l)).thenReturn(Optional.of(u1));
-		assertEquals(u1, userService.findByUserId(2121l));
+		User u1 = new User("Shobhit", "pass2", "ElectionOfficer");
+		when(repo.findById(u1.getUserName())).thenReturn(Optional.of(u1));
+		assertEquals(u1, userService.findByUserId("Shobhit"));
 	}
 
 	// getAll
 	@Test
 	@DisplayName("Test for displaying list of user")
 	public void getUserListDetailsTest() {
-		User u1 = new User(212l, "gaja", "yhsh", "hshs", "mailll", "43536", "voter");
-		User u2 = new User(55l, "fdfd", "bha", "pra", "mail@", "6262", "nominated condiadate");
+		User u1 = new User("Shobhit", "pass2", "ElectionOfficer");
+		User u2 = new User("Ritik", "pass1", "Admin");
 
 		when(repo.findAll()).thenReturn(Stream.of(u1, u2).collect(Collectors.toList()));
 		assertEquals(2, userService.viewUserList().size());
