@@ -13,9 +13,9 @@ public interface UserService {
 
 	public User update(User user);
 
-	public boolean delete(String userId);
+	public boolean delete(String userName);
 
 	public List<User> viewUserList();
 
-	public User findByUserId(String userId);
+	public User findByUserId(String userName);
 }

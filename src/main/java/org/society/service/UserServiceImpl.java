@@ -1,6 +1,4 @@
-/*
-  * @author: Nagidi Bhanu prakash
- */
+
 package org.society.service;
 
 import java.util.List;
@@ -32,9 +30,9 @@ public class UserServiceImpl implements UserService {
 
 //Method to Delete User Details	
 	@Override
-	public boolean delete(String userId) {
+	public boolean delete(String userName) {
 
-		return dao.delete(userId);
+		return dao.delete(userName);
 	}
 
 //Method to view Users List	
@@ -46,9 +44,9 @@ public class UserServiceImpl implements UserService {
 
 //Method to Find User by their USer ID	
 	@Override
-	public User findByUserId(String userId) {
+	public User findByUserId(String userName) {
 
-		return dao.findByUserId(userId);
+		return dao.findByUserName(userName);
 	}
 
 }
