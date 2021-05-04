@@ -44,16 +44,12 @@ public class RegisteredSocietyVoters implements Serializable {
 
 	private String lastName;
 
-	@NotNull(message = "Password is Required")
-	@Length(min = 5, max = 15, message = "Name size must be between 5 and 15")
-	private String password;
-
 	@NotNull(message = "Gender is Required")
 	private String gender;
 
 	@NotBlank(message = "Reservation Category is required")
 	private String reservationCategory;
-	
+
 	@Pattern(regexp = "^[0][1-9]\\d{9}$|^[1-9]\\d{9}$")
 	@NotNull(message = "Mobile is Required")
 	@Length(min = 10, max = 13, message = "mobile number should be valid")
@@ -83,7 +79,7 @@ public class RegisteredSocietyVoters implements Serializable {
 	private String status;
 
 	// ManyToOne relationship one Society can have many voters
- 	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL) // added cascade
 	@JoinColumn(name = "cooperative_society_fk")
 	private CooperativeSociety cooperativeSociety;
@@ -92,22 +88,20 @@ public class RegisteredSocietyVoters implements Serializable {
 		super();
 	}
 
-	public RegisteredSocietyVoters(@NotNull(message = "Voter Id number can not be null") String voterIdCardNo,
+	public RegisteredSocietyVoters(long id, @NotNull(message = "Voter Id number can not be null") String voterIdCardNo,
 			@NotNull(message = "Name is Required") @Length(min = 2, max = 30, message = "Name size must be between 5 and 30") String firstName,
-			String lastName,
-			@NotNull(message = "Password is Required") @Length(min = 5, max = 15, message = "Name size must be between 5 and 15") String password,
-			@NotNull(message = "Gender is Required") String gender,
+			String lastName, @NotNull(message = "Gender is Required") String gender,
 			@NotBlank(message = "Reservation Category is required") String reservationCategory,
-			@NotNull(message = "Name is Required") @Length(min = 10, max = 13, message = "mobile number should be valid") String mobileno,
+			@Pattern(regexp = "^[0][1-9]\\d{9}$|^[1-9]\\d{9}$") @NotNull(message = "Mobile is Required") @Length(min = 10, max = 13, message = "mobile number should be valid") String mobileno,
 			@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$") @NotNull(message = "Email is Required") String emailId,
 			@NotNull String address, @NotNull String mandal, @NotNull String district,
 			@NotNull(message = "Pincode is required") @Min(6) int pincode, boolean castedVote, String status,
 			CooperativeSociety cooperativeSociety) {
 		super();
+		this.id = id;
 		this.voterIdCardNo = voterIdCardNo;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.password = password;
 		this.gender = gender;
 		this.reservationCategory = reservationCategory;
 		this.mobileno = mobileno;
@@ -151,14 +145,6 @@ public class RegisteredSocietyVoters implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getGender() {
@@ -248,4 +234,14 @@ public class RegisteredSocietyVoters implements Serializable {
 	public void setCooperativeSociety(CooperativeSociety cooperativeSociety) {
 		this.cooperativeSociety = cooperativeSociety;
 	}
+
+	@Override
+	public String toString() {
+		return "RegisteredSocietyVoters [id=" + id + ", voterIdCardNo=" + voterIdCardNo + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", gender=" + gender + ", reservationCategory=" + reservationCategory
+				+ ", mobileno=" + mobileno + ", emailId=" + emailId + ", address=" + address + ", mandal=" + mandal
+				+ ", district=" + district + ", pincode=" + pincode + ", castedVote=" + castedVote + ", status="
+				+ status + ", cooperativeSociety=" + cooperativeSociety + "]";
+	}
+
 }

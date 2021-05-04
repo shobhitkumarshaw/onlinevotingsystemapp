@@ -3,7 +3,6 @@
  * 
  */
 
-
 package org.society.entities;
 
 import java.io.Serializable;
@@ -16,10 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(	name = "Election_Officer")
+@Table(name = "Election_Officer")
 public class ElectionOfficer implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = 99L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +25,6 @@ public class ElectionOfficer implements Serializable {
 	private Long id;
 	private String firstName;
 	private String lastName;
-	
-	private String password;
 	private String gender;
 	private String mobileno;
 	@Column(unique = true)
@@ -37,19 +33,18 @@ public class ElectionOfficer implements Serializable {
 	private String address2;
 	private String district;
 	private int pincode;
-	
+
 	public ElectionOfficer() {
 		super();
-		
+
 	}
 
-	public ElectionOfficer(Long id, String firstName, String lastName, String password, String gender, String mobileno,
-			String emailId, String address1, String address2, String district, int pincode) {
+	public ElectionOfficer(Long id, String firstName, String lastName, String gender, String mobileno, String emailId,
+			String address1, String address2, String district, int pincode) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.password = password;
 		this.gender = gender;
 		this.mobileno = mobileno;
 		this.emailId = emailId;
@@ -81,14 +76,6 @@ public class ElectionOfficer implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getGender() {
@@ -149,15 +136,9 @@ public class ElectionOfficer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ElectionOfficer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+ password + ", gender=" + gender + ", mobileno=" + mobileno + ", emailId=" + emailId + ", address1="
-				+ address1 + ", address2=" + address2 + ", district=" + district + ", pincode=" + pincode + "]";
+		return "ElectionOfficer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender="
+				+ gender + ", mobileno=" + mobileno + ", emailId=" + emailId + ", address1=" + address1 + ", address2="
+				+ address2 + ", district=" + district + ", pincode=" + pincode + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
