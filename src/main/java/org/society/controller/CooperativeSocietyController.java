@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-@CrossOrigin
+
 @RestController
-@RequestMapping("api/CooperativeSociety")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("api/cooperative_society")
 public class CooperativeSocietyController {
 	
 	@Autowired

@@ -76,12 +76,15 @@ public class ElectionOfficerController {
 
 	//Method to update Election Officer Details	
 	@PutMapping
-	public String updateElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
+	public ResponseEntity<String> updateElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
 
 		service.updateElectionOfficerDetails(officer);
 		logger.info("Election Officer with id: "+officer.getId() + " updated!");
-		return "Election Officer with id: " + officer.getId() + " updated successfully!";
-
+		//return "Election Officer with id: " + officer.getId() + " updated successfully!";
+		return new ResponseEntity<String>(
+				"{\"message\":\"Election Officer with id: " + officer.getId() + " updated successfully!\"}",  HttpStatus.OK);
+		// Convert message to Json
+		
 	}
 
 	//Method to delete Election Officer Details by their ID	

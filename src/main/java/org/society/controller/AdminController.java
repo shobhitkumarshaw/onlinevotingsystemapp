@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: Shobhit Kumar Shaw
  */
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/Admins")
 public class AdminController {

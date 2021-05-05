@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/RegisteredSocietyVoter")
 public class RegisteredSocietyVotersController {
 

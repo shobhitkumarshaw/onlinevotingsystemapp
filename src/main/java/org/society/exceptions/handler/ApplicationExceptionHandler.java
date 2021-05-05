@@ -37,7 +37,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 				.collect(Collectors.toList());
 
 		Map<String, Object> errorBody = new LinkedHashMap<>();
-		errorBody.put("data error", "Problem in data received");
+		errorBody.put("dataerror", "Problem in data received");
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("errors", errorList);
 		return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
