@@ -5,6 +5,7 @@
 package org.society.test.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -37,8 +38,12 @@ public class NominatedCandidatesTest {
 		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Male", "obc", "9876543210", "mihir@email.com", "Orissa","Gandhi Nagar", "Jajapur",123456 , true,"active", cs1);
 		NominatedCandidates nc1 = new NominatedCandidates(111L, "Life", "Water",10000, true, true, true, rs1, cs1);
 		
-		when(nominatedCandidatesRepository.save(nc1)).thenReturn(nc1);
-		assertEquals(nc1, nominatedCandidatesDao.save(nc1,"v12345",1L));
+
+		//when(nominatedCandidatesRepository.save(nc1)).thenReturn(nc1);
+
+		when(nominatedCandidatesRepository.save(any(NominatedCandidates.class))).thenReturn(nc1);
+		assertEquals(nc1, nominatedCandidatesDao.save(nc1,"v12345",1l));
+
 	}
 	
 	// Update Nominated Candidates Details

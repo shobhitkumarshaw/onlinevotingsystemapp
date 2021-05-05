@@ -1,14 +1,20 @@
 package org.society.test.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import static org.assertj.core.api.Assertions.*;
+
 
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,10 +60,12 @@ public class ElectionOfficerTest {
 	public void deleteElectionOfficerDetailsTest() {
 
 		ElectionOfficer officer = new ElectionOfficer("Mohit", "Kumar", "Male", "2234567890", "mohit@gmail.com", "add2", "add3", "Dis2", 223456);
+		officer.setId(3l);
 		when(repository.existsById(officer.getId())).thenReturn(true);
 		eoDao.delete(officer.getId());
-		//verify(repository).deleteById(off);
-	//	assertEquals(repository.deleteById(officer.getId()));
+
+		verify(repository,times(1)).deleteById(officer.getId());;
+
 		
 	}
 
