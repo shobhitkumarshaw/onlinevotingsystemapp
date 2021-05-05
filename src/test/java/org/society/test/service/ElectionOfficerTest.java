@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.*;
+import static 
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,8 +57,8 @@ public class ElectionOfficerTest {
 		when(repository.existsById(officer.getId())).thenReturn(true);
 		eoDao.delete(officer.getId());
 		//verify(repository).deleteById(off);
-		//assertEquals(repository.deleteById(null))
-		assertThatNullPointerException(repository.deleteById(officer.getId()));
+	//	assertEquals(repository.deleteById(officer.getId()));
+		
 	}
 
 	// DetailsById

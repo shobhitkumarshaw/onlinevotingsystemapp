@@ -38,7 +38,7 @@ public class NominatedCandidatesTest {
 		NominatedCandidates nc1 = new NominatedCandidates(111L, "Life", "Water",10000, true, true, true, rs1, cs1);
 		
 		when(nominatedCandidatesRepository.save(nc1)).thenReturn(nc1);
-		assertEquals(nc1, nominatedCandidatesDao.save(nc1,"v12345",1l));
+		assertEquals(nc1, nominatedCandidatesDao.save(nc1,"v12345",1L));
 	}
 	
 	// Update Nominated Candidates Details
