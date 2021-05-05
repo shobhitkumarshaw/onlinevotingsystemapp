@@ -24,7 +24,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 public class ElectionResultTest {
 	@Autowired
 	private ElectionResultDao erDao;
-	// private ElectionResultService erService;
+	
 
 	@MockBean
 	private ElectionResultRepository erRepo;

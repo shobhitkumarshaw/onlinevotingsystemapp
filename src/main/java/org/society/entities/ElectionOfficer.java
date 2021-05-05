@@ -39,10 +39,9 @@ public class ElectionOfficer implements Serializable {
 
 	}
 
-	public ElectionOfficer(Long id, String firstName, String lastName, String gender, String mobileno, String emailId,
+	public ElectionOfficer(String firstName, String lastName, String gender, String mobileno, String emailId,
 			String address1, String address2, String district, int pincode) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;

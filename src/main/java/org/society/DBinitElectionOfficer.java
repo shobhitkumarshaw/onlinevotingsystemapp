@@ -13,10 +13,10 @@ public class DBinitElectionOfficer implements CommandLineRunner {
 	ElectionOfficerRepository repo;
 	@Override
 	public void run(String... args) throws Exception {
-		repo.save(new ElectionOfficer(30L, "Rahul", "Raj",  "Male", "1234567890", "rahul@gmail.com", "add1", "add2", "Dis1", 654321));
+		repo.save(new ElectionOfficer("Rahul", "Raj",  "Male", "1234567890", "rahul@gmail.com", "add1", "add2", "Dis1", 123456));
 	
-		repo.save(new ElectionOfficer(31L, "Mohit", "Kumar", "Male", "2234567890", "mohit@gmail.com", "add2", "add3", "Dis2", 554321));
+		repo.save(new ElectionOfficer("Mohit", "Kumar", "Male", "2234567890", "mohit@gmail.com", "add2", "add3", "Dis2", 223456));
 
-		repo.save(new ElectionOfficer(32L, "Rohit", "Yadav", "Male", "3234567890", "rohit@gmail.com", "add3", "add4", "Dis3", 454321));
+		repo.save(new ElectionOfficer("Rohit", "Yadav", "Male", "3234567890", "rohit@gmail.com", "add3", "add4", "Dis3", 323456));
 	}
 }

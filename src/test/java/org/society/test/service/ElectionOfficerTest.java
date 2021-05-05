@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.society.dao.ElectionOfficerDaoImpl;
 import org.society.entities.ElectionOfficer;
 import org.society.repository.ElectionOfficerRepository;
 import org.society.service.ElectionOfficerServiceImpl;
@@ -22,7 +23,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 public class ElectionOfficerTest {
 
 	@Autowired
-	private ElectionOfficerServiceImpl service;
+	private ElectionOfficerDaoImpl eoDao;
 
 	@MockBean
 	private ElectionOfficerRepository repository;
@@ -31,11 +32,9 @@ public class ElectionOfficerTest {
 	@Test
 	@DisplayName("Test for adding Election officer in database")
 	public void addElectionOfficerDetailsTest() {
-		// when - then
-		ElectionOfficer officer = new ElectionOfficer(1L, "shobhit", "shaw", "Bcrec1", "Male", "9876543210",
-				"shobhit@gmail.com", "add1", "add2", "dis1", 654321);
+		ElectionOfficer officer = new ElectionOfficer("Rahul", "Raj", "Male", "1234567890", "rahul@gmail.com", "add1", "add2", "Dis1", 1234);
 		when(repository.save(officer)).thenReturn(officer);
-		assertEquals(officer, service.addElectionOfficerDetails(officer));
+		assertEquals(officer, eoDao.save(officer));
 	}
 
 	// Update
@@ -43,8 +42,7 @@ public class ElectionOfficerTest {
 	@DisplayName("Test for updating Election officer in database")
 	public void updateElectionOfficerDetailsTest() {
 
-		ElectionOfficer officer = new ElectionOfficer(788L, "shobhit", "shaw", "Bcrec1", "Male", "9876543210",
-				"shobhit@gmail.com", "add1", "add2", "dis1", 654321);
+		ElectionOfficer officer = new ElectionOfficer("Rahul", "Raj",  "Male", "1234567890", "rahul@gmail.com", "add1", "add2", "Dis1", 123456);
 		officer.setFirstName("Tej");
 		assertThat(repository.findById(officer.getId())).isNotEqualTo(officer);
 	}
@@ -54,11 +52,12 @@ public class ElectionOfficerTest {
 	@DisplayName("Test for deleting Election officer in database")
 	public void deleteElectionOfficerDetailsTest() {
 
-		ElectionOfficer officer = new ElectionOfficer(3L, "shobhit", "shaw", "Bcrec1", "Male", "9876543210",
-				"shobhit@gmail.com", "add1", "add2", "dis1", 654321);
+		ElectionOfficer officer = new ElectionOfficer("Mohit", "Kumar", "Male", "2234567890", "mohit@gmail.com", "add2", "add3", "Dis2", 223456);
 		when(repository.existsById(officer.getId())).thenReturn(true);
-		service.deleteElectionOfficer(officer.getId());
-		verify(repository).deleteById(3l);
+		eoDao.delete(officer.getId());
+		//verify(repository).deleteById(off);
+		//assertEquals(repository.deleteById(null))
+		assertThatNullPointerException(repository.deleteById(officer.getId()));
 	}
 
 	// DetailsById
@@ -67,10 +66,9 @@ public class ElectionOfficerTest {
 	@DisplayName("Test for displaying Election officer by Id in database")
 	public void getElectionOfficerByIdDetailsTest() {
 
-		ElectionOfficer officer = new ElectionOfficer(2L, "shobhit", "shaw", "Bcrec1", "Male", "9876543210",
-				"shobhit@gmail.com", "add1", "add2", "dis1", 654321);
+		ElectionOfficer officer = new ElectionOfficer("Mohit", "Kumar", "Male", "2234567890", "mohit@gmail.com", "add2", "add3", "Dis2", 223456);
 		when(repository.findById(2l)).thenReturn(Optional.of(officer));
-		assertEquals(officer, service.viewElectionOfficerById(2l));
+		assertEquals(officer, eoDao.getElectionOfficerById(2l));
 
 	}
 
@@ -79,12 +77,10 @@ public class ElectionOfficerTest {
 	@DisplayName("Test for displaying list of Election officer  in database")
 	public void getElectionOfficerListDetailsTest() {
 
-		ElectionOfficer officer = new ElectionOfficer(2L, "shobhit", "shaw", "Bcrec1", "Male", "9876543210",
-				"shobhit@gmail.com", "add1", "add2", "dis1", 654321);
-		ElectionOfficer officer2 = new ElectionOfficer(3L, "Raj", "Kumar", "Bcrec2", "Male", "8876543210",
-				"raj@gmail.com", "add2", "add3", "dis2", 554321);
+		ElectionOfficer officer = new ElectionOfficer("Mohit", "Kumar", "Male", "2234567890", "mohit@gmail.com", "add2", "add3", "Dis2", 223456);
+		ElectionOfficer officer2 = new ElectionOfficer("Rahul", "Raj",  "Male", "1234567890", "rahul@gmail.com", "add1", "add2", "Dis1", 123456);
 
 		when(repository.findAll()).thenReturn(Stream.of(officer, officer2).collect(Collectors.toList()));
-		assertEquals(2, service.viewElectionOfficerList().size());
+		assertEquals(2, eoDao.getElectionOfficerList().size());
 	}
 }

@@ -29,7 +29,7 @@ public class VotedListTest {
 	private VotedListDao vlDao;
 	@MockBean
 	private VotedListRepository vlRepo;
-
+/*
 	//Add
 	@Test
 	@DisplayName("Test for adding VotedList")
@@ -70,5 +70,6 @@ public class VotedListTest {
 
 		when(vlRepo.findAll()).thenReturn(Stream.of(vl, vl2).collect(Collectors.toList()));
 		assertEquals(2, vlDao.getVotedList().size());
-	}
+	
+}*/
 }

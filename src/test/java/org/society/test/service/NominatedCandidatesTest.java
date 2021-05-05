@@ -33,11 +33,10 @@ public class NominatedCandidatesTest {
 	@Test
 	@DisplayName("Test for adding Nominated Candidates Details")
 	public void addNominatedCandidatesDetailsTest() {
-		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
-				"Dis1", "12345678", null, null);
-		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters("v56324", "Ashish", "Singh", "plmokn", "Male", "sc", "8521674392", "ashish.singh@yahoo.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs1);
-		NominatedCandidates nc1 = new NominatedCandidates(523698l, "yoga", "cycle", 5632014f, true, true, true, rs1, cs1);
-
+		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Sathpur", "Gandhi Nagar", "Jajapur", "123456", null, null);
+		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters(200l, "v12345", "Mihir", "shaw", "Male", "obc", "9876543210", "mihir@email.com", "Orissa","Gandhi Nagar", "Jajapur",123456 , true,"active", cs1);
+		NominatedCandidates nc1 = new NominatedCandidates(111L, "Life", "Water",10000, true, true, true, rs1, cs1);
+		
 		when(nominatedCandidatesRepository.save(nc1)).thenReturn(nc1);
 		assertEquals(nc1, nominatedCandidatesDao.save(nc1,"v12345",1l));
 	}
@@ -46,13 +45,15 @@ public class NominatedCandidatesTest {
 	@Test
 	@DisplayName("Test for Updating Nominated Candidates Details")
 	public void updateNominatedCandidatesDetailsTest() {
-		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
-				"Dis1", "12345678", null, null);
-		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters("v56324", "Ashish", "Singh", "plmokn", "Male", "sc", "8521674392", "ashish.singh@yahoo.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs1);
-		NominatedCandidates nc1 = new NominatedCandidates(523698l, "yoga", "cycle", 5632014f, true, true, true, rs1, cs1);
-
-		nc1.setSecurityDeposit(25000);
-		assertThat(nominatedCandidatesRepository.findById(nc1.getCandidateId())).isNotEqualTo(nc1);
+		CooperativeSociety cs2 = new CooperativeSociety("B Society", "HeadNominatedCandidate12", "Motipur", "Mouna Nagar",
+				"Saran", "223456", null, null);
+		RegisteredSocietyVoters rs2 = new RegisteredSocietyVoters(300l, "v22345", "Shobbit", "kumar", "Male",
+				"gen", "8876543210", "shobbit@email.com", "Chapra", "Mouna Nagar", "Saran", 223456, true,"active", cs2);
+		NominatedCandidates nc2 = new NominatedCandidates(222L, "Death", "Fire", 20000, true, true, true, rs2,
+				cs2);
+		
+		nc2.setSecurityDeposit(25000);
+		assertThat(nominatedCandidatesRepository.findById(nc2.getNominationFormNo())).isNotEqualTo(nc2);
 	}
 
 	
@@ -61,11 +62,13 @@ public class NominatedCandidatesTest {
 	@Test
 	@DisplayName("Test for displaying nominated Candidate by Id")
 	public void getNominatedCandidateByIdDetailsTest() {
-		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadNominatedCandidate1", "Village1", "mondal1",
-				"Dis1", "12345678", null, null);
-		RegisteredSocietyVoters rs1 = new RegisteredSocietyVoters("v56324", "Ashish", "Singh", "plmokn", "Male", "sc", "8521674392", "ashish.singh@yahoo.com", "Rayagada", "Kotepada", "Gunupur", 573942, true, "active", cs1);
-		NominatedCandidates nc1 = new NominatedCandidates(523698l, "yoga", "cycle", 5632014f, true, true, true, rs1, cs1);
-		when(nominatedCandidatesRepository.findById(100l)).thenReturn(Optional.of(nc1));
-		assertEquals(nc1, nominatedCandidatesDao.getByCandidateId(100l));
+		CooperativeSociety cs2 = new CooperativeSociety("B Society", "HeadNominatedCandidate12", "Motipur", "Mouna Nagar",
+				"Saran", "223456", null, null);
+		RegisteredSocietyVoters rs2 = new RegisteredSocietyVoters(300l, "v22345", "Shobbit", "kumar", "Male",
+				"gen", "8876543210", "shobbit@email.com", "Chapra", "Mouna Nagar", "Saran", 223456, true,"active", cs2);
+		NominatedCandidates nc2 = new NominatedCandidates(222L, "Death", "Fire", 20000, true, true, true, rs2,
+				cs2);
+		when(nominatedCandidatesRepository.findById(222L)).thenReturn(Optional.of(nc2));
+		assertEquals(nc2, nominatedCandidatesDao.getByCandidateId(222l));
 	}
 }

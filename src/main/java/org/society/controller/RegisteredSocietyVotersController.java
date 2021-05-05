@@ -1,6 +1,3 @@
-/*
- * @author: Aditya Mohapatra
- */
 
 package org.society.controller;
 
