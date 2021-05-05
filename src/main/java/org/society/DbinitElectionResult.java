@@ -18,7 +18,7 @@ public class DbinitElectionResult implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadofResult1", "Village1", "mandal1", "dis1",
 				"654321", null, null);
-		ElectionResult er1 = new ElectionResult(LocalDate.now(), cs1, 20000, 10000, 50, 4000, 40, "loos");
+		ElectionResult er1 = new ElectionResult(LocalDate.now(), cs1, 20000, 10000, 50, 6000, 60, "Win");
 		repo.save(er1);
 		
 		CooperativeSociety cs2 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",

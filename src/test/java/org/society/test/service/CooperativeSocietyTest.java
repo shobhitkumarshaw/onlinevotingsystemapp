@@ -29,7 +29,7 @@ public class CooperativeSocietyTest {
 	@DisplayName("Test for adding Election Result")
 	public void addElectionResultDetailsTest() {
 
-		CooperativeSociety cs1 = new CooperativeSociety("A Society", "HeadofResult1", "Village1", "mandal1", "dis1",
+		CooperativeSociety cs1 = new CooperativeSociety("D Society", "HeadofResult1", "Village1", "mandal1", "dis1",
 				"654321", null, null);
 		when(csRepo.save(cs1)).thenReturn(cs1);
 		assertEquals(cs1, csDao.save(cs1));
@@ -40,7 +40,7 @@ public class CooperativeSocietyTest {
 	@DisplayName("Test for updating Election Result")
 	public void updateElectionResultDetailsTest() {
 
-		CooperativeSociety cs3 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",
+		CooperativeSociety cs3 = new CooperativeSociety("E Society", "HeadofResult3", "village3", "mandal3", "dis3",
 				"454321", null, null);
 		cs3.setSocietyName("Abc Society");
 		assertThat(csRepo.findById(cs3.getId())).isNotEqualTo(cs3);
