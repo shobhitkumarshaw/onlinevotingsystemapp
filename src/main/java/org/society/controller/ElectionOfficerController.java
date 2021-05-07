@@ -2,6 +2,7 @@ package org.society.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.society.entities.ElectionOfficer;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionOfficerService;
+import org.society.service.ValidateLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,30 +32,34 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/ElectionOfficer")
 public class ElectionOfficerController {
-	
-	
+
 	Logger logger = LoggerFactory.getLogger(ElectionOfficerController.class);
 
 	@Autowired
 	private ElectionOfficerService service;
-	
-	
 
-	//Method to get Election Officer Details by their ID	
+	@Autowired
+	private ValidateLogin login;
+
+	// Method to get Election Officer Details by their ID
 	@GetMapping(value = "{id}")
-	public ResponseEntity<?> getElectionOfficerById(@PathVariable("id") long id) {
-		
+	public ResponseEntity<?> getElectionOfficerById(@PathVariable("id") long id, HttpServletRequest request) {
+
+		login.validateToken(request, "ElectionOfficer");
+
 		// Duplicate validation is done in DAO part. If Exception is thrown than it will
 		// be propagated to ApplicationExecptionHandler class
 		ElectionOfficer officer = service.viewElectionOfficerById(id);
 		logger.info("Election Officer id: " + id + " found!");
 		return new ResponseEntity<ElectionOfficer>(officer, HttpStatus.OK);
-		
+
 	}
 
-	//Method to get the list of Election Officer 	
+	// Method to get the list of Election Officer
 	@GetMapping
-	public List<ElectionOfficer> getListOfElectionOfficer() {
+	public List<ElectionOfficer> getListOfElectionOfficer(HttpServletRequest request) {
+
+		login.validateToken(request, "ElectionOfficer");
 
 		List<ElectionOfficer> officerList = service.viewElectionOfficerList();
 		if (officerList.size() == 0) {
@@ -64,42 +70,55 @@ public class ElectionOfficerController {
 		return officerList;
 	}
 
-	//Method to add Election Officer Details	
+	// Method to add Election Officer Details
 	@PostMapping
-	public String addElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
+	public String addElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer, HttpServletRequest request) {
+
+		login.validateToken(request, "ElectionOfficer");
 
 		service.addElectionOfficerDetails(officer);
-		logger.info("Election Officer added with id: "+officer.getId());
+		logger.info("Election Officer added with id: " + officer.getId());
 		return "Election Officer Details added successfully!";
 
 	}
 
-	//Method to update Election Officer Details	
+	// Method to update Election Officer Details
 	@PutMapping
-	public ResponseEntity<String> updateElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer) {
+	public ResponseEntity<String> updateElectionOfficerDetails(@Valid @RequestBody ElectionOfficer officer,
+			HttpServletRequest request) {
+
+		login.validateToken(request, "ElectionOfficer");
 
 		service.updateElectionOfficerDetails(officer);
-		logger.info("Election Officer with id: "+officer.getId() + " updated!");
-		//return "Election Officer with id: " + officer.getId() + " updated successfully!";
+		logger.info("Election Officer with id: " + officer.getId() + " updated!");
+		// return "Election Officer with id: " + officer.getId() + " updated
+		// successfully!";
 		return new ResponseEntity<String>(
-				"{\"message\":\"Election Officer with id: " + officer.getId() + " updated successfully!\"}",  HttpStatus.OK);
+				"{\"message\":\"Election Officer with id: " + officer.getId() + " updated successfully!\"}",
+				HttpStatus.OK);
 		// Convert message to Json
-		
+
 	}
 
-	//Method to delete Election Officer Details by their ID	
+	// Method to delete Election Officer Details by their ID
 	@DeleteMapping(value = "{id}")
-	public String deleteElectionOfficerDetailsById(@PathVariable("id") long id) {
+	public String deleteElectionOfficerDetailsById(@PathVariable("id") long id, HttpServletRequest request) {
+
+		login.validateToken(request, "ElectionOfficer");
+
 		service.deleteElectionOfficer(id);
-		logger.info("Election Officer with id: "+ id + " deleted!");
+		logger.info("Election Officer with id: " + id + " deleted!");
 		return "Election Officer with id: " + id + " removed successfully !";
 	}
-	
-	//Method to approve or reject the Nominated candidate
+
+	// Method to approve or reject the Nominated candidate
 	@GetMapping(value = "{candidateId}/{approval}")
-	public String approveCandidate(@PathVariable("candidateId") long id, 
-			@PathVariable("approval") String approval) {
+	public String approveCandidate(@PathVariable("candidateId") long id, @PathVariable("approval") String approval,
+			HttpServletRequest request) {
+
+		login.validateToken(request, "ElectionOfficer");
+
 		return service.approveCandidate(id, approval);
-		
+
 	}
 }
