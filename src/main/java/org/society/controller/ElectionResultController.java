@@ -2,6 +2,7 @@ package org.society.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.society.entities.NominatedCandidates;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
 import org.society.service.ElectionResultService;
+import org.society.service.ValidateLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ElectionResultController {
 	@Autowired
 	private ElectionResultService service;
+	
+	@Autowired
+	private ValidateLogin login;
+	
 	Logger logger = LoggerFactory.getLogger(ElectionResultController.class);
 
 	// Method to Get the Election Result list
@@ -58,7 +64,8 @@ public class ElectionResultController {
 
 	// Method to save the Election Result
 	@PostMapping
-	public String saveResult(@Valid @RequestBody ElectionResult result) {
+	public String saveResult(@Valid @RequestBody ElectionResult result,HttpServletRequest request) {
+		login.validateToken(request, "ElectionOfficer");
 		service.addElectionResult(result);
 		logger.info("Election Result added with id: " + result.getId());
 		return "Election Result successfully saved";
@@ -66,8 +73,8 @@ public class ElectionResultController {
 
 	// Method to Update the Election Result
 	@PutMapping
-	public String updateResult(@Valid @RequestBody ElectionResult result) {
-
+	public String updateResult(@Valid @RequestBody ElectionResult result,HttpServletRequest request) {
+		login.validateToken(request, "ElectionOfficer");
 		service.updateElectionResult(result);
 		logger.info("Elction Result with id: " + result.getId() + " updated!");
 		return "Election Result successfully Updated";
@@ -75,8 +82,8 @@ public class ElectionResultController {
 
 	// Method to Delete the Election Result details
 	@DeleteMapping("{CandidateId}")
-	public String deleteResult(@PathVariable("CandidateId") long CandidateId) {
-
+	public String deleteResult(@PathVariable("CandidateId") long CandidateId,HttpServletRequest request) {
+		login.validateToken(request, "ElectionOfficer");
 		service.deleteElectionResult(CandidateId);
 		logger.info("Election Result with id: " + CandidateId + " deleted!");
 		return "Election Result data successfully deleted";
