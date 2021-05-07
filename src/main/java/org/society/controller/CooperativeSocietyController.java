@@ -50,7 +50,7 @@ public class CooperativeSocietyController {
 //Method to Update Co-operative Society Details	
 	@PutMapping
 	public String updateCooperativeSociety(@Valid @RequestBody CooperativeSociety society,HttpServletRequest request) {
-		login.validateToken(request, "ElectionOfficerr");
+		login.validateToken(request,"ElectionOfficerr");
 		service.updateSocietyDetails(society);
 		
 		return "Society with id: "+ society.getId() +" updated successfully!";
@@ -60,7 +60,7 @@ public class CooperativeSocietyController {
 //Method to delete Co-operative Society Details	
 	@DeleteMapping(value = "{societyId}")
 	public String deleteCooperativeScoiety(@PathVariable("societyId") long societyId,HttpServletRequest request) {
-		login.validateToken(request, "ElectionOfficer");
+		login.validateToken(request,"ElectionOfficer");
 		service.deleteSociety(societyId);
 		
 		return "Cooperative Society with id: "+ societyId +" deleted successfully!";
@@ -70,7 +70,7 @@ public class CooperativeSocietyController {
 //Method to get the list of Co-operative Society 	
 	@GetMapping
 	public List<CooperativeSociety> getCooperativeSocietyList(HttpServletRequest request){
-		login.validateToken(request, "RegisteredSocietyVoter");
+		login.validateToken(request,"ElectionOfficer");
 		List<CooperativeSociety> societyList = service.viewSocietiesList();
 		
 		if(societyList.size() == 0) {
