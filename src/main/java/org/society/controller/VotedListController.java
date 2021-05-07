@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("api/voted_list")
+@RequestMapping("api/votedList")
 public class VotedListController {
 	Logger logger = LoggerFactory.getLogger(VotedListController.class);
 
@@ -29,7 +29,7 @@ public class VotedListController {
 	private VotedListService service;
 
 	// Method for Casting Vote
-	@PutMapping("{scoietyId}/{nominatedCandidateId}/{voterIdNumber}")
+	@GetMapping("{scoietyId}/{nominatedCandidateId}/{voterIdNumber}")
 	public String castVote(@PathVariable("scoietyId") long scoietyId,
 			@PathVariable("nominatedCandidateId") long nominatedCandidateId,
 			@PathVariable("voterIdNumber") String voterIdNumber) {

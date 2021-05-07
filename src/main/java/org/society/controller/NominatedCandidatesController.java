@@ -6,6 +6,7 @@ package org.society.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.society.entities.NominatedCandidates;
 import org.society.exceptions.EmptyDataException;
 import org.society.exceptions.VoterNotFoundException;
 import org.society.service.NominatedCandidatesService;
+import org.society.service.ValidateLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +39,15 @@ public class NominatedCandidatesController {
 	NominatedCandidatesService nominatedCandidatesService;
 	Logger logger = LoggerFactory.getLogger(NominatedCandidatesController.class);
 
+	@Autowired
+	private ValidateLogin login;
+	
     //Method to	get Nominated Candidates List by their ID
 	@GetMapping(value = "{id}")
-	public ResponseEntity<?> getNominatedCandidatesById(@PathVariable("id") long id) {
+	public ResponseEntity<?> getNominatedCandidatesById(@PathVariable("id") long id, HttpServletRequest request) {
+		
+		login.validateToken(request, "NominatedCandidates");
+		
 		NominatedCandidates nominatedCandidates = nominatedCandidatesService.searchByCandidateId(id);
 		if (nominatedCandidates == null) {
 			logger.error("No data found with this id:"+ id +" in Nominated Candidates database!");
@@ -52,7 +60,9 @@ public class NominatedCandidatesController {
 
     //Method to get List of Nominated Candidates	
 	@GetMapping
-	public List<NominatedCandidates> getListOfNominatedCandidates() {
+	public List<NominatedCandidates> getListOfNominatedCandidates(HttpServletRequest request) {
+		
+		login.validateToken(request, "NominatedCandidates");
 		
 		List<NominatedCandidates> nominatedCandidatesList = nominatedCandidatesService.viewNominatedCandidatesList();
 		if (nominatedCandidatesList.size() == 0) {
@@ -67,7 +77,10 @@ public class NominatedCandidatesController {
 	@PostMapping("{voterIdNumber}/{societyId}")
 	public String addNominatedCandidateDetails(@Valid @RequestBody NominatedCandidates candidate,
 			@PathVariable("voterIdNumber") String voterId, 
-			@PathVariable("societyId") long societyId) {
+			@PathVariable("societyId") long societyId, HttpServletRequest request) {
+		
+		login.validateToken(request, "NominatedCandidates");
+		
 		nominatedCandidatesService.saveNominatedCandidate(candidate, voterId, societyId);
 		logger.info("Nominated Candidates added with id: "+candidate.getCandidateId());
 		return "Nominated Candidates added successfully!";
@@ -75,7 +88,9 @@ public class NominatedCandidatesController {
 
     //Method to Update Nominated Candidate Details	
 	@PutMapping
-	public String updateNominatedCandidatesDetails(@Valid @RequestBody NominatedCandidates candidate) {
+	public String updateNominatedCandidatesDetails(@Valid @RequestBody NominatedCandidates candidate, HttpServletRequest request) {
+		
+		login.validateToken(request, "NominatedCandidates");
 		
 		nominatedCandidatesService.updateNominatedCandidateDetails(candidate);
 		logger.info("Nominated Candidates with id: "+candidate.getCandidateId() + " updated!");
@@ -85,7 +100,10 @@ public class NominatedCandidatesController {
 	
     //Method to Delete Nominated Candidate Details	
 	@DeleteMapping(value = "{id}")
-	public String deleteNominatedCandidatesDetailsById(@PathVariable("id") long id) {
+	public String deleteNominatedCandidatesDetailsById(@PathVariable("id") long id, HttpServletRequest request) {
+		
+		login.validateToken(request, "NominatedCandidates");
+		
 		nominatedCandidatesService.deleteNominatedCandididate(id);
 		logger.info("Nominated Candidates with id: "+ id + " deleted!");
 		return "Nominated Candidates removed successfully!";
