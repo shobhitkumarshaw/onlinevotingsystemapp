@@ -114,6 +114,34 @@ public class RegisteredSocietyVoters implements Serializable {
 		this.status = status;
 		this.cooperativeSociety = cooperativeSociety;
 	}
+	
+	
+
+	public RegisteredSocietyVoters(@NotNull(message = "Voter Id number can not be null") String voterIdCardNo,
+			@NotNull(message = "Name is Required") @Length(min = 2, max = 30, message = "Name size must be between 5 and 30") String firstName,
+			String lastName, @NotNull(message = "Gender is Required") String gender,
+			@NotBlank(message = "Reservation Category is required") String reservationCategory,
+			@Pattern(regexp = "^[0][1-9]\\d{9}$|^[1-9]\\d{9}$") @NotNull(message = "Mobile is Required") @Length(min = 10, max = 13, message = "mobile number should be valid") String mobileno,
+			@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$") @NotNull(message = "Email is Required") String emailId,
+			@NotNull String address, @NotNull String mandal, @NotNull String district,
+			@NotNull(message = "Pincode is required") @Min(6) int pincode, boolean castedVote, String status,
+			CooperativeSociety cooperativeSociety) {
+		super();
+		this.voterIdCardNo = voterIdCardNo;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.reservationCategory = reservationCategory;
+		this.mobileno = mobileno;
+		this.emailId = emailId;
+		this.address = address;
+		this.mandal = mandal;
+		this.district = district;
+		this.pincode = pincode;
+		this.castedVote = castedVote;
+		this.status = status;
+		this.cooperativeSociety = cooperativeSociety;
+	}
 
 	public long getId() {
 		return id;

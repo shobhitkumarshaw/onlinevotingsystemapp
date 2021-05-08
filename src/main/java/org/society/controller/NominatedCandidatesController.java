@@ -43,7 +43,7 @@ public class NominatedCandidatesController {
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getNominatedCandidatesById(@PathVariable("id") long id, HttpServletRequest request) {
 		
-		login.validateToken(request,"NominatedCandidate");
+		//login.validateToken(request,"NominatedCandidate");
 		
 		NominatedCandidates nominatedCandidates = nominatedCandidatesService.searchByCandidateId(id);
 		if (nominatedCandidates == null) {
@@ -59,7 +59,7 @@ public class NominatedCandidatesController {
 	@GetMapping
 	public List<NominatedCandidates> getListOfNominatedCandidates(HttpServletRequest request) {
 		
-		login.validateToken(request, "NominatedCandidate");
+		//login.validateToken(request, "NominatedCandidate");
 		
 		List<NominatedCandidates> nominatedCandidatesList = nominatedCandidatesService.viewNominatedCandidatesList();
 		if (nominatedCandidatesList.size() == 0) {
@@ -76,7 +76,7 @@ public class NominatedCandidatesController {
 			@PathVariable("voterIdNumber") String voterId, 
 			@PathVariable("societyId") long societyId, HttpServletRequest request) {
 		
-		login.validateToken(request, "NominatedCandidate");
+		//login.validateToken(request, "NominatedCandidate");
 		
 		nominatedCandidatesService.saveNominatedCandidate(candidate, voterId, societyId);
 		logger.info("Nominated Candidates added with id: "+candidate.getCandidateId());
@@ -87,11 +87,12 @@ public class NominatedCandidatesController {
 	@PutMapping
 	public String updateNominatedCandidatesDetails(@Valid @RequestBody NominatedCandidates candidate, HttpServletRequest request) {
 		
-		login.validateToken(request, "NominatedCandidate");
+		//login.validateToken(request, "NominatedCandidate");
 		
 		nominatedCandidatesService.updateNominatedCandidateDetails(candidate);
 		logger.info("Nominated Candidates with id: "+candidate.getCandidateId() + " updated!");
 		return "Nominated Candidates details updated successfully!";
+		 
 		
 	}
 	
@@ -99,7 +100,7 @@ public class NominatedCandidatesController {
 	@DeleteMapping(value = "{id}")
 	public String deleteNominatedCandidatesDetailsById(@PathVariable("id") long id, HttpServletRequest request) {
 		
-		login.validateToken(request, "NominatedCandidate");
+		//login.validateToken(request, "NominatedCandidate");
 		
 		nominatedCandidatesService.deleteNominatedCandididate(id);
 		logger.info("Nominated Candidates with id: "+ id + " deleted!");
