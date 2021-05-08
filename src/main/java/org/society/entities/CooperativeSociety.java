@@ -49,15 +49,15 @@ public class CooperativeSociety implements Serializable {
 	@Length(min = 6)//@Min(6)
 	private String pincode;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = RegisteredSocietyVoters.class)
 	private List<RegisteredSocietyVoters> registeredSocietyVoters = new ArrayList<>();
 
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = NominatedCandidates.class)
 	private List<NominatedCandidates> nominatedCandidates = new ArrayList<>();
 
-	public CooperativeSociety() {
+	public CooperativeSociety() { 
 		super();
 
 	}

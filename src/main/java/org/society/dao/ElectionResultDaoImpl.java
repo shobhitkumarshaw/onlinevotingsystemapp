@@ -4,6 +4,8 @@
 
 package org.society.dao;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +16,7 @@ import org.society.entities.RegisteredSocietyVoters;
 import org.society.entities.VotedList;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.ElectionResultNotFoundException;
+import org.society.model.Result;
 import org.society.repository.ElectionResultRepository;
 import org.society.repository.RegisteredSocietyVotersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,5 +131,34 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	public int viewInvalidVotes() {
 		List<RegisteredSocietyVoters> voters = voterRepo.findByCastedVote(false);
 		return voters.size();
+	}
+	
+	public List<Result> getResult(){
+		List<Result> electionResult = new ArrayList<>();
+		
+		List<VotedList> list = votedList.getVotedList();
+		Map<Long, Long> result = list.stream().filter(l -> l.getNominatedCandidates() != null)
+				.map(VotedList::getNominatedCandidates)
+				.collect(Collectors.groupingBy(NominatedCandidates::getCandidateId, Collectors.counting()));
+		System.out.println(result);
+		for(long k : result.keySet()) {
+			Optional<LocalDateTime> date = list.stream().filter(l -> l.getNominatedCandidates().getCandidateId() == k)
+					.map(d -> d.getPollingDateTime())
+					.findFirst();
+			LocalDateTime pollingDate = date.get();
+			NominatedCandidates candidate = candidateDao.getByCandidateId(k);
+			String socity = candidate.getCooperativeSociety().getSocietyName();
+			String candidateName = candidate.getRegisteredSocietyVoter().getFirstName() 
+					+ " " + candidate.getRegisteredSocietyVoter().getLastName();
+			String party = candidate.getPartyName();
+			Long postedVotes = result.get(k);
+			Long totalVotes = list.stream().filter(s -> s.getNominatedCandidates().getCooperativeSociety().getSocietyName().equals(socity))
+					.collect(Collectors.counting());
+			double pollingPercentage = (postedVotes/totalVotes) * 100;
+			electionResult.add(new Result(pollingDate, socity, candidateName, party, postedVotes, totalVotes, pollingPercentage));
+		}
+		
+		return electionResult;
+		
 	}
 }

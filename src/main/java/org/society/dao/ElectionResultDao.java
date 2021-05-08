@@ -10,6 +10,7 @@ import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.NominatedCandidateNotFoundException;
+import org.society.model.Result;
 
 public interface ElectionResultDao {
 	public ElectionResult save(ElectionResult result);
@@ -27,5 +28,7 @@ public interface ElectionResultDao {
 	public NominatedCandidates viewLowestVotingPercentCandidate();
 
 	public int viewInvalidVotes();
+	
+	public List<Result> getResult();
 	
 }

@@ -7,10 +7,12 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.society.dao.ElectionResultDao;
 import org.society.entities.ElectionResult;
 import org.society.entities.NominatedCandidates;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
+import org.society.model.Result;
 import org.society.service.ElectionResultService;
 import org.society.service.ValidateLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class ElectionResultController {
 	
 	@Autowired
 	private ValidateLogin login;
+	
+	@Autowired
+	private ElectionResultDao dao;
 	
 	Logger logger = LoggerFactory.getLogger(ElectionResultController.class);
 
@@ -105,6 +110,11 @@ public class ElectionResultController {
 	@GetMapping("InvalidVotes")
 	public double viewInvalidVotes() {
 		return service.viewInvalidVotes();
+	}
+	
+	@GetMapping("Result")
+	public List<Result> getResult(){
+		return dao.getResult();
 	}
 
 }

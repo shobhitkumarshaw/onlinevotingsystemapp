@@ -32,7 +32,7 @@ public class ElectionResult implements Serializable {
 	private LocalDate pollingDate;
 	
 	
-	@JsonIgnore
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cooperativeSociety_fk")
 	private CooperativeSociety cooperativeSociety;
