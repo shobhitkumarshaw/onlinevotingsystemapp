@@ -50,7 +50,7 @@ public class CooperativeSocietyController {
 //Method to Update Co-operative Society Details	
 	@PutMapping
 	public String updateCooperativeSociety(@Valid @RequestBody CooperativeSociety society,HttpServletRequest request) {
-		login.validateToken(request,"ElectionOfficerr");
+		login.validateToken(request,"ElectionOfficer");
 		service.updateSocietyDetails(society);
 		
 		return "Society with id: "+ society.getId() +" updated successfully!";

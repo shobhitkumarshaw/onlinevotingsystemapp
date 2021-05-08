@@ -33,17 +33,18 @@ public class RegisteredSocietyVotersController {
 
 	@Autowired
 	RegisteredSocietyVotersService registeredSocietyVotersService;
-	Logger logger = LoggerFactory.getLogger(RegisteredSocietyVotersController.class);
-	
 	@Autowired
 	private ValidateLogin login;
+	
+	Logger logger = LoggerFactory.getLogger(RegisteredSocietyVotersController.class);
+	
+	
 
 	//Method to get Registered Society Voter by their Voter Card Number 	
 	@GetMapping(value = "{id}")
 	public ResponseEntity<?> getRegisteredSocietyVoterByVoterCardNo(@PathVariable("id") String id, HttpServletRequest request) {
 		
-		login.validateToken(request, "RegisteredSocietyVoters");
-		
+		login.validateToken(request, "RegisteredSocietyVoter");
 		RegisteredSocietyVoters registeredSocietyVoters = registeredSocietyVotersService.searchByVoterID(id);
 		if (registeredSocietyVoters == null) {
 			logger.error("No data found with this id:" + id + " in Registered Society Voter database!");
@@ -57,7 +58,7 @@ public class RegisteredSocietyVotersController {
 	@GetMapping
 	public List<RegisteredSocietyVoters> getListOfRegisteredSocietyVoters(HttpServletRequest request) {
 		
-		login.validateToken(request, "RegisteredSocietyVoters");
+		login.validateToken(request, "RegisteredSocietyVoter");
 
 		List<RegisteredSocietyVoters> registeredSocietyVotersList = registeredSocietyVotersService
 				.viewRegisteredVoterList();
@@ -74,7 +75,7 @@ public class RegisteredSocietyVotersController {
 	public String addRegisteredSocietyVotersDetails(@Valid @RequestBody RegisteredSocietyVoters voter,
 			@PathVariable("societyId") long societyId, HttpServletRequest request) {
 		
-		login.validateToken(request, "RegisteredSocietyVoters");
+		login.validateToken(request, "RegisteredSocietyVoter");
 		
 		registeredSocietyVotersService.voterRegistration(voter, societyId);
 
@@ -86,7 +87,7 @@ public class RegisteredSocietyVotersController {
 	@PutMapping
 	public String updateRegisteredSocietyVotersDetails(@Valid @RequestBody RegisteredSocietyVoters voter, HttpServletRequest request) {
 		
-		login.validateToken(request, "RegisteredSocietyVoters");
+		login.validateToken(request, "RegisteredSocietyVoter");
 
 		registeredSocietyVotersService.updateRegisteredVoterDetails(voter);
 		logger.info("Registered Society Voter with id: " + voter.getId() + " updated!");
@@ -98,7 +99,7 @@ public class RegisteredSocietyVotersController {
 	@DeleteMapping(value = "{voterId}")
 	public String deleteRegisteredSocietyVotersDetailsById(@PathVariable("voterId") String id, HttpServletRequest request) {
 		
-		login.validateToken(request, "RegisteredSocietyVoters");
+		login.validateToken(request,"RegisteredSocietyVoter");
 		
 		registeredSocietyVotersService.deleteRegisteredVoter(id);
 		logger.info("Registered Society Voter with id: " + id + " deactivated!");

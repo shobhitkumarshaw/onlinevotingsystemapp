@@ -1,6 +1,4 @@
-/*
-  * @author: Nagidi Bhanu prakash
- */
+
 package org.society;
 
 import org.society.entities.User;
@@ -19,7 +17,7 @@ public class DBinitUser implements CommandLineRunner {
 
 		repo.save(new User("Ritik","pass1","Admin"));
 		repo.save(new User("Shobhit","pass2","ElectionOfficer"));
-		repo.save(new User("Govind","pass3","RegisteredSocietyVoter"));
-		repo.save(new User("Aditya","pass4","NominatedCandidate"));
+		repo.save(new User("Aditya","pass3","RegisteredSocietyVoter"));
+		repo.save(new User("Govind","pass4","NominatedCandidate"));
 	}
 }
