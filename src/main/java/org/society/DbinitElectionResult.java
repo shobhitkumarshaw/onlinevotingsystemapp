@@ -23,12 +23,12 @@ public class DbinitElectionResult implements CommandLineRunner{
 		
 		CooperativeSociety cs2 = new CooperativeSociety("c Society", "HeadofResult3", "village3", "mandal3", "dis3",
 				"454321", null, null);
-		ElectionResult er2 = new ElectionResult(LocalDate.of(2021,05,01), cs2, 30000, 15000, 50, 6000, 40, "loss");
+		ElectionResult er2 = new ElectionResult(LocalDate.of(2021,01,10), cs2, 30000, 15000, 50, 6000, 40, "loss");
 		repo.save(er2);
 		
 		CooperativeSociety cs3 = new CooperativeSociety("B Society", "HeadofResult2", "village2", "mandal2", "dis2",
 				"554321", null, null);
-		ElectionResult er3 = new ElectionResult(LocalDate.of(2021,05,01), cs3, 10000, 5000, 50, 1500, 30, "loss");
+		ElectionResult er3 = new ElectionResult(LocalDate.of(2020,10,15), cs3, 10000, 5000, 50, 1500, 30, "loss");
 		repo.save(er3);
 	}
 
