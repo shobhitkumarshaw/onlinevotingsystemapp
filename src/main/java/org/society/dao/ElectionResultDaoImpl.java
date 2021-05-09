@@ -115,10 +115,10 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 		Map<Long, Long> Result = list.stream().filter(l -> l.getNominatedCandidates() != null)
 				.map(VotedList::getNominatedCandidates)
 				.collect(Collectors.groupingBy(NominatedCandidates::getCandidateId, Collectors.counting()));
-		long low = 3l;
-		long val = Result.get(3l);
+		long low = 1l;
+		long val = Long.MAX_VALUE;
 		for (long K : Result.keySet()) {
-			if (val >= Result.get(K)) {
+			if (val < Result.get(K)) {
 				val = Result.get(K);
 				low = K;
 			}
