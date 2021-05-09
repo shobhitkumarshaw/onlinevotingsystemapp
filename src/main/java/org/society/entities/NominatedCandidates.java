@@ -54,7 +54,7 @@ public class NominatedCandidates implements Serializable {
 	private RegisteredSocietyVoters registeredSocietyVoter;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)// added cascade
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cooperativeSociety_fk")
 	private CooperativeSociety cooperativeSociety;
 

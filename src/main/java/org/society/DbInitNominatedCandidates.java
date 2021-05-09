@@ -39,6 +39,7 @@ public class DbInitNominatedCandidates implements CommandLineRunner {
 		NominatedCandidates nc2 = new NominatedCandidates(222L, "Death", "Fire", 20000, true, true, true, null,
 				null);
 		repo.save(nc2);
+		
 		NominatedCandidates nc3 = new NominatedCandidates(333L, "Game", "Thrones", 30000, true, true, true, null,
 				null);
 		repo.save(nc3);

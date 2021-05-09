@@ -32,7 +32,7 @@ public class ValidateLogin {
 		
 		//System.out.println(jwtTokenUtil.getRoleFromToken(jwtToken));
 		
-		if(!jwtTokenUtil.getRoleFromToken(jwtToken).equals(role)) {
+		if(!jwtTokenUtil.getRoleFromToken(jwtToken).equals(role) && !jwtTokenUtil.getRoleFromToken(jwtToken).equals("Admin") ) {
 			throw new InvalidUserException("Not authorized to perfrom this action");
 		}
 		try {

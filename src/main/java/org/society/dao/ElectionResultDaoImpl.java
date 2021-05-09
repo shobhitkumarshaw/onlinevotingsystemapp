@@ -16,6 +16,7 @@ import org.society.entities.RegisteredSocietyVoters;
 import org.society.entities.VotedList;
 import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.ElectionResultNotFoundException;
+import org.society.exceptions.EmptyDataException;
 import org.society.model.Result;
 import org.society.repository.ElectionResultRepository;
 import org.society.repository.RegisteredSocietyVotersRepository;
@@ -135,8 +136,12 @@ public class ElectionResultDaoImpl implements ElectionResultDao {
 	
 	public List<Result> getResult(){
 		List<Result> electionResult = new ArrayList<>();
+	
 		
 		List<VotedList> list = votedList.getVotedList();
+		if(list.size() == 0) {
+			throw new EmptyDataException("No data found in Database!");
+		}
 		Map<Long, Long> result = list.stream().filter(l -> l.getNominatedCandidates() != null)
 				.map(VotedList::getNominatedCandidates)
 				.collect(Collectors.groupingBy(NominatedCandidates::getCandidateId, Collectors.counting()));

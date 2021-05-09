@@ -99,7 +99,7 @@ public class RegisteredSocietyVotersController {
 	@DeleteMapping(value = "{voterId}")
 	public String deleteRegisteredSocietyVotersDetailsById(@PathVariable("voterId") String id, HttpServletRequest request) {
 		
-		login.validateToken(request,"RegisteredSocietyVoter");
+		login.validateToken(request,"ElectionOfficer");
 		
 		registeredSocietyVotersService.deleteRegisteredVoter(id);
 		logger.info("Registered Society Voter with id: " + id + " deactivated!");

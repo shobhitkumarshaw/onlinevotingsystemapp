@@ -45,6 +45,5 @@ public class CooperativeSocietyTest {
 		cs3.setSocietyName("Abc Society");
 		assertThat(csRepo.findById(cs3.getId())).isNotEqualTo(cs3);
 	}
-	
 
 }
