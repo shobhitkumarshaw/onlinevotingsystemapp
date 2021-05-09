@@ -11,6 +11,7 @@ import org.society.exceptions.DuplicateEntityFoundException;
 import org.society.exceptions.ElectionOfficerNotFoundException;
 import org.society.exceptions.ElectionResultNotFoundException;
 import org.society.exceptions.EmptyDataException;
+import org.society.exceptions.InvalidUserException;
 import org.society.exceptions.NoAdminFoundException;
 import org.society.exceptions.NoUserLoggedInException;
 import org.society.exceptions.NominatedCandidateNotFoundException;
@@ -41,6 +42,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("errors", errorList);
 		return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
+		
 
 	}
 
@@ -151,6 +153,15 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		errorBody.put("timestamp", LocalDateTime.now());
 		errorBody.put("details", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(InvalidUserException.class)
+	public ResponseEntity<?> handleUserDataErrors(InvalidUserException ex) {
+
+		Map<String, Object> errorBody = new LinkedHashMap<>();
+		errorBody.put("errorMessage", ex.getMessage());
+
+		return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
 	}
 	
 	
