@@ -9,8 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
-import com.sun.istack.NotNull;
+import org.hibernate.validator.constraints.Length;
+
 
 @Entity
 public class User implements Serializable {
@@ -19,9 +21,11 @@ public class User implements Serializable {
 	@Id
 	private String userName;
 
-	@NotNull
+	@NotNull(message = "Password can not be null")
+	@Length(min = 5, max = 30, message = "Password size must be between 5 and 30")
 	private String password;
-
+	@NotNull(message = "Role can not be null")
+	@Length(min = 2, max = 30)
 	private String role;
 
 	public User(String userName, String password, String role) {

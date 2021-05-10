@@ -49,7 +49,7 @@ public class VotedListController {
 	// Method to get the Voted List
 	@GetMapping
 	public List<VotedList> getVotedList(HttpServletRequest request) {
-		//login.validateToken(request, "ElectionOfficer");
+		//login.validateToken(request, "ElectionOfficer"); 
 		List<VotedList> votedList = service.viewVotedList();
 		if (votedList.size() == 0) {
 			new EmptyDataException("Voted List is empty!");

@@ -30,24 +30,30 @@ public class CooperativeSociety implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
+	@NotNull(message = "Society name is required")
+	@Length(min = 2, max = 30, message = "Society size must be between 2 and 30")
 	private String societyName;
 
-	@NotNull
+	@NotNull(message = "Head Of Society is required")
+	@Length(min = 2, max = 30, message = "Head Of Society size must be between 2 and 30")
 	private String headOfSociety;
 
-	@NotNull
+	@NotNull(message = "Village name is required")
+	@Length(min = 2, max = 30, message = "Village size must be between 2 and 30")
 	private String village;
 
-	@NotNull
+	@NotNull(message = "Mandal is required")
+	@Length(min = 2, max = 30, message = "Mandal size must be between 2 and 30")
 	private String mandal;
 
-	@NotNull
+	@NotNull(message = "District is required")
+	@Length(min = 2, max = 30, message = "District size must be between 2 and 30")
 	private String district;
 
 	@NotNull(message = "Pincode is required")
-	@Length(min = 6)//@Min(6)
+	@Length(min = 6, max =6, message = "Pin code must be of 6 digit number only!")
 	private String pincode;
+	
 	
 	//@JsonIgnore
 	@OneToMany(mappedBy = "cooperativeSociety", targetEntity = RegisteredSocietyVoters.class)

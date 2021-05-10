@@ -18,6 +18,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,10 +34,16 @@ public class NominatedCandidates implements Serializable {
 	private long candidateId;
 	// add unique constraint here
 	//@Column(unique = true)
+	
+	@NotNull(message = "Nomination Form can not be empty!")
 	private long nominationFormNo;
-
+	
+	@NotNull(message = "Party name is Required")
+	@Length(min = 2, max = 30, message = "Party name size must be between 2 and 30")
 	private String partyName;
-
+	
+	@NotNull(message = "party symbol is Required")
+	@Length(min = 2, max = 30, message = "Party symbol size must be between 2 and 30")
 	private String symbol;
 
 	@Min(value = 0, message = "Security Deposit should not be less than 0")
@@ -78,6 +87,8 @@ public class NominatedCandidates implements Serializable {
 		this.registeredSocietyVoter = registeredSocietyVoter;
 		this.cooperativeSociety = cooperativeSociety;
 	}
+	
+
 
 	public CooperativeSociety getCooperativeSociety() {
 		return cooperativeSociety;

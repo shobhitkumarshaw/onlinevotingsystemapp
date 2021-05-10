@@ -39,38 +39,39 @@ public class RegisteredSocietyVoters implements Serializable {
 	private String voterIdCardNo;
 
 	@NotNull(message = "Name is Required")
-	@Length(min = 2, max = 30, message = "Name size must be between 5 and 30")
+	@Length(min = 2, max = 30, message = "Name size must be between 2 and 30")
 	private String firstName;
-
+	
+	@NotNull(message = "Last Name is Required")
+	@Length(min = 2, max = 30, message = "Name size must be between 2 and 30")
 	private String lastName;
 
 	@NotNull(message = "Gender is Required")
 	private String gender;
 
-	@NotBlank(message = "Reservation Category is required")
+	@NotNull(message = "Reservation Category is required")
 	private String reservationCategory;
 
-	@Pattern(regexp = "^[0][1-9]\\d{9}$|^[1-9]\\d{9}$")
+	@Pattern(regexp = "^[0][1-9]\\d{9}$|^[1-9]\\d{9}$",message = "Enter Valid Mobile Number!")
 	@NotNull(message = "Mobile is Required")
-	@Length(min = 10, max = 13, message = "mobile number should be valid")
+	@Length(min = 10, max = 13, message = "Moblile number should of length between 10 and 13")
 	private String mobileno;
 
 	// @email
-	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
+	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$",message = "Enter Valid Email Id!")
 	@NotNull(message = "Email is Required")
 	private String emailId;
 
-	@NotNull
+	@NotNull(message = "address is required")
 	private String address;
 
-	@NotNull
+	@NotNull(message = "mandal is required")
 	private String mandal;
 
-	@NotNull
+	@NotNull(message = "district is required")
 	private String district;
 
 	@NotNull(message = "Pincode is required")
-	@Min(6)
 	private int pincode;
 
 	private boolean castedVote;

@@ -13,6 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "Election_Officer")
@@ -22,15 +27,35 @@ public class ElectionOfficer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull(message = "Name is Required")
+	@Length(min = 2, max = 30, message = "First name size must be between 2 and 30")
 	private String firstName;
+	@NotNull(message = "Last Name is Required")
+	@Length(min = 2, max = 30, message = "Last name size must be between 2 and 30")
 	private String lastName;
+	@NotNull(message = "Gender is Required")
 	private String gender;
+	
+	@Pattern(regexp = "^[0][1-9]\\d{9}$|^[1-9]\\d{9}$",message = "Enter Valid Mobile Number")
+	@NotNull(message = "Mobile is Required")
+	@Length(min = 10, max = 13, message = "mobile number should be valid")
 	private String mobileno;
 	@Column(unique = true)
+	
+	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message ="Enter valid Email Id")
+	@NotNull(message = "Email is Required")
 	private String emailId;
+	
+	@NotNull(message = "Address 1 is required")
 	private String address1;
+	@NotNull(message = "Address 2 is required")
 	private String address2;
+	
+	@NotNull(message = "district is required")
 	private String district;
+	
+	@NotNull(message = "Pincode is required")
+	@Min(6)
 	private int pincode;
 
 	public ElectionOfficer() {
